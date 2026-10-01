@@ -1,6 +1,8 @@
 import Link from "next/link";
 
+import { CookieSettingsButton } from "@/components/analytics/cookie-settings-button";
 import { Logo } from "@/components/brand/logo";
+import { analyticsEnabled } from "@/lib/analytics/config";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Container } from "@/components/shared/layout-primitives";
 import { footerColumns } from "@/content/navigation";
@@ -67,9 +69,12 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {siteConfig.legal.entityName}. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+            <p>
+              © {new Date().getFullYear()} {siteConfig.legal.entityName}. All rights reserved.
+            </p>
+            {analyticsEnabled && <CookieSettingsButton />}
+          </div>
           {socialLinks.length > 0 && (
             <ul className="flex gap-5">
               {socialLinks.map((s) => (

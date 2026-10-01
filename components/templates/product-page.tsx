@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
+import { TrackView } from "@/components/analytics/track-view";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { Faq } from "@/components/sections/faq";
 import { FeatureGrid } from "@/components/sections/feature-grid";
@@ -114,6 +115,7 @@ export function ProductPage({ product }: { product: ProductDetail }) {
 
       {product.related && <RelatedLinks related={product.related} title="Related services and solutions" />}
 
+      <TrackView event="product_view" params={{ product: product.slug }} />
       <CtaBanner
         trackId={track}
         title={`Interested in ${product.name}?`}

@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 
+import { AnalyticsLoader } from "@/components/analytics/analytics-loader";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader, SkipLink } from "@/components/layout/site-header";
-import { siteConfig } from "@/lib/site";
+import { analyticsConfig, analyticsEnabled } from "@/lib/analytics/config";
+import { isPlaceholder, siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -29,6 +31,10 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   formatDetection: { telephone: false, email: false, address: false },
+  // Google Search Console ownership (HTML tag method). Optional.
+  ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -46,6 +52,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        {analyticsEnabled && (
+          <AnalyticsLoader
+            gtmId={analyticsConfig.gtmId}
+            ga4Id={analyticsConfig.ga4Id}
+            clarityId={analyticsConfig.clarityId}
+            meetingUrl={isPlaceholder(siteConfig.contact.meetingUrl) ? undefined : siteConfig.contact.meetingUrl}
+          />
+        )}
       </body>
     </html>
   );

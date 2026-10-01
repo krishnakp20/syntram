@@ -2,7 +2,7 @@ import { industries } from "@/content/industries";
 import { getVisibleProducts } from "@/content/products";
 import { services } from "@/content/services";
 import { solutions } from "@/content/solutions";
-import type { NavEntry, NavGroup, NavLink } from "@/types/content";
+import type { NavEntry, NavLink } from "@/types/content";
 
 export const primaryCta: NavLink = { label: "Let's Talk", href: "/contact" };
 
@@ -77,9 +77,7 @@ export const mainNav: NavEntry[] = [
   },
 ];
 
-export function isNavGroup(entry: NavEntry): entry is NavGroup {
-  return "items" in entry;
-}
+export { isNavGroup } from "@/lib/nav";
 
 export interface FooterColumn {
   title: string;

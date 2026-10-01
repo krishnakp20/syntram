@@ -7,7 +7,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 
 import { LogoMark } from "@/components/brand/logo";
 import { ButtonLink } from "@/components/shared/button-link";
-import { isNavGroup } from "@/content/navigation";
+import { isNavGroup } from "@/lib/nav";
 import type { NavEntry, NavLink } from "@/types/content";
 
 /**

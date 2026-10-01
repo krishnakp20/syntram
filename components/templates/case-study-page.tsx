@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 
+import { TrackView } from "@/components/analytics/track-view";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { PageHero } from "@/components/sections/page-hero";
 import { ProcessSteps } from "@/components/sections/process-steps";
@@ -198,6 +199,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         title="Services and solutions used"
       />
 
+      <TrackView event="case_study_view" params={{ case_study: study.slug }} />
       <CtaBanner
         trackId={`case_study_${study.slug.replace(/-/g, "_")}`}
         title="Facing a similar challenge?"

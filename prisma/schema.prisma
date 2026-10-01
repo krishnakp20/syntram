@@ -1,0 +1,54 @@
+// Syntram website database.
+// Only genuinely dynamic data lives here — leads and contact submissions.
+// Marketing content stays in /content (or Sanity), not in the database.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+  SPAM
+}
+
+/// A contact-form submission. One row per submission.
+model Lead {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  status    LeadStatus @default(NEW)
+
+  name    String  @db.VarChar(120)
+  email   String  @db.VarChar(254)
+  company String? @db.VarChar(160)
+  phone   String? @db.VarChar(40)
+  country String? @db.VarChar(80)
+  service String? @db.VarChar(60)
+  budget  String? @db.VarChar(60)
+  message String  @db.Text
+
+  /// Page the form was submitted from, e.g. "/services/voice-ai".
+  sourcePath  String? @db.VarChar(300)
+  utmSource   String? @db.VarChar(120)
+  utmMedium   String? @db.VarChar(120)
+  utmCampaign String? @db.VarChar(160)
+
+  /// Salted SHA-256 of the client IP — used for rate limiting, never stored raw.
+  ipHash    String? @db.VarChar(64)
+  userAgent String? @db.VarChar(400)
+
+  /// Whether the team notification email was accepted by the email provider.
+  notificationSent Boolean @default(false)
+
+  @@index([createdAt])
+  @@index([ipHash, createdAt])
+  @@index([email])
+}

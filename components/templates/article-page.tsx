@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ArticleEngagement } from "@/components/analytics/article-engagement";
 import { ContextualCta } from "@/components/article/contextual-cta";
 import { MdxContent } from "@/components/article/mdx-content";
 import { TableOfContents } from "@/components/article/table-of-contents";
@@ -89,7 +90,10 @@ export async function ArticlePage({ article }: { article: Article }) {
             <TableOfContents items={toc} />
           </div>
           <div className="prose prose-syntram max-w-[72ch] min-w-0">
-            <MdxContent source={article.content} format={article.format} />
+            <div id="article-body">
+              <MdxContent source={article.content} format={article.format} />
+            </div>
+            <ArticleEngagement slug={article.slug} kind={article.kind} targetId="article-body" />
             <ContextualCta related={article.related} trackId={trackId} />
             {article.tags.length > 0 && (
               <ul className="not-prose flex flex-wrap gap-2" aria-label="Tags">
