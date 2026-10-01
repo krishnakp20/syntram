@@ -1,0 +1,164 @@
+---
+title: "How AI Voice Agents Work: Architecture, Components and Design Decisions"
+excerpt: "A technical guide to the architecture of an AI voice agent — from telephony and speech recognition to LLM reasoning, tools, handoff and monitoring — and the decisions that shape each layer."
+publishedAt: 2026-10-01
+category: "Voice AI"
+tags: ["voice ai", "architecture", "llm", "telephony"]
+seo:
+  title: "How AI Voice Agents Work: Architecture"
+  description: "A technical guide to AI voice agent architecture: telephony, speech recognition, LLM reasoning, tools, handoff and monitoring, plus the key design decisions."
+related:
+  services: ["voice-ai", "ai-development", "api-integration"]
+  solutions: ["voice-ai"]
+---
+
+An AI voice agent looks simple from the outside: a caller speaks, the agent replies. Underneath, it's a real-time distributed system where a dozen components must cooperate within a fraction of a second, on every turn, for the whole call.
+
+This guide walks through that architecture layer by layer, with the design decisions that matter at each one. It's aimed at technical leads and product owners planning a voice agent project.
+
+## The architecture at a glance
+
+A typical production voice agent has these layers:
+
+1. **Telephony & media** — connects calls and streams audio
+2. **Speech recognition** — turns audio into text, continuously
+3. **Turn management** — decides when to listen and when to speak
+4. **Orchestration & reasoning** — the LLM plus conversation state
+5. **Tools & business logic** — the actions the agent can take
+6. **Speech synthesis** — turns replies into audio
+7. **Handoff** — transfers to people with context
+8. **Observability & analytics** — logs, transcripts, metrics and evaluation
+
+Let's look at each.
+
+## 1. Telephony and media
+
+**What it does:** answers or places calls, streams audio in both directions, and handles transfers, holds and recordings.
+
+**Common options:**
+
+- **SIP trunking** into your existing phone system or contact-centre platform
+- **Cloud telephony providers** with programmable voice APIs
+- **WebRTC** for voice inside websites and mobile apps
+- **Real-time media frameworks** that manage audio rooms and streaming between participants
+
+**Key decisions:**
+
+- Keep your existing numbers and contact-centre stack, or route calls through a new provider?
+- Where does the agent sit — in front of your human team, alongside it as overflow, or only after hours?
+- How will warm transfers work technically — SIP transfer, conference bridge, or a contact-centre API?
+
+## 2. Speech recognition (STT)
+
+**What it does:** converts the caller's speech into text in real time.
+
+**Key decisions:**
+
+- **Streaming vs batch.** Real-time agents need streaming recognition with partial results.
+- **Language and accent coverage.** Test with recordings that represent your actual callers.
+- **Custom vocabulary.** Names, products, places and codes are where generic recognition fails most often.
+- **Numbers and spelling.** Phone numbers, reference codes and email addresses often need dedicated handling — for example, confirming them back to the caller.
+
+## 3. Turn management
+
+**What it does:** decides when the caller has finished, when the agent should speak, and what happens when they talk over each other.
+
+This layer has an outsized effect on how natural the conversation feels:
+
+- **End-of-turn detection** based on silence alone tends to be either too slow or too eager. Content-aware detection performs better.
+- **Barge-in** lets the caller interrupt. The agent must stop speaking quickly and discard the rest of its planned reply.
+- **Backchannel and holding phrases** ("Sure, let me check…") help during unavoidable waits, such as slow API calls.
+
+## 4. Orchestration and reasoning
+
+**What it does:** keeps track of the conversation and decides what to do next.
+
+At the centre is usually a large language model, wrapped in an orchestration layer that controls it. Two broad patterns exist:
+
+- **Free-form agent:** the LLM follows a single set of instructions and decides everything. Fast to prototype, harder to make consistent.
+- **Structured flow:** the conversation is modelled as states or steps (greet → identify → understand → act → confirm), with the LLM handling language understanding and generation inside each step. More work up front, but more predictable and easier to test.
+
+For business-critical calls, we generally recommend a structured approach with the LLM doing what it does best — understanding varied phrasing and producing natural replies — while state, rules and permissions live in code.
+
+**Other decisions at this layer:**
+
+- **Model selection** per task, balancing quality, speed and cost
+- **Context management** — what history and knowledge the model sees on each turn
+- **Guardrails** — topics the agent must not discuss, information it must not reveal, and when it must escalate
+
+<Callout type="tip" title="Keep business rules out of the prompt">
+Eligibility checks, pricing, refund limits and similar rules should be enforced in code that the agent calls, not described in instructions and left to the model's judgement. Prompts guide behaviour; code guarantees it.
+</Callout>
+
+## 5. Tools and business logic
+
+**What it does:** gives the agent real capabilities in your systems.
+
+Tools are functions the LLM can request, such as `find_available_slots`, `book_appointment`, `get_order_status` or `create_ticket`. Each tool should:
+
+- Have a **narrow, well-defined purpose** and validated inputs
+- **Enforce permissions** — the agent can only act for the verified caller
+- Return **concise, structured results** the model can use in a reply
+- Be **idempotent** where possible, so a retry doesn't create duplicates
+- Have **timeouts and fallbacks**, so a slow system doesn't stall the call
+
+Most of the integration effort in a voice project is here — connecting to CRMs, calendars, order systems and helpdesks reliably.
+
+## 6. Speech synthesis (TTS)
+
+**What it does:** turns the agent's replies into natural-sounding speech.
+
+**Key decisions:**
+
+- **Voice selection** that suits your brand and your callers
+- **Streaming output** so playback starts on the first sentence
+- **Pronunciation** of brand names, places and abbreviations
+- **Language support** if you serve callers in more than one language
+
+## 7. Human handoff
+
+**What it does:** transfers the call to a person when the agent should not or cannot continue.
+
+Design handoff deliberately:
+
+- **Triggers:** caller asks for a person, the request is out of scope, the agent's confidence is low, or the topic is sensitive
+- **Context transfer:** the receiving person should get the caller's identity, the transcript or a summary, and what the agent already tried
+- **Fallbacks:** if no one is available, take a message, offer a callback or provide clear next steps
+
+A poor handoff wipes out the benefit of everything the agent did before it.
+
+## 8. Observability and analytics
+
+**What it does:** shows what's happening on every call and whether the agent is doing its job.
+
+At a minimum, capture:
+
+- **Transcripts and recordings** (subject to your consent and retention policies)
+- **Per-turn latency** by pipeline stage
+- **Tool calls**, their inputs, results and errors
+- **Call outcomes** — resolved, transferred, abandoned — and reasons
+
+Then use it:
+
+- **Review samples of real calls** regularly, especially failures and transfers
+- **Maintain an evaluation set** of representative conversations and re-run it whenever prompts, models or flows change
+- **Track trends** in why customers call — often the most valuable insight a voice project produces
+
+## Security and compliance considerations
+
+- **Caller verification** before sharing or changing personal data
+- **Data minimisation** — only send models the data they need for the current step
+- **Provider settings** that control data retention and model training on your data
+- **Redaction** of sensitive information in transcripts and logs
+- **Disclosure** that the caller is speaking with an automated agent, and consent for recording where required
+- **Outbound calling rules**, which vary by jurisdiction and use case
+
+## Putting it together: a sensible first project
+
+1. Choose one high-volume call type with a clear outcome.
+2. Map the conversation and the systems it needs to touch.
+3. Build the pipeline end to end with real integrations, even if the flow is small.
+4. Test with realistic calls — including difficult ones — and measure latency and completion.
+5. Launch to a limited share of calls with close review, then expand.
+
+If you're planning a voice agent and want an experienced team to design or build it, see our [voice AI development services](/services/voice-ai), learn how it applies to [business call handling](/solutions/voice-ai), or [start a conversation](/contact) with us.

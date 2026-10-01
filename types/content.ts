@@ -274,6 +274,66 @@ export interface CaseStudy extends Placeholder {
   coverImage?: CaseStudyImage;
 }
 
+/* ---------- Articles (blog posts & guides) ---------- */
+
+export type ArticleKind = "blog" | "guide";
+
+export interface ArticleAuthor {
+  name: string;
+  role?: string;
+}
+
+export interface ArticleImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+/**
+ * Shared shape for blog posts and guides, independent of where they're stored.
+ * Local MDX files and the Sanity adapter both map into this, so pages never
+ * need to know which source the content came from.
+ */
+export interface Article {
+  kind: ArticleKind;
+  slug: string;
+  title: string;
+  excerpt: string;
+  /** MDX / Markdown body. */
+  content: string;
+  /**
+   * "mdx" allows components and is only used for trusted, repo-reviewed files.
+   * CMS content is always "md" (plain Markdown, no executable code).
+   */
+  format: "mdx" | "md";
+  featuredImage?: ArticleImage;
+  author: ArticleAuthor;
+  /** ISO date. */
+  publishedAt: string;
+  updatedAt?: string;
+  category: string;
+  tags: string[];
+  seo: {
+    title?: string;
+    description?: string;
+    canonical?: string;
+  };
+  /** Internal-linking hints: shown as contextual CTAs and related links. */
+  related?: RelatedContent;
+  /** Drafts are visible in development only, and never indexed. */
+  draft?: boolean;
+  readingMinutes: number;
+}
+
+export type ArticleSummary = Omit<Article, "content" | "format">;
+
+export interface TocItem {
+  id: string;
+  text: string;
+  depth: 2 | 3;
+}
+
 /* ---------- Navigation ---------- */
 
 export interface NavLink {

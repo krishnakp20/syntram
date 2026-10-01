@@ -1,0 +1,127 @@
+---
+title: "A Practical Guide to AI Customer Support Automation"
+excerpt: "How to plan, build and roll out AI support automation that customers and agents actually trust — from choosing the first use case to knowledge, integrations, handoff and measurement."
+publishedAt: 2026-10-01
+category: "Automation"
+tags: ["customer support", "automation", "ai agents", "rag"]
+seo:
+  title: "A Practical Guide to AI Support Automation"
+  description: "How to plan and roll out AI customer support automation: choosing use cases, preparing knowledge, integrating systems, designing handoff and measuring results."
+related:
+  services: ["ai-development", "api-integration", "voice-ai"]
+  solutions: ["customer-support-automation", "ai-automation"]
+  industries: ["ecommerce", "travel"]
+---
+
+AI can now handle a meaningful share of routine customer support across chat, email and phone. But many support automation projects disappoint — not because the technology is incapable, but because they skip the groundwork.
+
+This guide covers what a well-run project looks like, step by step.
+
+## Step 1: Understand your demand
+
+Before choosing tools, understand why customers contact you.
+
+- **Export a representative sample** of recent tickets, chats and call notes.
+- **Categorise by intent** — order status, password reset, billing question, product how-to, complaint and so on.
+- **Note how each is resolved:** what information was needed, which systems were used, and whether a policy decision was involved.
+
+You're looking for intents that are **frequent**, **well-defined**, and **resolvable with information or actions available in your systems**. These are your automation candidates.
+
+<Callout type="note">
+Intents that require judgement, negotiation, empathy in difficult situations or exceptions to policy are usually poor first candidates. Plan for those to go to people — with better context.
+</Callout>
+
+## Step 2: Choose a first use case
+
+Pick one or two intents to start with. A good first use case:
+
+- Represents a noticeable share of volume
+- Has a clear, checkable definition of "resolved"
+- Needs data from no more than one or two systems
+- Has low risk if something goes wrong
+
+Order status, delivery questions, appointment changes and common how-to questions are typical starting points.
+
+## Step 3: Get your knowledge in order
+
+AI assistants answer from the information you give them. If your help centre is outdated or contradictory, the assistant will be too.
+
+- **Audit the relevant help content** for accuracy and gaps.
+- **Write down unwritten rules** that agents know but customers can't see.
+- **Assign ownership** — someone must keep this content current.
+- **Structure it for retrieval:** clear titles, one topic per article, explicit conditions ("If your order was placed more than 30 days ago…").
+
+Most modern assistants use **retrieval-augmented generation (RAG)**: they search your approved content for each question and answer from what they find, ideally citing it. This is usually more reliable and easier to maintain than training a custom model.
+
+## Step 4: Connect the systems
+
+Information answers questions; integrations resolve them.
+
+- **Read access** to order, account, booking or ticket data lets the assistant give specific answers ("Your order shipped yesterday…").
+- **Write access** lets it complete tasks — updating an address, rescheduling, starting a return — within rules you define.
+- **Verification** must come first: confirm who the customer is before sharing or changing personal data.
+
+Design every action with limits. For example: refunds may be initiated automatically below a set value and within policy; anything else goes to a person.
+
+## Step 5: Design the handoff
+
+Handoff is where customer trust is won or lost.
+
+- **Make it easy to reach a person**, and never trap customers in loops.
+- **Escalate automatically** when the request is out of scope, the customer is frustrated, or the topic is sensitive.
+- **Pass full context:** the conversation, customer details, what was attempted and a short summary.
+- **Route intelligently** to the right team or skill group.
+
+When agents receive a well-summarised case instead of a cold start, handling becomes faster — even for the conversations AI didn't resolve.
+
+## Step 6: Choose channels deliberately
+
+You don't need every channel on day one.
+
+- **Web chat and messaging** are often the easiest place to start: customers expect quick answers, and replies can include links and structured information.
+- **Email** benefits from triage, drafting and summarisation, even when a person sends the final reply.
+- **Phone** offers big gains for high call volumes, but requires real-time voice engineering. See our [guide to how AI voice agents work](/guides/how-ai-voice-agents-work).
+
+Wherever possible, share one knowledge base and one set of integrations across channels so answers stay consistent.
+
+## Step 7: Test before launch
+
+- **Build an evaluation set** from real past conversations, with expected outcomes.
+- **Include edge cases:** ambiguous questions, angry customers, missing data, attempts to get the assistant off-topic.
+- **Score answers** for accuracy, completeness, tone and correct escalation.
+- **Have experienced agents review** a sample — they'll spot problems no metric catches.
+
+Re-run the same evaluation whenever you change content, prompts or models.
+
+## Step 8: Roll out gradually
+
+1. **Internal pilot** — your support team uses the assistant first.
+2. **Limited exposure** — a percentage of conversations, specific hours, or a single channel.
+3. **Close review** of transcripts and handoffs during the first weeks.
+4. **Expand** to more traffic and intents once quality is stable.
+
+## Step 9: Measure what matters
+
+Agree success measures before launch. Useful ones include:
+
+- **Resolution rate** for automated conversations — resolved without a person, and confirmed rather than assumed
+- **Escalation quality** — were handoffs appropriate, and did they include useful context?
+- **Customer satisfaction** for automated vs human-handled conversations
+- **Repeat contact rate** — did customers come back about the same issue?
+- **Agent time** spent on routine vs complex work
+
+Be wary of a high "containment" figure on its own: a conversation that ended without escalation isn't necessarily a resolved one.
+
+## Common pitfalls
+
+- **Automating before fixing content.** Bad knowledge produces confident wrong answers.
+- **No clear owner** once the project goes live.
+- **Hiding the human option** to inflate automation figures.
+- **Launching everywhere at once** instead of learning from a focused rollout.
+- **Ignoring the agent experience** — support teams should help shape and review the system.
+
+## Summary
+
+Successful support automation is less about the model and more about the system around it: accurate knowledge, solid integrations, careful handoff, honest measurement and gradual rollout. Start small, prove value on real conversations and build from there.
+
+Planning a support automation project? Explore our [customer support automation solution](/solutions/customer-support-automation), the [AI development services](/services/ai-development) behind it, or [talk to our team](/contact) about your support volume.

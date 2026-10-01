@@ -1,0 +1,101 @@
+---
+title: "How to Reduce Voice AI Latency: An Engineering Checklist"
+excerpt: "Slow responses are the fastest way to make a voice agent feel robotic. Here's where latency comes from in a voice AI pipeline and the practical techniques that reduce it."
+publishedAt: 2026-10-01
+category: "Engineering"
+tags: ["voice ai", "latency", "architecture", "performance"]
+seo:
+  title: "How to Reduce Voice AI Latency: A Checklist"
+  description: "Where latency comes from in a voice AI pipeline — telephony, speech recognition, LLMs, tools and speech synthesis — and practical ways to reduce each one."
+related:
+  services: ["voice-ai", "cloud-devops"]
+  solutions: ["voice-ai"]
+---
+
+In human conversation, the gap between one person finishing and the other replying is usually very short. People notice when a reply takes noticeably longer than that — and on a phone call, silence feels even longer than it is.
+
+For voice agents, **latency is a product feature**, not just a technical metric. This checklist covers where delay comes from and how to reduce it.
+
+## First, measure the right thing
+
+The number that matters is **perceived response latency**: the time from when the caller stops speaking to when they hear the first sound of the reply. Measure it end to end, on real phone calls, not just inside your server.
+
+Break it down by stage so you know where to focus:
+
+1. Audio transport in (network and telephony)
+2. End-of-speech detection
+3. Final speech recognition result
+4. Language model — time to first token
+5. Any tool or API calls
+6. Text-to-speech — time to first audio
+7. Audio transport out
+
+Log timestamps for each stage on every turn. Averages hide problems, so look at the slower turns (for example, the 90th or 95th percentile) as well.
+
+## Stage-by-stage techniques
+
+### Turn detection
+
+Waiting for a long fixed silence before responding is a common hidden delay.
+
+- Use **voice activity detection tuned for conversation**, and consider models that predict end-of-turn from the content of what's said, not just silence.
+- Tune thresholds per use case: a caller reading out a long reference number needs more patience than a yes/no answer.
+- Support **barge-in** so callers can interrupt — it makes the whole conversation feel faster.
+
+### Speech recognition
+
+- **Stream audio** to the recogniser continuously instead of sending complete utterances.
+- Use **partial transcripts** to start preparing a response early, then confirm against the final transcript.
+- Add **custom vocabulary** for names and terms. Fewer recognition errors mean fewer slow clarification loops.
+
+### Language model
+
+This is often the largest and most variable contributor.
+
+- **Stream tokens** and start speaking as soon as the first sentence is ready.
+- **Choose the model per task.** The most capable model is not always necessary; smaller, faster models often handle well-structured conversations well. Evaluate quality and speed together.
+- **Keep prompts lean.** Very long instructions and conversation histories add processing time. Summarise older turns and retrieve only the context you need.
+- **Use prompt caching** where your provider supports it, so repeated system instructions aren't reprocessed every turn.
+- **Ask for short replies.** Spoken responses should be brief anyway; shorter outputs are also faster.
+
+### Tool and API calls
+
+- **Pre-fetch likely data** at the start of the call — for example, look up the caller by phone number before they finish their first sentence.
+- **Run independent calls in parallel** instead of sequentially.
+- **Set strict timeouts** with graceful fallbacks ("Let me check that for you…") so a slow backend doesn't produce dead air.
+- **Cache reference data** such as opening hours and product details.
+
+### Text-to-speech
+
+- **Stream audio output** and begin playback on the first chunk.
+- **Split responses into sentences** so synthesis can start before the whole reply is generated.
+- **Pre-generate common phrases** — greetings, confirmations, hold messages — where the wording is fixed.
+
+### Infrastructure and network
+
+- **Co-locate services.** Run your orchestration close to your telephony provider and model endpoints; each extra network hop adds delay.
+- **Choose regions deliberately** based on where your callers and providers are.
+- **Use persistent connections** (for example WebSockets) to avoid repeated connection setup.
+- **Watch for cold starts** if you use serverless components on the call path.
+
+<Callout type="note" title="Filler isn't a fix">
+Short acknowledgements ("Sure, one moment") can make an unavoidable delay feel natural — but using them to mask slow responses on every turn quickly sounds scripted. Fix the underlying latency first.
+</Callout>
+
+## A practical checklist
+
+- [ ] End-to-end latency is measured on real calls, per stage, including slow turns
+- [ ] Turn detection is tuned for the type of conversation
+- [ ] Speech recognition is streaming, with custom vocabulary configured
+- [ ] LLM output is streamed and the model choice has been benchmarked for speed and quality
+- [ ] Prompts and context are kept lean, with caching where available
+- [ ] Tool calls are parallelised, time-limited and pre-fetched where possible
+- [ ] Text-to-speech streams and starts on the first sentence
+- [ ] Services are co-located, with persistent connections and no cold starts on the call path
+- [ ] Barge-in works reliably
+
+## Final thought
+
+There's rarely a single fix for voice latency. It comes from many small decisions across the pipeline, which is why it should be designed in from the start and monitored after launch — just like uptime.
+
+If you're building a voice agent and want help with architecture or performance, see our [voice AI development](/services/voice-ai) and [cloud & DevOps](/services/cloud-devops) services, or read the full [voice agent architecture guide](/guides/how-ai-voice-agents-work).

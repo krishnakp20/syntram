@@ -77,6 +77,43 @@ export function serviceJsonLd({
   };
 }
 
+export function articleJsonLd({
+  kind,
+  title,
+  description,
+  path,
+  publishedAt,
+  updatedAt,
+  authorName,
+  image,
+}: {
+  kind: "blog" | "guide";
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: string;
+  updatedAt?: string;
+  authorName: string;
+  image?: string;
+}): JsonLdObject {
+  const isOrgAuthor = authorName === siteConfig.name;
+  return {
+    "@context": "https://schema.org",
+    "@type": kind === "blog" ? "BlogPosting" : "Article",
+    headline: title,
+    description,
+    url: absoluteUrl(path),
+    mainEntityOfPage: absoluteUrl(path),
+    datePublished: publishedAt,
+    dateModified: updatedAt ?? publishedAt,
+    author: isOrgAuthor
+      ? { "@type": "Organization", "@id": organizationId, name: siteConfig.name, url: siteConfig.url }
+      : { "@type": "Person", name: authorName },
+    publisher: { "@type": "Organization", "@id": organizationId, name: siteConfig.name, url: siteConfig.url },
+    ...(image ? { image: absoluteUrl(image) } : {}),
+  };
+}
+
 /** Only use when the FAQ is rendered visibly on the same page. */
 export function faqJsonLd(faqs: FAQItem[]): JsonLdObject {
   return {
