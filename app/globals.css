@@ -3,6 +3,8 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+/* Styles that apply inside light-toned sections */
+@custom-variant theme-light (&:where(.theme-light, .theme-light *));
 
 /*
  * Syntram design tokens

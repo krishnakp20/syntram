@@ -1,17 +1,43 @@
 import { ArrowRight } from "lucide-react";
 
+import { CaseStudyCard } from "@/components/cards/case-study-card";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Container, Section, SectionHeader } from "@/components/shared/layout-primitives";
+import { getPublishedCaseStudies } from "@/content/work";
 
 /**
  * Case studies are only published with client approval and real results.
- * Until the first ones are ready, this section says so instead of showing
- * invented projects. Phase 3 replaces the panel with CaseStudyCards fed from
- * the content layer (non-placeholder entries only).
+ * Shows the latest published (non-placeholder) case studies; until the first
+ * ones exist, it says so instead of showing invented projects.
  */
 const caseStudyOutline = ["Challenge", "Solution", "Architecture", "Technology", "Results"];
 
 export function WorkTeaser() {
+  const published = getPublishedCaseStudies().slice(0, 3);
+
+  if (published.length > 0) {
+    return (
+      <Section aria-labelledby="work-title">
+        <Container>
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeader id="work-title" eyebrow="Case studies" title="Selected work" />
+            <ButtonLink href="/work" variant="outline" className="self-start lg:self-auto" trackAs="home_work_view">
+              All case studies
+              <ArrowRight aria-hidden="true" />
+            </ButtonLink>
+          </div>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {published.map((study) => (
+              <li key={study.slug}>
+                <CaseStudyCard study={study} />
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+    );
+  }
+
   return (
     <Section aria-labelledby="work-title">
       <Container>

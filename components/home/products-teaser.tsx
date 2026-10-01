@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
+import { ProductCard } from "@/components/cards/product-card";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Icon } from "@/components/shared/icon";
 import { Container, Section, SectionHeader } from "@/components/shared/layout-primitives";
@@ -51,7 +52,9 @@ export function ProductsTeaser() {
           ) : (
             <ul className="flex flex-col gap-4">
               {published.map((p) => (
-                <li key={p.slug}>{p.name}</li>
+                <li key={p.slug}>
+                  <ProductCard product={p} />
+                </li>
               ))}
             </ul>
           )}

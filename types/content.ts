@@ -208,6 +208,72 @@ export interface ProductSummary extends Placeholder {
   icon: IconName;
 }
 
+/**
+ * Full product page. Every descriptive field is optional: sections only render
+ * when real, confirmed information exists — nothing is filled in for show.
+ */
+export interface ProductDetail extends ProductSummary {
+  seo: SeoFields;
+  overview?: string;
+  features?: Feature[];
+  useCases?: UseCase[];
+  integrations?: string[];
+  faqs?: FAQItem[];
+  related?: RelatedContent;
+  /** e.g. "Request early access" — defaults to a generic contextual CTA. */
+  ctaLabel?: string;
+}
+
+/* ---------- Case studies ---------- */
+
+export interface CaseStudyResult {
+  label: string;
+  /** Optional headline figure, e.g. "2×". Only include if verified. */
+  value?: string;
+  description: string;
+  /**
+   * Must be `true` (confirmed and approved by the client) for the result to be
+   * rendered. Unverified results are never shown.
+   */
+  verified: boolean;
+}
+
+export interface CaseStudyImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+}
+
+export interface CaseStudy extends Placeholder {
+  slug: string;
+  title: string;
+  summary: string;
+  client: {
+    /** Use a descriptive label (e.g. "A regional clinic network") when the client is anonymised. */
+    name: string;
+    anonymised: boolean;
+  };
+  industry: IndustrySlug;
+  services: ServiceSlug[];
+  solutions?: SolutionSlug[];
+  /** ISO date, e.g. "2026-10-01". */
+  publishedAt: string;
+  seo: SeoFields;
+  challenge: string;
+  solution: string;
+  architecture: {
+    description: string;
+    components: string[];
+  };
+  technology: string[];
+  implementation: ProcessStep[];
+  results: CaseStudyResult[];
+  screenshots: CaseStudyImage[];
+  coverImage?: CaseStudyImage;
+}
+
 /* ---------- Navigation ---------- */
 
 export interface NavLink {

@@ -1,10 +1,27 @@
 import { industries } from "@/content/industries";
-import { products } from "@/content/products";
+import { getVisibleProducts } from "@/content/products";
 import { services } from "@/content/services";
 import { solutions } from "@/content/solutions";
 import type { NavEntry, NavGroup, NavLink } from "@/types/content";
 
 export const primaryCta: NavLink = { label: "Let's Talk", href: "/contact" };
+
+/** A mega-menu when products are visible; otherwise a plain link to /products. */
+function productsNavEntry(): NavEntry {
+  const visible = getVisibleProducts();
+  if (visible.length === 0) return { label: "Products", href: "/products" };
+  return {
+    label: "Products",
+    href: "/products",
+    intro: "Platform products built on the Syntram voice and automation stack.",
+    items: visible.map((p) => ({
+      label: p.name,
+      href: `/products/${p.slug}`,
+      description: p.placeholder ? "Placeholder — details to be announced" : p.tagline,
+      icon: p.icon,
+    })),
+  };
+}
 
 export const mainNav: NavEntry[] = [
   {
@@ -38,17 +55,7 @@ export const mainNav: NavEntry[] = [
       icon: i.icon,
     })),
   },
-  {
-    label: "Products",
-    href: "/products",
-    intro: "Platform products built on the Syntram voice and automation stack.",
-    items: products.map((p) => ({
-      label: p.name,
-      href: `/products/${p.slug}`,
-      description: p.placeholder ? "Coming soon" : p.tagline,
-      icon: p.icon,
-    })),
-  },
+  productsNavEntry(),
   { label: "Work", href: "/work" },
   {
     label: "Resources",
