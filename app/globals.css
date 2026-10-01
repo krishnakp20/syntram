@@ -1,0 +1,279 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Syntram design tokens
+ * ---------------------------------------------------------------
+ * The site is dark-first. `:root` holds the dark (ink) palette and
+ * `.theme-light` re-scopes the same tokens for light sections, so every
+ * component works in both without per-component overrides.
+ *
+ * Accent ("signal") is a single teal hue. Use it for emphasis, focus and
+ * primary actions only — never as a large background fill.
+ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand-specific */
+  --color-signal: var(--signal);
+  --color-signal-strong: var(--signal-strong);
+  --color-signal-soft: var(--signal-soft);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-subtle: var(--subtle);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Fluid display sizes (clamp keeps 320px → 1920px readable without breakpoints) */
+  --text-display-xl: clamp(2.5rem, 1.6rem + 4.2vw, 4.75rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.028em;
+  --text-display-lg: clamp(2rem, 1.45rem + 2.6vw, 3.25rem);
+  --text-display-lg--line-height: 1.08;
+  --text-display-lg--letter-spacing: -0.022em;
+  --text-display-md: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  --text-display-md--line-height: 1.15;
+  --text-display-md--letter-spacing: -0.015em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  --animate-flow: flow 1.6s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-wave: wave 1.4s ease-in-out infinite;
+
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes wave {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+}
+
+/* ---------- Dark (default) ---------- */
+:root {
+  --radius: 0.75rem;
+
+  --background: #0a0c11;
+  --foreground: #e9edf3;
+  --surface: #0f1219;
+  --surface-raised: #151a23;
+  --card: #11151d;
+  --card-foreground: #e9edf3;
+  --popover: #121720;
+  --popover-foreground: #e9edf3;
+
+  --primary: #2dd4bf;
+  --primary-foreground: #04201c;
+  --secondary: #1a202b;
+  --secondary-foreground: #e9edf3;
+  --muted: #171c26;
+  --muted-foreground: #9aa5b8; /* 7.6:1 on background */
+  --subtle: #6d7890; /* decorative / large text only */
+  --accent: #1a202b;
+  --accent-foreground: #e9edf3;
+  --destructive: #f87171;
+
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: #2dd4bf;
+  --line: rgb(255 255 255 / 0.07);
+  --line-strong: rgb(255 255 255 / 0.14);
+
+  --signal: #2dd4bf;
+  --signal-strong: #5eead4;
+  --signal-soft: rgb(45 212 191 / 0.12);
+
+  color-scheme: dark;
+}
+
+/* ---------- Light sections ---------- */
+.theme-light {
+  --background: #f5f6f8;
+  --foreground: #0b0e14;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #0b0e14;
+  --popover: #ffffff;
+  --popover-foreground: #0b0e14;
+
+  --primary: #0b0e14;
+  --primary-foreground: #ffffff;
+  --secondary: #e9ecf1;
+  --secondary-foreground: #0b0e14;
+  --muted: #eceff3;
+  --muted-foreground: #4a5466; /* 7.4:1 on background */
+  --subtle: #8590a3;
+  --accent: #e9ecf1;
+  --accent-foreground: #0b0e14;
+  --destructive: #c62828;
+
+  --border: rgb(11 14 20 / 0.1);
+  --input: rgb(11 14 20 / 0.16);
+  --ring: #0f766e;
+  --line: rgb(11 14 20 / 0.08);
+  --line-strong: rgb(11 14 20 / 0.16);
+
+  --signal: #0f766e; /* AA for text on light */
+  --signal-strong: #0d5f59;
+  --signal-soft: rgb(15 118 110 / 0.09);
+
+  color-scheme: light;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--signal-soft);
+    color: var(--foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Faint engineering grid used behind technical visuals */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 55%, transparent);
+  }
+  .mask-radial {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+  }
+}
+
+/*
+ * Scroll-reveal: progressive enhancement with zero JavaScript.
+ * Content is fully visible by default; browsers that support scroll-driven
+ * animations fade it in. Disabled entirely for reduced-motion users.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Voice pipeline "running light" — referenced via an arbitrary animation utility */
+@keyframes stage-glow {
+  0%,
+  14% {
+    border-color: var(--signal);
+    color: var(--signal-strong);
+    box-shadow:
+      0 0 0 4px var(--signal-soft),
+      0 0 24px -4px var(--signal);
+  }
+  22%,
+  100% {
+    border-color: var(--line-strong);
+    box-shadow: none;
+  }
+}
+
+/* Every decorative animation stops for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
