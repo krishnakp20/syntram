@@ -103,6 +103,99 @@ export interface IndustrySummary {
   icon: IconName;
 }
 
+/* ---------- Detail-page building blocks ---------- */
+
+/** Keys into `content/technology.ts` groups. */
+export type TechGroupKey = "ai" | "voice" | "frontend" | "backend" | "data" | "cloud";
+
+export interface PageHeroContent {
+  /** H1. Keep it human — the SEO title can differ. */
+  headline: string;
+  intro: string;
+}
+
+export interface NarrativeBlock {
+  title: string;
+  body: string;
+  points: string[];
+}
+
+export interface UseCase {
+  title: string;
+  description: string;
+}
+
+export interface CtaContent {
+  title: string;
+  description: string;
+  /** Contextual CTA label — avoid generic "Contact us". */
+  primaryLabel: string;
+}
+
+export interface RelatedContent {
+  services?: ServiceSlug[];
+  solutions?: SolutionSlug[];
+  industries?: IndustrySlug[];
+}
+
+/* ---------- Detail pages ---------- */
+
+export interface ServiceDetail extends ServiceSummary {
+  seo: SeoFields;
+  hero: PageHeroContent;
+  problem: NarrativeBlock;
+  solution: NarrativeBlock;
+  capabilities: Feature[];
+  useCases: UseCase[];
+  technology: TechGroupKey[];
+  /** Overrides the shared delivery process where a service works differently. */
+  process?: ProcessStep[];
+  faqs: FAQItem[];
+  related: RelatedContent;
+  cta: CtaContent;
+}
+
+export interface SolutionDetail extends SolutionSummary {
+  seo: SeoFields;
+  hero: PageHeroContent;
+  problem: NarrativeBlock;
+  /** How the solution works, step by step. */
+  howItWorks: ProcessStep[];
+  /** Qualitative outcomes — never unverified numbers. */
+  outcomes: Feature[];
+  capabilities: Feature[];
+  useCases: UseCase[];
+  technology: TechGroupKey[];
+  faqs: FAQItem[];
+  related: RelatedContent;
+  cta: CtaContent;
+}
+
+export interface IndustryChallenge {
+  title: string;
+  description: string;
+}
+
+export interface IndustrySolutionFit {
+  solution: SolutionSlug;
+  /** Why this solution matters in this industry specifically. */
+  rationale: string;
+}
+
+export interface IndustryDetail extends IndustrySummary {
+  seo: SeoFields;
+  hero: PageHeroContent;
+  challenges: IndustryChallenge[];
+  solutionFits: IndustrySolutionFit[];
+  useCases: UseCase[];
+  technology: TechGroupKey[];
+  /** Industry-specific considerations shown alongside the shared process. */
+  considerations: NarrativeBlock;
+  faqs: FAQItem[];
+  related: RelatedContent;
+  cta: CtaContent;
+}
+
 /* ---------- Products ---------- */
 
 export type ProductStatus = "in-development" | "beta" | "available";

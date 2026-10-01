@@ -12,10 +12,12 @@ import { VoiceAiFeature } from "@/components/home/voice-ai-feature";
 import { WhySyntram } from "@/components/home/why-syntram";
 import { WorkTeaser } from "@/components/home/work-teaser";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Syntram Technologies | AI, Voice AI & Software Development Company",
+  title: "Syntram Technologies — AI, Voice AI & Software Development",
   absoluteTitle: true,
   description:
     "Syntram Technologies builds AI-powered software, voice AI agents and business automation — from LLM applications to web, mobile and cloud platforms.",
@@ -45,6 +47,7 @@ export default function HomePage() {
         primary={{ label: "Start a Conversation", href: "/contact" }}
         secondary={{ label: "Explore Voice AI", href: "/services/voice-ai" }}
       />
+      <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
     </>
   );
 }
