@@ -103,35 +103,38 @@
   }
 }
 
-/* ---------- Dark (default) ---------- */
+/* ---------- Soft dark (default) ----------
+ * A slate-navy base rather than near-black, with slightly eased text
+ * contrast: easier on the eyes for long reading while staying WCAG AA.
+ */
 :root {
   --radius: 0.75rem;
 
-  --background: #0a0c11;
-  --foreground: #e9edf3;
-  --surface: #0f1219;
-  --surface-raised: #151a23;
-  --card: #11151d;
-  --card-foreground: #e9edf3;
-  --popover: #121720;
-  --popover-foreground: #e9edf3;
+  --background: #172030;
+  --foreground: #e6eaf1;
+  --surface: #1b2536;
+  --surface-raised: #222d40;
+  --card: #1e2839;
+  --card-foreground: #e6eaf1;
+  --popover: #202a3c;
+  --popover-foreground: #e6eaf1;
 
   --primary: #2dd4bf;
   --primary-foreground: #04201c;
-  --secondary: #1a202b;
-  --secondary-foreground: #e9edf3;
-  --muted: #171c26;
-  --muted-foreground: #9aa5b8; /* 7.6:1 on background */
-  --subtle: #6d7890; /* decorative / large text only */
-  --accent: #1a202b;
-  --accent-foreground: #e9edf3;
+  --secondary: #26314a;
+  --secondary-foreground: #e6eaf1;
+  --muted: #232d42;
+  --muted-foreground: #aab4c6; /* ~7.6:1 on background */
+  --subtle: #8892a7; /* ~4.8:1 — AA for normal text too */
+  --accent: #26314a;
+  --accent-foreground: #e6eaf1;
   --destructive: #f87171;
 
-  --border: rgb(255 255 255 / 0.08);
-  --input: rgb(255 255 255 / 0.12);
+  --border: rgb(255 255 255 / 0.09);
+  --input: rgb(255 255 255 / 0.14);
   --ring: #2dd4bf;
-  --line: rgb(255 255 255 / 0.07);
-  --line-strong: rgb(255 255 255 / 0.14);
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
 
   --signal: #2dd4bf;
   --signal-strong: #5eead4;
@@ -298,6 +301,16 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Hero slideshow progress bar */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

@@ -19,6 +19,24 @@ export const metadata = buildMetadata({
  * are deliberately absent until Syntram confirms them — see lib/site.ts.
  */
 
+/** TODO(Syntram): review and approve the wording of both statements. */
+const missionVision: { label: string; statement: string; detail: string; icon: IconName }[] = [
+  {
+    label: "Our mission",
+    statement: "Make AI genuinely useful for business.",
+    detail:
+      "We build AI-powered software, voice agents and automation that work reliably in real operations — accurate, secure, integrated with the systems teams already use, and measured against the job they're meant to do.",
+    icon: "target",
+  },
+  {
+    label: "Our vision",
+    statement: "Dependable AI for every business, not just the largest.",
+    detail:
+      "We see a future where organisations of any size can put trustworthy AI to work for their customers and teams — with people firmly in control and technology that keeps earning its place.",
+    icon: "radar",
+  },
+];
+
 const focusAreas: { title: string; body: string; icon: IconName }[] = [
   { title: "Voice AI", body: "Real-time voice agents for inbound and outbound calls, connected to business systems.", icon: "audio-lines" },
   { title: "AI & automation", body: "LLM applications, agents and automated workflows that handle real operational work.", icon: "sparkles" },
@@ -68,9 +86,34 @@ export default function AboutPage() {
         }
       />
 
-      <Section aria-labelledby="mission-title">
+      <Section aria-labelledby="mission-vision-title">
+        <Container>
+          <h2 id="mission-vision-title" className="sr-only">
+            Mission and vision
+          </h2>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {missionVision.map((block) => (
+              <article
+                key={block.label}
+                className="flex flex-col rounded-3xl border border-line-strong bg-surface p-7 sm:p-10"
+              >
+                <span className="grid size-12 place-items-center rounded-xl bg-signal-soft text-signal">
+                  <Icon name={block.icon} className="size-6" />
+                </span>
+                <p className="mt-6 font-mono text-xs font-medium tracking-[0.14em] text-signal uppercase">
+                  {block.label}
+                </p>
+                <h3 className="mt-3 text-display-md font-semibold text-foreground">{block.statement}</h3>
+                <p className="mt-4 text-[1.0625rem] leading-relaxed text-muted-foreground">{block.detail}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="surface" aria-labelledby="story-title" className="border-y border-line">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
-          <SectionHeader id="mission-title" eyebrow="Our mission" title="Make AI genuinely useful for business" />
+          <SectionHeader id="story-title" eyebrow="About the company" title="Why Syntram exists" />
           <div className="flex flex-col gap-5 text-lead text-muted-foreground">
             <p>
               AI has become capable enough to answer calls, read documents, resolve requests and run parts of real

@@ -1,10 +1,33 @@
+import { clients, galleryImages, popularLinks } from "@/content/company";
 import { industries } from "@/content/industries";
 import { getVisibleProducts } from "@/content/products";
 import { services } from "@/content/services";
 import { solutions } from "@/content/solutions";
+import { showPlaceholders } from "@/lib/content/visibility";
 import type { NavEntry, NavLink } from "@/types/content";
 
 export const primaryCta: NavLink = { label: "Let's Talk", href: "/contact" };
+
+/** Clients and Gallery appear only once they have real content (or in dev preview). */
+export const showClientsPage = clients.length > 0 || showPlaceholders;
+export const showGalleryPage = galleryImages.length > 0 || showPlaceholders;
+
+const aboutNavEntry: NavEntry = {
+  label: "About",
+  href: "/about",
+  intro: "Who we are, what we stand for and how to join us.",
+  items: [
+    { label: "About Syntram", href: "/about", description: "Our mission, vision and how we work.", icon: "users" },
+    ...(showClientsPage
+      ? [{ label: "Our Clients", href: "/clients", description: "Organisations we work with.", icon: "handshake" as const }]
+      : []),
+    { label: "Careers", href: "/careers", description: "Open roles and life at Syntram.", icon: "target" },
+    ...(showGalleryPage
+      ? [{ label: "Gallery", href: "/gallery", description: "Our team, workplace and events.", icon: "layers" as const }]
+      : []),
+    { label: "Contact", href: "/contact", description: "Start a conversation with our team.", icon: "messages" },
+  ],
+};
 
 /** A mega-menu when products are visible; otherwise a plain link to /products. */
 function productsNavEntry(): NavEntry {
@@ -24,6 +47,7 @@ function productsNavEntry(): NavEntry {
 }
 
 export const mainNav: NavEntry[] = [
+  aboutNavEntry,
   {
     label: "Solutions",
     href: "/solutions",
@@ -67,14 +91,6 @@ export const mainNav: NavEntry[] = [
       { label: "All resources", href: "/resources", description: "Everything in one place.", icon: "layers" },
     ],
   },
-  {
-    label: "Company",
-    href: "/about",
-    items: [
-      { label: "About Syntram", href: "/about", description: "Who we are and how we work.", icon: "users" },
-      { label: "Contact", href: "/contact", description: "Start a conversation with our team.", icon: "messages" },
-    ],
-  },
 ];
 
 export { isNavGroup } from "@/lib/nav";
@@ -101,11 +117,14 @@ export const footerColumns: FooterColumn[] = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
+      ...(showClientsPage ? [{ label: "Our Clients", href: "/clients" }] : []),
+      { label: "Careers", href: "/careers" },
+      ...(showGalleryPage ? [{ label: "Gallery", href: "/gallery" }] : []),
       { label: "Work", href: "/work" },
       { label: "Products", href: "/products" },
       { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "/guides" },
       { label: "Contact", href: "/contact" },
     ],
   },
+  ...(popularLinks.length > 0 ? [{ title: "Popular links", links: popularLinks }] : []),
 ];

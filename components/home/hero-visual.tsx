@@ -26,7 +26,8 @@ const log = [
   { kind: "run", key: "crm", value: "update_contact(notes)" },
 ] as const;
 
-export function HeroVisual() {
+/** `floating={false}` drops the overhanging side cards (used inside the hero slider). */
+export function HeroVisual({ floating = true }: { floating?: boolean }) {
   return (
     <div className="relative mx-auto w-full max-w-[560px] lg:mx-0 lg:justify-self-end" role="img" aria-label="Illustration: a voice AI agent turning a phone call into transcribed speech, reasoning, system actions and a spoken reply.">
       <div aria-hidden="true" className="relative rounded-2xl border border-line-strong bg-surface/90 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.7)] backdrop-blur">
@@ -112,26 +113,32 @@ export function HeroVisual() {
       </div>
 
       {/* Floating detail cards — larger screens only */}
-      <div
-        aria-hidden="true"
-        className="absolute -right-3 -bottom-8 hidden w-48 rounded-xl border border-line-strong bg-surface-raised/95 p-3.5 shadow-xl backdrop-blur sm:block lg:-right-6"
-      >
-        <p className="font-mono text-[0.625rem] tracking-wider text-subtle uppercase">Handoff</p>
-        <p className="mt-1 text-[0.8125rem] leading-snug text-foreground">Routes to a person with full context when needed</p>
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute -top-5 -right-3 hidden rounded-xl border border-line-strong bg-surface-raised/95 px-3.5 py-2.5 shadow-xl backdrop-blur sm:block lg:-right-6"
-      >
-        <p className="font-mono text-[0.625rem] tracking-wider text-subtle uppercase">Integrations</p>
-        <p className="mt-1 flex gap-1.5 text-[0.75rem] text-foreground">
-          {["CRM", "Calendar", "API"].map((t) => (
-            <span key={t} className="rounded-md border border-line px-1.5 py-0.5">
-              {t}
-            </span>
-          ))}
-        </p>
-      </div>
+      {floating && (
+        <>
+          <div
+            aria-hidden="true"
+            className="absolute -right-3 -bottom-8 hidden w-48 rounded-xl border border-line-strong bg-surface-raised/95 p-3.5 shadow-xl backdrop-blur sm:block lg:-right-6"
+          >
+            <p className="font-mono text-[0.625rem] tracking-wider text-subtle uppercase">Handoff</p>
+            <p className="mt-1 text-[0.8125rem] leading-snug text-foreground">
+              Routes to a person with full context when needed
+            </p>
+          </div>
+          <div
+            aria-hidden="true"
+            className="absolute -top-5 -right-3 hidden rounded-xl border border-line-strong bg-surface-raised/95 px-3.5 py-2.5 shadow-xl backdrop-blur sm:block lg:-right-6"
+          >
+            <p className="font-mono text-[0.625rem] tracking-wider text-subtle uppercase">Integrations</p>
+            <p className="mt-1 flex gap-1.5 text-[0.75rem] text-foreground">
+              {["CRM", "Calendar", "API"].map((t) => (
+                <span key={t} className="rounded-md border border-line px-1.5 py-0.5">
+                  {t}
+                </span>
+              ))}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }

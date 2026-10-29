@@ -5,7 +5,9 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container, Section } from "@/components/shared/layout-primitives";
 import { nextSteps } from "@/content/contact";
 import { buildMetadata } from "@/lib/seo";
-import { isPlaceholder, siteConfig } from "@/lib/site";
+import { OfficeList } from "@/components/shared/office-list";
+import { getSocialLinks, SocialLinks } from "@/components/shared/social-links";
+import { isPlaceholder, siteConfig, whatsappUrl } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Contact Us — Talk to Our Team",
@@ -15,12 +17,13 @@ export const metadata = buildMetadata({
 });
 
 export default function ContactPage() {
-  const { email, phone, whatsapp, meetingUrl } = siteConfig.contact;
+  const { email, phone, meetingUrl } = siteConfig.contact;
+  const whatsapp = whatsappUrl("Hi Syntram, I'd like to discuss a project.");
   const channels = [
+    whatsapp && { href: whatsapp, label: "WhatsApp", detail: "Chat with our team", Icon: MessageCircle, external: true },
     !isPlaceholder(meetingUrl) && { href: meetingUrl, label: "Book a call", detail: "Pick a time that suits you", Icon: CalendarCheck, external: true, meeting: true },
     !isPlaceholder(email) && { href: `mailto:${email}`, label: "Email", detail: email, Icon: Mail },
     !isPlaceholder(phone) && { href: `tel:${phone}`, label: "Phone", detail: phone, Icon: Phone },
-    !isPlaceholder(whatsapp) && { href: `https://wa.me/${whatsapp}`, label: "WhatsApp", detail: "Message us", Icon: MessageCircle, external: true },
   ].filter(Boolean) as {
     href: string;
     label: string;
@@ -86,9 +89,27 @@ export default function ContactPage() {
                 </ul>
               </div>
             )}
+
+            {getSocialLinks().length > 0 && (
+              <div>
+                <h2 className="font-display text-xl font-semibold text-foreground">Follow us</h2>
+                <SocialLinks className="mt-5" />
+              </div>
+            )}
           </aside>
         </Container>
       </Section>
+
+      {siteConfig.offices.length > 0 && (
+        <Section tone="surface" aria-labelledby="offices-title" className="border-t border-line">
+          <Container>
+            <h2 id="offices-title" className="text-display-md font-semibold text-foreground">
+              Our offices
+            </h2>
+            <OfficeList className="mt-8 lg:grid-cols-3" />
+          </Container>
+        </Section>
+      )}
     </>
   );
 }

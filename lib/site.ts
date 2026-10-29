@@ -14,6 +14,19 @@ export function isPlaceholder(value: string | undefined | null): boolean {
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://syntram.com").replace(/\/$/, "");
 
+export type SocialNetwork = "linkedin" | "facebook" | "instagram" | "youtube" | "x" | "github";
+
+export interface Office {
+  /** e.g. "Headquarters", "India", "UAE". */
+  label: string;
+  /** Address lines as they should be printed. */
+  lines: string[];
+  /** Optional phone for this office, E.164 format. */
+  phone?: string;
+  /** Optional Google Maps link. */
+  mapUrl?: string;
+}
+
 export const siteConfig = {
   name: "Syntram Technologies",
   shortName: "Syntram",
@@ -28,16 +41,29 @@ export const siteConfig = {
   contact: {
     email: PLACEHOLDER as string, // e.g. hello@syntram.com
     phone: PLACEHOLDER as string, // E.164, e.g. +91XXXXXXXXXX
-    whatsapp: PLACEHOLDER as string, // digits only, e.g. 91XXXXXXXXXX
+    whatsapp: PLACEHOLDER as string, // digits only incl. country code, e.g. 91XXXXXXXXXX
     meetingUrl: PLACEHOLDER as string, // Cal.com / Calendly link
-    address: PLACEHOLDER as string,
+    /** Careers / HR inbox shown on /careers. */
+    careersEmail: PLACEHOLDER as string,
   },
 
+  /**
+   * Company offices. TODO(Syntram): add real addresses — the "Our offices"
+   * blocks on /contact and in the footer stay hidden while this is empty.
+   * Example:
+   *   { label: "India", lines: ["Street", "City, State PIN", "India"], phone: "+91…" }
+   */
+  offices: [] as Office[],
+
+  /** Social profiles — each icon appears only once its URL is set. */
   social: {
     linkedin: PLACEHOLDER as string,
+    facebook: PLACEHOLDER as string,
+    instagram: PLACEHOLDER as string,
+    youtube: PLACEHOLDER as string,
     x: PLACEHOLDER as string,
     github: PLACEHOLDER as string,
-  },
+  } satisfies Record<SocialNetwork, string>,
 
   /** Legal entity details — confirm before launch. */
   legal: {
@@ -47,3 +73,11 @@ export const siteConfig = {
 } as const;
 
 export type SiteConfig = typeof siteConfig;
+
+/** WhatsApp click-to-chat URL, or undefined while the number is a placeholder. */
+export function whatsappUrl(message?: string): string | undefined {
+  const number = siteConfig.contact.whatsapp;
+  if (isPlaceholder(number)) return undefined;
+  const digits = number.replace(/\D/g, "");
+  return `https://wa.me/${digits}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+}
