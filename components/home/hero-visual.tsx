@@ -30,7 +30,7 @@ const log = [
 export function HeroVisual({ floating = true }: { floating?: boolean }) {
   return (
     <div className="relative mx-auto w-full max-w-[560px] lg:mx-0 lg:justify-self-end" role="img" aria-label="Illustration: a voice AI agent turning a phone call into transcribed speech, reasoning, system actions and a spoken reply.">
-      <div aria-hidden="true" className="relative rounded-2xl border border-line-strong bg-surface/90 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.7)] backdrop-blur">
+      <div aria-hidden="true" className="relative rounded-2xl border border-line-strong bg-surface/90 shadow-[0_30px_80px_-30px_rgb(15_23_42/0.25)] backdrop-blur">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-line px-4 py-3 sm:px-5">
           <div className="flex items-center gap-2.5">

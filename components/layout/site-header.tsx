@@ -14,7 +14,7 @@ const desktopEntries: DesktopNavEntry[] = mainNav.map((entry) => ({
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/80">
       <Container className="flex h-16 items-center justify-between gap-4">
         <Logo />
         <DesktopNav entries={desktopEntries} />

@@ -18,7 +18,7 @@ export function CtaBanner({ title, description, primary, secondary, trackId }: C
   return (
     <section aria-labelledby={`${trackId}-cta-title`} className="relative overflow-hidden py-20 sm:py-24 lg:py-28">
       <Container>
-        <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-surface px-6 py-14 text-center sm:px-12 lg:py-20">
+        <div className="theme-dark relative overflow-hidden rounded-3xl border border-line-strong bg-surface px-6 py-14 text-center sm:px-12 lg:py-20">
           <div aria-hidden="true" className="bg-grid mask-radial pointer-events-none absolute inset-0 opacity-60" />
           <div
             aria-hidden="true"

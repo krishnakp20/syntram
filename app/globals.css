@@ -4,14 +4,15 @@
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
-/* Styles that apply inside light-toned sections */
-@custom-variant theme-light (&:where(.theme-light, .theme-light *));
+/* Styles that apply inside dark-toned areas (footer, CTA boxes) */
+@custom-variant theme-dark (&:where(.theme-dark, .theme-dark *));
 
 /*
  * Syntram design tokens
  * ---------------------------------------------------------------
- * The site is dark-first. `:root` holds the dark (ink) palette and
- * `.theme-light` re-scopes the same tokens for light sections, so every
+ * The site is light-first. `:root` holds the light palette, `.theme-light`
+ * is a white alternate for section rhythm, and `.theme-dark` re-scopes the
+ * same tokens to soft navy for the footer and CTA boxes — so every
  * component works in both without per-component overrides.
  *
  * Accent ("signal") is a single teal hue. Use it for emphasis, focus and
@@ -103,13 +104,64 @@
   }
 }
 
-/* ---------- Soft dark (default) ----------
- * A slate-navy base rather than near-black, with slightly eased text
- * contrast: easier on the eyes for long reading while staying WCAG AA.
+/* ---------- Light (default) ----------
+ * Soft grey page with white cards. Text colours meet WCAG AA on both the
+ * grey background and white cards.
  */
 :root {
   --radius: 0.75rem;
 
+  --background: #f4f6f8;
+  --foreground: #0d1320;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #0d1320;
+  --popover: #ffffff;
+  --popover-foreground: #0d1320;
+
+  --primary: #0f766e; /* white text on this: 5.5:1 */
+  --primary-foreground: #ffffff;
+  --secondary: #e8ecf1;
+  --secondary-foreground: #0d1320;
+  --muted: #eceff4;
+  --muted-foreground: #475569; /* ~7:1 on background */
+  --subtle: #64708a; /* ~4.6:1 — AA for small labels */
+  --accent: #e8ecf1;
+  --accent-foreground: #0d1320;
+  --destructive: #c62828;
+
+  --border: rgb(13 19 32 / 0.1);
+  --input: rgb(13 19 32 / 0.18);
+  --ring: #0f766e;
+  --line: rgb(13 19 32 / 0.08);
+  --line-strong: rgb(13 19 32 / 0.15);
+
+  --signal: #0f766e; /* AA for text on light */
+  --signal-strong: #0b5f58;
+  --signal-soft: rgb(15 118 110 / 0.09);
+
+  color-scheme: light;
+}
+
+/* ---------- White alternate sections ----------
+ * Used by <Section tone="light"> so sections alternate grey / white.
+ */
+.theme-light {
+  --background: #ffffff;
+  --surface: #f6f8fa;
+  --surface-raised: #ffffff;
+  --muted: #f1f4f7;
+  --subtle: #5f6b84;
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ---------- Soft dark (footer, CTA boxes) ----------
+ * Slate-navy rather than near-black, with eased text contrast.
+ */
+.theme-dark {
   --background: #172030;
   --foreground: #e6eaf1;
   --surface: #1b2536;
@@ -141,41 +193,6 @@
   --signal-soft: rgb(45 212 191 / 0.12);
 
   color-scheme: dark;
-}
-
-/* ---------- Light sections ---------- */
-.theme-light {
-  --background: #f5f6f8;
-  --foreground: #0b0e14;
-  --surface: #ffffff;
-  --surface-raised: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #0b0e14;
-  --popover: #ffffff;
-  --popover-foreground: #0b0e14;
-
-  --primary: #0b0e14;
-  --primary-foreground: #ffffff;
-  --secondary: #e9ecf1;
-  --secondary-foreground: #0b0e14;
-  --muted: #eceff3;
-  --muted-foreground: #4a5466; /* 7.4:1 on background */
-  --subtle: #8590a3;
-  --accent: #e9ecf1;
-  --accent-foreground: #0b0e14;
-  --destructive: #c62828;
-
-  --border: rgb(11 14 20 / 0.1);
-  --input: rgb(11 14 20 / 0.16);
-  --ring: #0f766e;
-  --line: rgb(11 14 20 / 0.08);
-  --line-strong: rgb(11 14 20 / 0.16);
-
-  --signal: #0f766e; /* AA for text on light */
-  --signal-strong: #0d5f59;
-  --signal-soft: rgb(15 118 110 / 0.09);
-
-  color-scheme: light;
   background-color: var(--background);
   color: var(--foreground);
 }

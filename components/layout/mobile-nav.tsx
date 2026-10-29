@@ -61,7 +61,7 @@ export function MobileNav({ items, cta }: { items: NavEntry[]; cta: NavLink }) {
         onCancel={unlock}
         onClose={unlock}
         aria-label="Site menu"
-        className="m-0 h-dvh max-h-none w-full max-w-none bg-background p-0 text-foreground backdrop:bg-black/60 open:flex open:flex-col sm:ml-auto sm:max-w-md sm:border-l sm:border-line lg:hidden"
+        className="m-0 h-dvh max-h-none w-full max-w-none bg-background p-0 text-foreground backdrop:bg-slate-900/40 open:flex open:flex-col sm:ml-auto sm:max-w-md sm:border-l sm:border-line lg:hidden"
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4">
           <span className="flex items-center gap-2.5">

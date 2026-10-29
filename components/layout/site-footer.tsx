@@ -18,7 +18,7 @@ export function SiteFooter() {
   const whatsapp = whatsappUrl();
 
   return (
-    <footer className="border-t border-line bg-surface">
+    <footer className="theme-dark border-t border-line bg-surface">
       <Container className="py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div className="flex max-w-sm flex-col gap-5">

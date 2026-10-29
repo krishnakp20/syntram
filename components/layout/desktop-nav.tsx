@@ -124,7 +124,7 @@ export function DesktopNav({ entries }: { entries: DesktopNavEntry[] }) {
                 onClick={(e) => {
                   if ((e.target as HTMLElement).closest("a")) setOpen(null);
                 }}
-                className="absolute top-full left-1/2 z-50 mt-2 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-line-strong bg-popover p-2 shadow-[0_24px_60px_-20px_rgb(0_0_0/0.6)] motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95"
+                className="absolute top-full left-1/2 z-50 mt-2 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-line-strong bg-popover p-2 shadow-[0_24px_60px_-20px_rgb(15_23_42/0.2)] motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95"
               >
                 {entry.panel}
               </div>

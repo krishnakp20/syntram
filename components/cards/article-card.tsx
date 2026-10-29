@@ -36,7 +36,7 @@ export function ArticleCard({ article, featured = false }: { article: ArticleSum
             ·
           </span>
           <span className="text-muted-foreground">{article.category}</span>
-          {article.draft && <span className="rounded bg-amber-400/15 px-1.5 text-amber-300">Draft</span>}
+          {article.draft && <span className="rounded bg-amber-400/20 px-1.5 text-amber-800">Draft</span>}
         </p>
         <h3
           className={cn(

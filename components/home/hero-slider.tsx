@@ -69,7 +69,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
         if (e.key === "ArrowLeft") go(active - 1);
       }}
     >
-      <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-surface/90 shadow-[0_40px_100px_-40px_rgb(0_0_0/0.6)]">
+      <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-surface/90 shadow-[0_40px_100px_-40px_rgb(15_23_42/0.22)]">
         <div aria-hidden="true" className="bg-grid mask-radial pointer-events-none absolute inset-0 opacity-50" />
         {/* All slides share one grid cell so the box height is the tallest slide — no layout shift. */}
         <div className="relative grid" aria-live={autoplay ? "off" : "polite"}>

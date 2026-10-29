@@ -12,11 +12,11 @@ export function PlaceholderNotice({ children, className }: { children: React.Rea
     <div
       role="note"
       className={cn(
-        "flex items-start gap-3 rounded-xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100 theme-light:text-amber-900",
+        "flex items-start gap-3 rounded-xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-950 theme-dark:text-amber-100",
         className,
       )}
     >
-      <TriangleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-amber-300 theme-light:text-amber-700" />
+      <TriangleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-amber-700 theme-dark:text-amber-300" />
       <p>
         <strong className="font-semibold">Placeholder content.</strong> {children}
       </p>
