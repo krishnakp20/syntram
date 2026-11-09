@@ -14,9 +14,9 @@ const desktopEntries: DesktopNavEntry[] = mainNav.map((entry) => ({
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/80">
+    <header className="theme-dark theme-logo sticky top-0 z-40 border-b border-line">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Logo />
+        <Logo eager />
         <DesktopNav entries={desktopEntries} />
         <div className="flex items-center gap-2">
           <ButtonLink

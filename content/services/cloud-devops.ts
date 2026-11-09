@@ -10,7 +10,7 @@ export const cloudDevops: ServiceDetail = {
   seo: {
     title: "Cloud & DevOps Services",
     description:
-      "Cloud architecture, infrastructure as code, CI/CD, containers, observability and cost optimisation on AWS, Google Cloud and Azure by Syntram Technologies.",
+      "Cloud architecture, infrastructure as code, CI/CD, containers, observability and cost optimisation on AWS, Google Cloud and Azure by ZAYBX.",
   },
   hero: {
     headline: "Cloud infrastructure you can understand, trust and afford",

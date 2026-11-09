@@ -10,7 +10,7 @@ export const customSoftwareDevelopment: ServiceDetail = {
   seo: {
     title: "Custom Software Development Services",
     description:
-      "Custom software development by Syntram Technologies: SaaS products, internal platforms and business systems with clean architecture and automated testing.",
+      "Custom software development by ZAYBX: SaaS products, internal platforms and business systems with clean architecture and automated testing.",
   },
   hero: {
     headline: "Custom software, built around how you actually work",

@@ -56,7 +56,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     <section
       ref={regionRef}
       aria-roledescription="carousel"
-      aria-label="Syntram highlights"
+      aria-label="ZAYBX highlights"
       className="relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

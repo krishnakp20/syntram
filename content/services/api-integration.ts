@@ -9,7 +9,7 @@ export const apiIntegration: ServiceDetail = {
   seo: {
     title: "API & System Integration Services",
     description:
-      "Connect CRMs, ERPs, telephony, payment and third-party platforms with reliable, secure and well-documented integrations from Syntram Technologies.",
+      "Connect CRMs, ERPs, telephony, payment and third-party platforms with reliable, secure and well-documented integrations from ZAYBX.",
   },
   hero: {
     headline: "Integrations that keep your systems in sync",

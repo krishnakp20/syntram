@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Voice AI & Automation Products",
   description:
-    "Syntram Technologies is developing platform products for voice AI and business automation. See what's available and talk to us about early access.",
+    "ZAYBX is developing platform products for voice AI and business automation. See what's available and talk to us about early access.",
   path: "/products",
 });
 

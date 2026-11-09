@@ -28,13 +28,13 @@ const reasons = [
   },
 ];
 
-export function WhySyntram() {
+export function WhyZaybx() {
   return (
     <Section aria-labelledby="why-title">
       <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.4fr]">
         <SectionHeader
           id="why-title"
-          eyebrow="Why Syntram"
+          eyebrow="Why ZAYBX"
           title="A partner that builds for the long run"
           description="How we work matters as much as what we build. These are the commitments behind every engagement."
           className="lg:sticky lg:top-28 lg:self-start"

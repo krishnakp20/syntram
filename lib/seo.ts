@@ -15,7 +15,7 @@ interface BuildMetadataInput extends SeoFields {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
-  /** Use the title verbatim (no "| Syntram Technologies" suffix). */
+  /** Use the title verbatim (no "| ZAYBX" suffix). */
   absoluteTitle?: boolean;
 }
 

@@ -1,4 +1,4 @@
-// Syntram website database.
+// ZAYBX website database.
 // Only genuinely dynamic data lives here — leads and contact submissions.
 // Marketing content stays in /content (or Sanity), not in the database.
 

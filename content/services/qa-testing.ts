@@ -10,7 +10,7 @@ export const qaTesting: ServiceDetail = {
   seo: {
     title: "QA, Testing & AI Evaluation Services",
     description:
-      "Test automation, API and performance testing, release quality gates and evaluation pipelines for AI and voice agents, by Syntram Technologies.",
+      "Test automation, API and performance testing, release quality gates and evaluation pipelines for AI and voice agents, by ZAYBX.",
   },
   hero: {
     headline: "Quality you can measure — for software and AI",

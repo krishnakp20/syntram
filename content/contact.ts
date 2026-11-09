@@ -12,7 +12,7 @@ export const serviceOptions = [
 ] as const;
 
 /**
- * Budget ranges in USD. TODO(Syntram): confirm currency and bands for your
+ * Budget ranges in USD. TODO(ZAYBX): confirm currency and bands for your
  * market (e.g. switch to INR if most leads are domestic).
  */
 export const budgetOptions = [

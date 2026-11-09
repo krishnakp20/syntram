@@ -8,18 +8,19 @@ import { Container, Section, SectionHeader } from "@/components/shared/layout-pr
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "About Syntram Technologies",
+  title: "About ZAYBX",
+  absoluteTitle: true,
   description:
-    "Syntram Technologies is an AI-first software engineering company building voice AI agents, automation platforms and the software that runs them.",
+    "ZAYBX is an AI-first software engineering company building voice AI agents, automation platforms and the software that runs them.",
   path: "/about",
 });
 
 /*
  * Company facts (founding year, team size, locations, leadership, clients)
- * are deliberately absent until Syntram confirms them — see lib/site.ts.
+ * are deliberately absent until ZAYBX confirms them — see lib/site.ts.
  */
 
-/** TODO(Syntram): review and approve the wording of both statements. */
+/** TODO(ZAYBX): review and approve the wording of both statements. */
 const missionVision: { label: string; statement: string; detail: string; icon: IconName }[] = [
   {
     label: "Our mission",
@@ -75,9 +76,9 @@ export default function AboutPage() {
     <>
       <PageHero
         breadcrumb={[{ name: "About", path: "/about" }]}
-        eyebrow="About Syntram"
+        eyebrow="About ZAYBX"
         title="An AI-first engineering company, built for practical results"
-        intro="Syntram Technologies designs and builds AI-powered software, voice agents and automation platforms. We combine modern AI with solid software engineering, so what we build works reliably in the real world — not just in a demo."
+        intro="ZAYBX designs and builds AI-powered software, voice agents and automation platforms. We combine modern AI with solid software engineering, so what we build works reliably in the real world — not just in a demo."
         actions={
           <ButtonLink href="/contact" size="cta-lg" trackAs="about_hero_talk">
             Talk to Our Team
@@ -113,7 +114,7 @@ export default function AboutPage() {
 
       <Section tone="surface" aria-labelledby="story-title" className="border-y border-line">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
-          <SectionHeader id="story-title" eyebrow="About the company" title="Why Syntram exists" />
+          <SectionHeader id="story-title" eyebrow="About the company" title="Why ZAYBX exists" />
           <div className="flex flex-col gap-5 text-lead text-muted-foreground">
             <p>
               AI has become capable enough to answer calls, read documents, resolve requests and run parts of real

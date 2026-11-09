@@ -8,7 +8,7 @@ export const ecommerce: IndustryDetail = {
   seo: {
     title: "AI & Automation for E-commerce",
     description:
-      "AI, voice and automation for e-commerce brands: automate order and returns support, catalogue operations and customer communication with Syntram Technologies.",
+      "AI, voice and automation for e-commerce brands: automate order and returns support, catalogue operations and customer communication with ZAYBX.",
   },
   hero: {
     headline: "AI and automation for online retail operations",

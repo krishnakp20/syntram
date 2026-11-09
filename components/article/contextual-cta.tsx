@@ -21,7 +21,7 @@ export function ContextualCta({ related, trackId }: { related?: RelatedContent; 
 
   return (
     <aside
-      aria-label="Work with Syntram"
+      aria-label="Work with ZAYBX"
       className="not-prose my-12 flex flex-col gap-5 rounded-2xl border border-signal/25 bg-signal-soft p-6 sm:flex-row sm:items-center sm:p-7"
     >
       {target && (

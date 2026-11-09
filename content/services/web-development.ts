@@ -9,7 +9,7 @@ export const webDevelopment: ServiceDetail = {
   seo: {
     title: "Web Development — Websites & Web Apps",
     description:
-      "Fast, accessible, SEO-friendly websites and web apps built with React, Next.js and TypeScript by Syntram Technologies, designed for Core Web Vitals.",
+      "Fast, accessible, SEO-friendly websites and web apps built with React, Next.js and TypeScript by ZAYBX, designed for Core Web Vitals.",
   },
   hero: {
     headline: "Websites and web apps that are fast, findable and accessible",

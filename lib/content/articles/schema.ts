@@ -21,7 +21,7 @@ export const articleFrontmatterSchema = z.object({
   tags: z.array(z.string()).default([]),
   author: z
     .object({ name: z.string(), role: z.string().optional() })
-    .default({ name: "Syntram Technologies" }),
+    .default({ name: "ZAYBX" }),
   featuredImage: z
     .object({ src: z.string(), alt: z.string().min(5), width: z.number(), height: z.number() })
     .optional(),

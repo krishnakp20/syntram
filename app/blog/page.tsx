@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Blog — Voice AI, AI Agents & Automation",
   description:
-    "Articles from Syntram Technologies on voice AI, AI agents, automation and software engineering — practical explanations without the hype.",
+    "Articles from ZAYBX on voice AI, AI agents, automation and software engineering — practical explanations without the hype.",
   path: "/blog",
 });
 

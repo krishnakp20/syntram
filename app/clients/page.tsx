@@ -12,7 +12,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Our Clients",
   description:
-    "Organisations that work with Syntram Technologies on AI, voice AI, automation and software projects — listed with their permission.",
+    "Organisations that work with ZAYBX on AI, voice AI, automation and software projects — listed with their permission.",
   path: "/clients",
   // Not indexed until real, approved clients are listed.
   noindex: clients.length === 0,

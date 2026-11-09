@@ -1,7 +1,7 @@
 /**
  * Global company configuration.
  *
- * Values wrapped in `PLACEHOLDER` are not yet confirmed by Syntram. Components
+ * Values wrapped in `PLACEHOLDER` are not yet confirmed by ZAYBX. Components
  * check `isPlaceholder()` and hide or flag them instead of publishing
  * invented facts. Replace them here once the real details are available.
  */
@@ -28,12 +28,12 @@ export interface Office {
 }
 
 export const siteConfig = {
-  name: "Syntram Technologies",
-  shortName: "Syntram",
+  name: "ZAYBX",
+  shortName: "ZAYBX",
   url: siteUrl,
   tagline: "AI. Software. Automation. Built for Business.",
   description:
-    "Syntram Technologies designs and builds AI-powered software, voice AI agents and automation platforms that help businesses operate smarter and scale faster.",
+    "ZAYBX designs and builds AI-powered software, voice AI agents and automation platforms that help businesses operate smarter and scale faster.",
   locale: "en_US",
   /** Shown as the default OpenGraph image until a branded one is designed. */
   ogImage: "/opengraph-image",
@@ -48,7 +48,7 @@ export const siteConfig = {
   },
 
   /**
-   * Company offices. TODO(Syntram): add real addresses — the "Our offices"
+   * Company offices. TODO(ZAYBX): add real addresses — the "Our offices"
    * blocks on /contact and in the footer stay hidden while this is empty.
    * Example:
    *   { label: "India", lines: ["Street", "City, State PIN", "India"], phone: "+91…" }
@@ -67,7 +67,7 @@ export const siteConfig = {
 
   /** Legal entity details — confirm before launch. */
   legal: {
-    entityName: "Syntram Technologies",
+    entityName: "ZAYBX",
     foundingYear: PLACEHOLDER as string,
   },
 } as const;

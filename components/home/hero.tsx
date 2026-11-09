@@ -33,7 +33,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lead text-muted-foreground">
-            Syntram Technologies designs and builds AI-powered software, voice agents and automation
+            ZAYBX designs and builds AI-powered software, voice agents and automation
             platforms — so your business can operate smarter and scale without adding friction.
           </p>
 

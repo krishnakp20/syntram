@@ -10,7 +10,7 @@ export const voiceAi: ServiceDetail = {
   seo: {
     title: "Voice AI Development Services",
     description:
-      "Real-time AI voice agents for inbound and outbound calls, with telephony, CRM integration, call analytics and human handoff, by Syntram Technologies.",
+      "Real-time AI voice agents for inbound and outbound calls, with telephony, CRM integration, call analytics and human handoff, by ZAYBX.",
   },
   hero: {
     headline: "Voice AI agents, engineered for real phone calls",

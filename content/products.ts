@@ -4,7 +4,7 @@ import type { ProductDetail } from "@/types/content";
 /**
  * Product registry.
  *
- * PLACEHOLDER: Syntram has not yet published product details. The entry below
+ * PLACEHOLDER: ZAYBX has not yet published product details. The entry below
  * only reserves the URL structure (/products/[slug]) so the template can be
  * reviewed. It is flagged as a placeholder, so it is:
  *   - hidden in production builds (see lib/content/visibility.ts)
@@ -25,7 +25,7 @@ export const products: ProductDetail[] = [
     seo: {
       title: "Voice AI Platform (Placeholder)",
       description:
-        "Placeholder page reserving the URL for a future Syntram product. Product details will be published here once they are confirmed and available.",
+        "Placeholder page reserving the URL for a future ZAYBX product. Product details will be published here once they are confirmed and available.",
       noindex: true,
     },
     related: {

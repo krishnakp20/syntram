@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Our Work — Case Studies",
   description:
-    "Case studies from Syntram Technologies covering AI, voice AI, automation and software projects — published only with client approval and verified results.",
+    "Case studies from ZAYBX covering AI, voice AI, automation and software projects — published only with client approval and verified results.",
   path: "/work",
 });
 

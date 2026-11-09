@@ -9,7 +9,7 @@ import { ResourcesTeaser } from "@/components/home/resources-teaser";
 import { ServicesOverview } from "@/components/home/services-overview";
 import { TechnologySection } from "@/components/home/technology-section";
 import { VoiceAiFeature } from "@/components/home/voice-ai-feature";
-import { WhySyntram } from "@/components/home/why-syntram";
+import { WhyZaybx } from "@/components/home/why-zaybx";
 import { WorkTeaser } from "@/components/home/work-teaser";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -17,10 +17,10 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Syntram Technologies — AI, Voice AI & Software Development",
+  title: "ZAYBX — AI, Voice AI & Software Development",
   absoluteTitle: true,
   description:
-    "Syntram Technologies builds AI-powered software, voice AI agents and business automation — from LLM applications to web, mobile and cloud platforms.",
+    "ZAYBX builds AI-powered software, voice AI agents and business automation — from LLM applications to web, mobile and cloud platforms.",
   path: "/",
 });
 
@@ -38,7 +38,7 @@ export default function HomePage() {
       <ProductsTeaser />
       <WorkTeaser />
       <TechnologySection />
-      <WhySyntram />
+      <WhyZaybx />
       <ResourcesTeaser />
       <CtaBanner
         trackId="home_final"

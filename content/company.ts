@@ -28,7 +28,7 @@ export interface JobOpening {
   postedAt: string;
 }
 
-/** TODO(Syntram): add current openings. */
+/** TODO(ZAYBX): add current openings. */
 export const jobOpenings: JobOpening[] = [];
 
 /* ---------- Gallery ---------- */
@@ -43,7 +43,7 @@ export interface GalleryImage {
   category?: string;
 }
 
-/** TODO(Syntram): add real photos you have permission to publish. */
+/** TODO(ZAYBX): add real photos you have permission to publish. */
 export const galleryImages: GalleryImage[] = [];
 
 /* ---------- Clients ---------- */
@@ -57,7 +57,7 @@ export interface Client {
 }
 
 /**
- * TODO(Syntram): only list clients who have agreed to be named publicly.
+ * TODO(ZAYBX): only list clients who have agreed to be named publicly.
  * Never add a logo without permission.
  */
 export const clients: Client[] = [];
@@ -72,7 +72,7 @@ export interface Achievement {
 
 /**
  * Shown as an "Achievements" slide in the homepage hero once non-empty.
- * TODO(Syntram): only add figures you can stand behind (projects delivered,
+ * TODO(ZAYBX): only add figures you can stand behind (projects delivered,
  * years in business, awards, certifications).
  */
 export const achievements: Achievement[] = [];
@@ -82,6 +82,6 @@ export const achievements: Achievement[] = [];
 /**
  * Extra links for the footer (e.g. Staffing Services, group companies,
  * learning resources). External URLs open in a new tab.
- * TODO(Syntram): confirm labels and URLs before adding.
+ * TODO(ZAYBX): confirm labels and URLs before adding.
  */
 export const popularLinks: NavLink[] = [];

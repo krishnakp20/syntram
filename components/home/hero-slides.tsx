@@ -201,7 +201,7 @@ export function getHeroSlides(): HeroSlide[] {
           title="Results we're proud of"
           body="A few milestones from our work so far."
           href="/about"
-          linkLabel="About Syntram"
+          linkLabel="About ZAYBX"
           visual={
             <ul className="grid grid-cols-2 gap-3">
               {achievements.slice(0, 4).map((a) => (

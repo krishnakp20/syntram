@@ -8,7 +8,7 @@
 @custom-variant theme-dark (&:where(.theme-dark, .theme-dark *));
 
 /*
- * Syntram design tokens
+ * ZAYBX design tokens
  * ---------------------------------------------------------------
  * The site is light-first. `:root` holds the light palette, `.theme-light`
  * is a white alternate for section rhythm, and `.theme-dark` re-scopes the
@@ -120,7 +120,7 @@
   --popover: #ffffff;
   --popover-foreground: #0d1320;
 
-  --primary: #0f766e; /* white text on this: 5.5:1 */
+  --primary: #1668d6; /* ZAYBX logo blue, deepened: white text 5.3:1 */
   --primary-foreground: #ffffff;
   --secondary: #e8ecf1;
   --secondary-foreground: #0d1320;
@@ -133,13 +133,13 @@
 
   --border: rgb(13 19 32 / 0.1);
   --input: rgb(13 19 32 / 0.18);
-  --ring: #0f766e;
+  --ring: #1668d6;
   --line: rgb(13 19 32 / 0.08);
   --line-strong: rgb(13 19 32 / 0.15);
 
-  --signal: #0f766e; /* AA for text on light */
-  --signal-strong: #0b5f58;
-  --signal-soft: rgb(15 118 110 / 0.09);
+  --signal: #1668d6; /* AA for text on light (4.9:1 on page grey) */
+  --signal-strong: #0f56b5;
+  --signal-soft: rgb(22 104 214 / 0.09);
 
   color-scheme: light;
 }
@@ -171,8 +171,8 @@
   --popover: #202a3c;
   --popover-foreground: #e6eaf1;
 
-  --primary: #2dd4bf;
-  --primary-foreground: #04201c;
+  --primary: #22b8ff; /* ZAYBX logo cyan-blue */
+  --primary-foreground: #021024;
   --secondary: #26314a;
   --secondary-foreground: #e6eaf1;
   --muted: #232d42;
@@ -184,17 +184,34 @@
 
   --border: rgb(255 255 255 / 0.09);
   --input: rgb(255 255 255 / 0.14);
-  --ring: #2dd4bf;
+  --ring: #22b8ff;
   --line: rgb(255 255 255 / 0.08);
   --line-strong: rgb(255 255 255 / 0.16);
 
-  --signal: #2dd4bf;
-  --signal-strong: #5eead4;
-  --signal-soft: rgb(45 212 191 / 0.12);
+  --signal: #22b8ff;
+  --signal-strong: #5cc8ff;
+  --signal-soft: rgb(34 184 255 / 0.12);
 
   color-scheme: dark;
   background-color: var(--background);
   color: var(--foreground);
+}
+
+/* ---------- Logo black (header, footer) ----------
+ * Same black as the ZAYBX logo's own background (#000002), so the logo
+ * image blends in with no visible box. Inherits the dark-theme tokens.
+ */
+.theme-logo {
+  --background: #000002;
+  --surface: #000002;
+  --surface-raised: #0b0f19;
+  --card: #0b0f19;
+  --popover: #0b0f19;
+  --secondary: #161d2c;
+  --muted: #121827;
+  --accent: #161d2c;
+
+  background-color: var(--background);
 }
 
 @layer base {
@@ -252,7 +269,7 @@
  * Deliberately unlayered: the typography plugin defines its own --tw-prose-*
  * colours in the utilities layer, and unlayered styles win over every layer.
  */
-.prose-syntram {
+.prose-zaybx {
   /* Slightly brighter than muted text: easier on the eye for long reads. */
   --tw-prose-body: color-mix(in oklab, var(--foreground) 82%, var(--background));
   --tw-prose-headings: var(--foreground);
@@ -273,26 +290,26 @@
   font-size: 1.0625rem;
   line-height: 1.75;
 }
-.prose-syntram :where(h2, h3) {
+.prose-zaybx :where(h2, h3) {
   font-family: var(--font-display);
   letter-spacing: -0.015em;
   scroll-margin-top: 6rem;
 }
-.prose-syntram :where(a) {
+.prose-zaybx :where(a) {
   text-underline-offset: 3px;
   font-weight: 500;
 }
-.prose-syntram :where(code):not(:where(pre code)) {
+.prose-zaybx :where(code):not(:where(pre code)) {
   background: var(--muted);
   border-radius: 0.375rem;
   padding: 0.15em 0.4em;
   font-weight: 400;
 }
-.prose-syntram :where(code):not(:where(pre code))::before,
-.prose-syntram :where(code):not(:where(pre code))::after {
+.prose-zaybx :where(code):not(:where(pre code))::before,
+.prose-zaybx :where(code):not(:where(pre code))::after {
   content: none;
 }
-.prose-syntram :where(pre) {
+.prose-zaybx :where(pre) {
   border: 1px solid var(--line);
 }
 

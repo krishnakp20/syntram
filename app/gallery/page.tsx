@@ -10,9 +10,10 @@ import { showGalleryPage } from "@/content/navigation";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Gallery — Life at Syntram",
+  title: "Gallery — Life at ZAYBX",
+  absoluteTitle: true,
   description:
-    "A look inside Syntram Technologies: our team, workplace and events. Photos from the people building AI, voice agents and software for businesses.",
+    "A look inside ZAYBX: our team, workplace and events. Photos from the people building AI, voice agents and software for businesses.",
   path: "/gallery",
   // Not indexed until real photos are published.
   noindex: galleryImages.length === 0,
@@ -39,7 +40,7 @@ export default function GalleryPage() {
           { name: "Gallery", path: "/gallery" },
         ]}
         eyebrow="Gallery"
-        title="Life at Syntram"
+        title="Life at ZAYBX"
         intro="Our team, our workplace and the moments in between."
       />
 
@@ -90,7 +91,7 @@ export default function GalleryPage() {
         title="Want to be in the next photo?"
         description="We're always interested in people who care about building useful technology."
         primary={{ label: "See careers", href: "/careers" }}
-        secondary={{ label: "About Syntram", href: "/about" }}
+        secondary={{ label: "About ZAYBX", href: "/about" }}
       />
     </>
   );

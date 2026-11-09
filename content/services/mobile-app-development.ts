@@ -9,7 +9,7 @@ export const mobileAppDevelopment: ServiceDetail = {
   seo: {
     title: "Mobile App Development — iOS & Android",
     description:
-      "Cross-platform and native iOS and Android apps by Syntram Technologies, with secure backends, offline support, push notifications and app store release.",
+      "Cross-platform and native iOS and Android apps by ZAYBX, with secure backends, offline support, push notifications and app store release.",
   },
   hero: {
     headline: "Mobile apps your users keep coming back to",

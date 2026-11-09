@@ -9,9 +9,9 @@ export interface TechGroup {
 }
 
 /**
- * Technologies Syntram works with. These are tools, not partnerships — do
+ * Technologies ZAYBX works with. These are tools, not partnerships — do
  * not present any of them as an endorsement or certification.
- * TODO(Syntram): confirm this list matches the team's actual production stack.
+ * TODO(ZAYBX): confirm this list matches the team's actual production stack.
  */
 export const technologyGroups: TechGroup[] = [
   {

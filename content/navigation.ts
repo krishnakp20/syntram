@@ -17,11 +17,11 @@ const aboutNavEntry: NavEntry = {
   href: "/about",
   intro: "Who we are, what we stand for and how to join us.",
   items: [
-    { label: "About Syntram", href: "/about", description: "Our mission, vision and how we work.", icon: "users" },
+    { label: "About ZAYBX", href: "/about", description: "Our mission, vision and how we work.", icon: "users" },
     ...(showClientsPage
       ? [{ label: "Our Clients", href: "/clients", description: "Organisations we work with.", icon: "handshake" as const }]
       : []),
-    { label: "Careers", href: "/careers", description: "Open roles and life at Syntram.", icon: "target" },
+    { label: "Careers", href: "/careers", description: "Open roles and life at ZAYBX.", icon: "target" },
     ...(showGalleryPage
       ? [{ label: "Gallery", href: "/gallery", description: "Our team, workplace and events.", icon: "layers" as const }]
       : []),
@@ -36,7 +36,7 @@ function productsNavEntry(): NavEntry {
   return {
     label: "Products",
     href: "/products",
-    intro: "Platform products built on the Syntram voice and automation stack.",
+    intro: "Platform products built on the ZAYBX voice and automation stack.",
     items: visible.map((p) => ({
       label: p.name,
       href: `/products/${p.slug}`,

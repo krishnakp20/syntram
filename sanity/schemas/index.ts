@@ -1,7 +1,7 @@
 import { articleFields } from "./article-fields";
 
 /**
- * Sanity schema types for the Syntram website content.
+ * Sanity schema types for the ZAYBX website content.
  * Register these in a Sanity Studio project: `schema: { types: schemaTypes }`.
  * Case studies, products and marketing pages stay in typed files in /content
  * until there's a clear editorial need to move them.

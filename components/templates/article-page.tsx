@@ -89,7 +89,7 @@ export async function ArticlePage({ article }: { article: Article }) {
           <div>
             <TableOfContents items={toc} />
           </div>
-          <div className="prose prose-syntram max-w-[72ch] min-w-0">
+          <div className="prose prose-zaybx max-w-[72ch] min-w-0">
             <div id="article-body">
               <MdxContent source={article.content} format={article.format} />
             </div>

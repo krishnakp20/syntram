@@ -2,7 +2,7 @@ import { Icon, type IconName } from "@/components/shared/icon";
 import { Container } from "@/components/shared/layout-primitives";
 
 /**
- * "Trust" section. Syntram has no client logos approved for publication yet,
+ * "Trust" section. ZAYBX has no client logos approved for publication yet,
  * so this shows what we engineer instead of an invented logo wall. When real,
  * approved logos exist, render a <LogoCloud> above this band.
  */

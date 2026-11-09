@@ -43,7 +43,7 @@ export function SocialLinks({ className, size = "md" }: { className?: string; si
   const links = getSocialLinks();
   if (links.length === 0) return null;
   return (
-    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="Syntram on social media">
+    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="ZAYBX on social media">
       {links.map((l) => (
         <li key={l.network}>
           <a

@@ -11,9 +11,10 @@ import { buildMetadata } from "@/lib/seo";
 import { isPlaceholder, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Careers — Join Syntram Technologies",
+  title: "Careers — Join ZAYBX",
+  absoluteTitle: true,
   description:
-    "Careers at Syntram Technologies: work on AI, voice AI, automation and software engineering. See open roles or send us your CV for future opportunities.",
+    "Careers at ZAYBX: work on AI, voice AI, automation and software engineering. See open roles or send us your CV for future opportunities.",
   path: "/careers",
 });
 
@@ -29,7 +30,7 @@ export default function CareersPage() {
   const careersEmail = siteConfig.contact.careersEmail;
   const cvHref = isPlaceholder(careersEmail)
     ? "/contact"
-    : `mailto:${careersEmail}?subject=${encodeURIComponent("Application — Syntram Technologies")}`;
+    : `mailto:${careersEmail}?subject=${encodeURIComponent("Application — ZAYBX")}`;
 
   return (
     <>
@@ -145,7 +146,7 @@ export default function CareersPage() {
         title="Don't see the right role?"
         description="Tell us about yourself and the work you're excited by. Good people don't always arrive on schedule."
         primary={{ label: "Send your CV", href: cvHref }}
-        secondary={{ label: "About Syntram", href: "/about" }}
+        secondary={{ label: "About ZAYBX", href: "/about" }}
       />
     </>
   );

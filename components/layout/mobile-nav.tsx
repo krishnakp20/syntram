@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
-import { LogoMark } from "@/components/brand/logo";
+import { LogoImage } from "@/components/brand/logo";
 import { ButtonLink } from "@/components/shared/button-link";
 import { isNavGroup } from "@/lib/nav";
 import type { NavEntry, NavLink } from "@/types/content";
@@ -64,10 +64,7 @@ export function MobileNav({ items, cta }: { items: NavEntry[]; cta: NavLink }) {
         className="m-0 h-dvh max-h-none w-full max-w-none bg-background p-0 text-foreground backdrop:bg-slate-900/40 open:flex open:flex-col sm:ml-auto sm:max-w-md sm:border-l sm:border-line lg:hidden"
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4">
-          <span className="flex items-center gap-2.5">
-            <LogoMark />
-            <span className="font-display text-base font-semibold">Syntram</span>
-          </span>
+          <LogoImage className="h-11" />
           <button
             type="button"
             onClick={close}

@@ -18,11 +18,11 @@ export function SiteFooter() {
   const whatsapp = whatsappUrl();
 
   return (
-    <footer className="theme-dark border-t border-line bg-surface">
+    <footer className="theme-dark theme-logo border-t border-line">
       <Container className="py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div className="flex max-w-sm flex-col gap-5">
-            <Logo />
+            <Logo className="h-16" />
             <p className="text-[0.9375rem] leading-relaxed text-muted-foreground">
               AI-powered software, voice agents and automation — engineered for production and built
               around how your business actually works.

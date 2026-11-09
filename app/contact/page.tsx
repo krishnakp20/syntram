@@ -12,13 +12,13 @@ import { isPlaceholder, siteConfig, whatsappUrl } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Contact Us — Talk to Our Team",
   description:
-    "Tell Syntram Technologies about your AI, voice AI, automation or software project. We'll reply with practical next steps and an honest view on fit.",
+    "Tell ZAYBX about your AI, voice AI, automation or software project. We'll reply with practical next steps and an honest view on fit.",
   path: "/contact",
 });
 
 export default function ContactPage() {
   const { email, phone, meetingUrl } = siteConfig.contact;
-  const whatsapp = whatsappUrl("Hi Syntram, I'd like to discuss a project.");
+  const whatsapp = whatsappUrl("Hi ZAYBX, I'd like to discuss a project.");
   const channels = [
     whatsapp && { href: whatsapp, label: "WhatsApp", detail: "Chat with our team", Icon: MessageCircle, external: true },
     !isPlaceholder(meetingUrl) && { href: meetingUrl, label: "Book a call", detail: "Pick a time that suits you", Icon: CalendarCheck, external: true, meeting: true },

@@ -67,7 +67,7 @@ export function IndustryPage({ industry }: { industry: IndustryDetail }) {
           <SectionHeader
             id="fits-title"
             eyebrow="Relevant solutions"
-            title={`How Syntram helps in ${industry.title}`}
+            title={`How ZAYBX helps in ${industry.title}`}
           />
           <ul className="mt-12 grid gap-4 lg:grid-cols-3">
             {fits.map(({ fit, solution }) => (

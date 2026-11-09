@@ -10,7 +10,7 @@ export const aiDevelopment: ServiceDetail = {
   seo: {
     title: "AI Development Services — LLMs & Agents",
     description:
-      "Custom AI development by Syntram Technologies: LLM applications, AI agents and RAG systems built for production, with evaluation and guardrails.",
+      "Custom AI development by ZAYBX: LLM applications, AI agents and RAG systems built for production, with evaluation and guardrails.",
   },
   hero: {
     headline: "AI development that holds up in production",
