@@ -28,8 +28,53 @@ export interface JobOpening {
   postedAt: string;
 }
 
-/** TODO(ZAYBX): add current openings. */
-export const jobOpenings: JobOpening[] = [];
+/** TODO(ZAYBX): confirm location, type and role details for each opening. */
+export const jobOpenings: JobOpening[] = [
+  {
+    slug: "website-development",
+    title: "Website Developer",
+    department: "Website Development",
+    location: "Pune, India",
+    type: "Full-time",
+    summary:
+      "Build fast, accessible and SEO-friendly websites and web apps for our clients and our own products, from first layout to production release.",
+    responsibilities: [
+      "Build responsive websites and web applications from designs",
+      "Write clean, reusable front-end code and connect it to APIs and CMSs",
+      "Keep sites fast, accessible and search-friendly",
+      "Maintain and improve live client sites",
+    ],
+    requirements: [
+      "Hands-on experience with HTML, CSS and JavaScript",
+      "Experience with React or Next.js (TypeScript a plus)",
+      "Comfortable with Git and working from designs",
+      "A portfolio or links to websites you have built",
+    ],
+    postedAt: "2026-11-13",
+  },
+  {
+    slug: "ai-tool-development",
+    title: "AI Tool Developer",
+    department: "AI Tools",
+    location: "Pune, India",
+    type: "Full-time",
+    summary:
+      "Design and build AI-powered tools — chatbots, voice agents and automation — that help businesses work faster, using modern LLMs and APIs.",
+    responsibilities: [
+      "Build AI tools and features using LLM APIs, prompts and retrieval",
+      "Integrate AI into client systems such as CRMs, websites and telephony",
+      "Test and measure how well AI features work, and improve them",
+      "Document what you build so it can be supported and extended",
+    ],
+    requirements: [
+      "Programming experience in Python or JavaScript/TypeScript",
+      "Hands-on work with LLM APIs or AI frameworks",
+      "Understanding of REST APIs and databases",
+      "Projects or examples of AI tools you have built",
+    ],
+    postedAt: "2026-11-13",
+  },
+];
 
 /* ---------- Gallery ---------- */
 

@@ -14,7 +14,7 @@ export function isPlaceholder(value: string | undefined | null): boolean {
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://syntram.com").replace(/\/$/, "");
 
-export type SocialNetwork = "linkedin" | "facebook" | "instagram" | "youtube" | "x" | "github";
+export type SocialNetwork = "linkedin" | "facebook" | "instagram" | "youtube" | "freelancer" | "x" | "github";
 
 export interface Office {
   /** e.g. "Headquarters", "India", "UAE". */
@@ -39,12 +39,12 @@ export const siteConfig = {
   ogImage: "/opengraph-image",
 
   contact: {
-    email: PLACEHOLDER as string, // e.g. hello@syntram.com
+    email: "info@zaybx.com" as string,
     phone: PLACEHOLDER as string, // E.164, e.g. +91XXXXXXXXXX
     whatsapp: PLACEHOLDER as string, // digits only incl. country code, e.g. 91XXXXXXXXXX
     meetingUrl: PLACEHOLDER as string, // Cal.com / Calendly link
     /** Careers / HR inbox shown on /careers. */
-    careersEmail: PLACEHOLDER as string,
+    careersEmail: "info@zaybx.com" as string,
   },
 
   /**
@@ -57,10 +57,11 @@ export const siteConfig = {
 
   /** Social profiles — each icon appears only once its URL is set. */
   social: {
-    linkedin: PLACEHOLDER as string,
-    facebook: PLACEHOLDER as string,
-    instagram: PLACEHOLDER as string,
-    youtube: PLACEHOLDER as string,
+    linkedin: PLACEHOLDER as string, // TODO(ZAYBX): add the LinkedIn company page URL
+    facebook: "https://www.facebook.com/profile.php?id=61596034036197" as string,
+    instagram: "https://www.instagram.com/zaybxglobaltech360/" as string,
+    youtube: "https://www.youtube.com/@Zaybx-j8w" as string,
+    freelancer: "https://www.freelancer.com/u/Zaybxglobal" as string,
     x: PLACEHOLDER as string,
     github: PLACEHOLDER as string,
   } satisfies Record<SocialNetwork, string>,

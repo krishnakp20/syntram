@@ -11,15 +11,21 @@ import type { ContactSubmission } from "./schema";
  *
  * Only ever emails the configured team address — never the submitter — so
  * the form can't be abused to send mail to arbitrary people.
- * Required env: RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL
- * (the "from" domain must be verified in Resend).
+ * Required env: RESEND_API_KEY, CONTACT_FROM_EMAIL (the "from" domain must be
+ * verified in Resend). Enquiries go to the site's contact email (info@zaybx.com);
+ * CONTACT_TO_EMAIL, if set, overrides it (comma-separated for several inboxes).
  */
 
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
+function recipients(): string[] {
+  const configured = process.env.CONTACT_TO_EMAIL?.trim() || siteConfig.contact.email;
+  return configured.split(",").map((s) => s.trim()).filter(Boolean);
+}
+
 export function isEmailConfigured(): boolean {
-  return Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL && process.env.CONTACT_FROM_EMAIL);
+  return Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL && recipients().length > 0);
 }
 
 export async function sendLeadNotification(lead: ContactSubmission, leadId?: string): Promise<boolean> {
@@ -67,7 +73,7 @@ export async function sendLeadNotification(lead: ContactSubmission, leadId?: str
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from: process.env.CONTACT_FROM_EMAIL!,
-      to: process.env.CONTACT_TO_EMAIL!.split(",").map((s) => s.trim()),
+      to: recipients(),
       replyTo: lead.email,
       subject: `New enquiry: ${lead.name}${lead.company ? ` (${lead.company})` : ""} — ${siteConfig.shortName}`,
       text,

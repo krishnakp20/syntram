@@ -6,6 +6,7 @@ import { Container, Section } from "@/components/shared/layout-primitives";
 import { nextSteps } from "@/content/contact";
 import { buildMetadata } from "@/lib/seo";
 import { OfficeList } from "@/components/shared/office-list";
+import { WorldMap } from "@/components/contact/world-map";
 import { getSocialLinks, SocialLinks } from "@/components/shared/social-links";
 import { isPlaceholder, siteConfig, whatsappUrl } from "@/lib/site";
 
@@ -97,6 +98,21 @@ export default function ContactPage() {
               </div>
             )}
           </aside>
+        </Container>
+      </Section>
+
+      <Section tone="light" aria-labelledby="locations-title" className="border-t border-line">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="font-mono text-[0.6875rem] tracking-wider text-signal uppercase">Our locations</p>
+            <h2 id="locations-title" className="mt-3 text-display-md font-semibold text-foreground">
+              Working with clients across the globe
+            </h2>
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
+              Wherever you are, our team is close by — in India, the Middle East, South-East Asia, Europe and Australia.
+            </p>
+          </div>
+          <WorldMap className="mx-auto mt-12 max-w-5xl" />
         </Container>
       </Section>
 

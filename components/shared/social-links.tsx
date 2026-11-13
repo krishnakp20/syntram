@@ -19,6 +19,11 @@ const glyphs: Record<SocialNetwork, { label: string; path: string }> = {
     label: "YouTube",
     path: "M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z",
   },
+  freelancer: {
+    label: "Freelancer",
+    // Generic briefcase glyph (not the Freelancer brand mark).
+    path: "M9 2h6a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v4.5H1V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2Zm0 4h6V4H9v2ZM1 14h9v1.5a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V14h9v6a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-6Z",
+  },
   x: {
     label: "X",
     path: "M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.48l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93Zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41Z",
@@ -30,7 +35,7 @@ const glyphs: Record<SocialNetwork, { label: string; path: string }> = {
 };
 
 /** Display order. */
-const order: SocialNetwork[] = ["linkedin", "facebook", "instagram", "youtube", "x", "github"];
+const order: SocialNetwork[] = ["linkedin", "facebook", "instagram", "youtube", "freelancer", "x", "github"];
 
 export function getSocialLinks() {
   return order
