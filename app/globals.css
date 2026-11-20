@@ -78,6 +78,8 @@
   --animate-flow: flow 1.6s linear infinite;
   --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
   --animate-wave: wave 1.4s ease-in-out infinite;
+  --animate-neon-on: neon-on 1.8s linear both;
+  --animate-neon-hum: neon-hum 9s linear 1.8s infinite;
 
   @keyframes flow {
     to {
@@ -90,6 +92,53 @@
       opacity: 0.55;
     }
     50% {
+      opacity: 1;
+    }
+  }
+  /* Neon sign: flickers on at load, then hums with the odd quick flicker. */
+  @keyframes neon-on {
+    0%,
+    8% {
+      opacity: 0.08;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    13% {
+      opacity: 0.15;
+    }
+    20% {
+      opacity: 1;
+    }
+    23% {
+      opacity: 0.3;
+    }
+    34%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes neon-hum {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.9;
+    }
+    92% {
+      opacity: 1;
+    }
+    93% {
+      opacity: 0.35;
+    }
+    94% {
+      opacity: 1;
+    }
+    95.5% {
+      opacity: 0.55;
+    }
+    96.5% {
       opacity: 1;
     }
   }
