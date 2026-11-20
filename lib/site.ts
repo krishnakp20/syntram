@@ -12,7 +12,7 @@ export function isPlaceholder(value: string | undefined | null): boolean {
   return !value || value === PLACEHOLDER;
 }
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://syntram.com").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.zaybx.com").replace(/\/$/, "");
 
 export type SocialNetwork = "linkedin" | "facebook" | "instagram" | "youtube" | "freelancer" | "x" | "github";
 
