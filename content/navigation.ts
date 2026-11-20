@@ -4,7 +4,31 @@ import { getVisibleProducts } from "@/content/products";
 import { services } from "@/content/services";
 import { solutions } from "@/content/solutions";
 import { showPlaceholders } from "@/lib/content/visibility";
-import type { NavEntry, NavLink } from "@/types/content";
+import type { IndustrySlug, NavEntry, NavLink, ServiceSlug } from "@/types/content";
+
+/** Short one-line descriptions for the Services mega-menu (page summaries are too long there). */
+const serviceNavBlurbs: Record<ServiceSlug, string> = {
+  "ai-development": "LLM apps, AI agents and tools built on your data.",
+  "voice-ai": "Voice agents that answer, act and hand off to people.",
+  "custom-software-development": "Platforms and business systems built around your team.",
+  "web-development": "Fast, search-friendly websites and web apps.",
+  "mobile-app-development": "iOS and Android apps with a solid backend.",
+  "api-integration": "Connect your CRM, ERP, telephony and other tools.",
+  "cloud-devops": "Cloud setup, CI/CD and monitoring you can rely on.",
+  "qa-testing": "Automated testing and release checks, AI included.",
+  "staffing-services": "Developers and IT specialists on contract or full-time.",
+};
+
+/** Short one-line descriptions for the Industries mega-menu. */
+const industryNavBlurbs: Record<IndustrySlug, string> = {
+  fintech: "Onboarding, collections and compliant support.",
+  healthcare: "Appointments, patient calls and admin automation.",
+  ecommerce: "Order support, returns and conversational sales.",
+  "real-estate": "Lead qualification and site-visit scheduling.",
+  education: "Admissions enquiries and student support.",
+  logistics: "Shipment updates and delivery coordination.",
+  travel: "Booking help, changes and multilingual support.",
+};
 
 export const primaryCta: NavLink = { label: "Let's Talk", href: "/contact" };
 
@@ -66,6 +90,7 @@ export const mainNav: NavEntry[] = [
     items: services.map((s) => ({
       label: s.shortTitle,
       href: `/services/${s.slug}`,
+      description: serviceNavBlurbs[s.slug],
       icon: s.icon,
     })),
   },
@@ -76,6 +101,7 @@ export const mainNav: NavEntry[] = [
     items: industries.map((i) => ({
       label: i.title,
       href: `/industries/${i.slug}`,
+      description: industryNavBlurbs[i.slug],
       icon: i.icon,
     })),
   },
