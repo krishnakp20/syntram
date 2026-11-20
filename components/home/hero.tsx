@@ -4,6 +4,20 @@ import { getHeroSlides } from "@/components/home/hero-slides";
 import { HeroSlider } from "@/components/home/hero-slider";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Container } from "@/components/shared/layout-primitives";
+import { NeuralField } from "@/components/visuals/neural-field";
+
+/**
+ * Fades the neural field out behind the headline (centre) and towards the
+ * slider (bottom), so it frames the text without competing with it.
+ */
+const fieldMask = {
+  maskImage:
+    "radial-gradient(ellipse 34% 44% at 50% 44%, transparent 30%, black 95%), linear-gradient(to bottom, black 60%, transparent 100%)",
+  maskComposite: "intersect",
+  WebkitMaskImage:
+    "radial-gradient(ellipse 34% 44% at 50% 44%, transparent 30%, black 95%), linear-gradient(to bottom, black 60%, transparent 100%)",
+  WebkitMaskComposite: "source-in",
+} as const;
 
 /**
  * Homepage hero: centred headline and CTAs, with a large rotating "highlights"
@@ -17,6 +31,11 @@ export function Hero() {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-48 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-signal/10 blur-[130px]"
+      />
+      {/* Animated AI "neural field" framing the headline (hidden on phones, where text spans the width). */}
+      <NeuralField
+        className="pointer-events-none absolute inset-x-0 top-0 hidden h-[600px] w-full sm:block lg:h-[640px]"
+        style={fieldMask}
       />
 
       <Container className="relative pt-14 pb-20 sm:pt-20 lg:pt-24 lg:pb-24">
