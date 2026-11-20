@@ -85,7 +85,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 aria-hidden={!isActive}
                 inert={!isActive}
                 className={cn(
-                  "col-start-1 row-start-1 transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
+                  "col-start-1 row-start-1 flex flex-col justify-center transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
                   isActive ? "opacity-100" : "pointer-events-none translate-y-2 opacity-0",
                 )}
               >

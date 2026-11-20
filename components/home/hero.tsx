@@ -38,7 +38,7 @@ export function Hero() {
         style={fieldMask}
       />
 
-      <Container className="relative pt-14 pb-20 sm:pt-20 lg:pt-24 lg:pb-24">
+      <Container className="relative pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-20">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <p className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/80 py-1 pr-3 pl-1 text-[0.8125rem] text-muted-foreground">
             <span className="rounded-full bg-signal-soft px-2 py-0.5 font-mono text-[0.6875rem] font-medium tracking-wider text-signal uppercase">
@@ -67,7 +67,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto mt-14 max-w-6xl lg:mt-16">
+        <div className="mx-auto mt-12 max-w-6xl lg:mt-14">
           <HeroSlider slides={getHeroSlides()} />
         </div>
       </Container>

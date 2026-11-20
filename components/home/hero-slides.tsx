@@ -93,7 +93,7 @@ export function getHeroSlides(): HeroSlide[] {
           body="Real-time voice agents that book, qualify, resolve and hand over to your team — connected to your CRM and calendar."
           href="/services/voice-ai"
           linkLabel="Explore Voice AI"
-          visual={<HeroVisual floating={false} />}
+          visual={<HeroVisual floating={false} compact />}
         />
       ),
     },
