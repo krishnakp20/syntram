@@ -148,8 +148,18 @@ export interface ServiceDetail extends ServiceSummary {
   heroVisual?: "neural" | "globe";
   problem: NarrativeBlock;
   solution: NarrativeBlock;
+  /** Optional "Engagement models" section shown after the problem/solution. */
+  models?: Feature[];
+  /** Overrides the capabilities heading, e.g. "Roles we can staff". */
+  capabilitiesTitle?: string;
   capabilities: Feature[];
   useCases: UseCase[];
+  /** Optional side-by-side comparison, e.g. traditional hiring vs our model. */
+  comparison?: {
+    title: string;
+    before: { label: string; points: string[] };
+    after: { label: string; points: string[] };
+  };
   technology: TechGroupKey[];
   /** Overrides the shared delivery process where a service works differently. */
   process?: ProcessStep[];
