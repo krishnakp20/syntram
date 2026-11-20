@@ -19,7 +19,8 @@ import type { ContactSubmission } from "./schema";
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-function recipients(): string[] {
+/** Inboxes that receive enquiries and job applications. */
+export function recipients(): string[] {
   const configured = process.env.CONTACT_TO_EMAIL?.trim() || siteConfig.contact.email;
   return configured.split(",").map((s) => s.trim()).filter(Boolean);
 }

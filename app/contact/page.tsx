@@ -24,7 +24,7 @@ export default function ContactPage() {
     whatsapp && { href: whatsapp, label: "WhatsApp", detail: "Chat with our team", Icon: MessageCircle, external: true },
     !isPlaceholder(meetingUrl) && { href: meetingUrl, label: "Book a call", detail: "Pick a time that suits you", Icon: CalendarCheck, external: true, meeting: true },
     !isPlaceholder(email) && { href: `mailto:${email}`, label: "Email", detail: email, Icon: Mail },
-    !isPlaceholder(phone) && { href: `tel:${phone}`, label: "Phone", detail: phone, Icon: Phone },
+    !isPlaceholder(phone) && { href: `tel:${phone.replace(/\s/g, "")}`, label: "Phone", detail: phone, Icon: Phone },
   ].filter(Boolean) as {
     href: string;
     label: string;
@@ -101,6 +101,17 @@ export default function ContactPage() {
         </Container>
       </Section>
 
+      {siteConfig.offices.length > 0 && (
+        <Section tone="surface" aria-labelledby="offices-title" className="border-t border-line">
+          <Container>
+            <h2 id="offices-title" className="text-display-md font-semibold text-foreground">
+              Our offices
+            </h2>
+            <OfficeList className="mt-8 lg:grid-cols-2" />
+          </Container>
+        </Section>
+      )}
+
       <Section tone="light" aria-labelledby="locations-title" className="border-t border-line">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
@@ -109,23 +120,13 @@ export default function ContactPage() {
               Working with clients across the globe
             </h2>
             <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
-              Wherever you are, our team is close by — in India, the Middle East, South-East Asia, Europe and Australia.
+              Headquartered in Pune, with a presence in New Delhi, the Middle East, South-East Asia, Europe and Australia.
             </p>
           </div>
           <WorldMap className="mx-auto mt-12 max-w-5xl" />
         </Container>
       </Section>
 
-      {siteConfig.offices.length > 0 && (
-        <Section tone="surface" aria-labelledby="offices-title" className="border-t border-line">
-          <Container>
-            <h2 id="offices-title" className="text-display-md font-semibold text-foreground">
-              Our offices
-            </h2>
-            <OfficeList className="mt-8 lg:grid-cols-3" />
-          </Container>
-        </Section>
-      )}
     </>
   );
 }

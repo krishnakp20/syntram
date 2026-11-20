@@ -6,6 +6,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container, Section } from "@/components/shared/layout-primitives";
 import { PlaceholderNotice } from "@/components/shared/placeholder-notice";
 import { clients } from "@/content/company";
+import { cn } from "@/lib/utils";
 import { showClientsPage } from "@/content/navigation";
 import { buildMetadata } from "@/lib/seo";
 
@@ -41,7 +42,16 @@ export default function ClientsPage() {
               <code>content/company.ts</code>. This page is hidden in production until then.
             </PlaceholderNotice>
           ) : (
-            <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
+            <ul
+              className={cn(
+                "grid gap-px overflow-hidden rounded-2xl border border-line bg-line",
+                // Size the grid to the number of clients so there are no empty filler cells.
+                clients.length === 1 && "mx-auto max-w-sm grid-cols-1",
+                clients.length === 2 && "mx-auto max-w-2xl grid-cols-2",
+                clients.length === 3 && "grid-cols-1 sm:grid-cols-3",
+                clients.length >= 4 && "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4",
+              )}
+            >
               {clients.map((client) => {
                 const content = client.logo ? (
                   <Image

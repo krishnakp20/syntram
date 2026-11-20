@@ -1,4 +1,6 @@
-import { ArrowRight, Briefcase, Clock, MapPin } from "lucide-react";
+import { ArrowRight, Briefcase, Clock, GraduationCap, MapPin } from "lucide-react";
+
+import { ApplyDialog } from "@/components/careers/apply-dialog";
 
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { PageHero } from "@/components/sections/page-hero";
@@ -8,7 +10,6 @@ import { Container, Section, SectionHeader } from "@/components/shared/layout-pr
 import { jobOpenings } from "@/content/company";
 import { formatDate } from "@/lib/format";
 import { buildMetadata } from "@/lib/seo";
-import { isPlaceholder, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Careers — Join ZAYBX",
@@ -27,11 +28,6 @@ const culture: { title: string; body: string; icon: IconName }[] = [
 ];
 
 export default function CareersPage() {
-  const careersEmail = siteConfig.contact.careersEmail;
-  const cvHref = isPlaceholder(careersEmail)
-    ? "/contact"
-    : `mailto:${careersEmail}?subject=${encodeURIComponent("Application — ZAYBX")}`;
-
   return (
     <>
       <PageHero
@@ -69,7 +65,11 @@ export default function CareersPage() {
                           </li>
                           <li className="inline-flex items-center gap-1.5">
                             <Briefcase aria-hidden="true" className="size-4 text-subtle" />
-                            {job.type}
+                            {job.type.join(" / ")}
+                          </li>
+                          <li className="inline-flex items-center gap-1.5">
+                            <GraduationCap aria-hidden="true" className="size-4 text-subtle" />
+                            {job.experience}
                           </li>
                           <li className="inline-flex items-center gap-1.5">
                             <Clock aria-hidden="true" className="size-4 text-subtle" />
@@ -77,10 +77,7 @@ export default function CareersPage() {
                           </li>
                         </ul>
                       </div>
-                      <ButtonLink href={cvHref} size="cta" className="self-start" trackAs={`careers_apply_${job.slug}`}>
-                        Apply
-                        <span className="sr-only"> for {job.title}</span>
-                      </ButtonLink>
+                      <ApplyDialog role={job.title} className="shrink-0 self-start" />
                     </div>
                     <p className="mt-5 text-[0.9375rem] leading-relaxed text-muted-foreground">{job.summary}</p>
                     <details className="group mt-5 border-t border-line pt-4">
@@ -107,6 +104,18 @@ export default function CareersPage() {
                   </article>
                 </li>
               ))}
+              <li
+                id="general-application"
+                className="flex scroll-mt-24 flex-col items-start gap-4 rounded-2xl border border-dashed border-line-strong p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"
+              >
+                <div>
+                  <p className="font-display text-lg font-semibold text-foreground">Don&apos;t see your role?</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Send us your CV and tell us what you&apos;d like to work on. We&apos;ll be in touch when a match opens up.
+                  </p>
+                </div>
+                <ApplyDialog role="General application" label="Send your CV" className="shrink-0" />
+              </li>
             </ul>
           ) : (
             <div className="mt-10 flex flex-col items-start gap-5 rounded-3xl border border-line-strong bg-surface p-7 sm:flex-row sm:items-center sm:justify-between sm:p-10">
@@ -117,10 +126,17 @@ export default function CareersPage() {
                   and tell us what you&apos;d like to work on — we&apos;ll get in touch when a suitable role opens.
                 </p>
               </div>
-              <ButtonLink href={cvHref} size="cta-lg" className="shrink-0" trackAs="careers_send_cv">
-                Send your CV
-                <ArrowRight aria-hidden="true" />
-              </ButtonLink>
+              <ApplyDialog
+                role="General application"
+                size="cta-lg"
+                className="shrink-0"
+                label={
+                  <>
+                    Send your CV
+                    <ArrowRight aria-hidden="true" />
+                  </>
+                }
+              />
             </div>
           )}
         </Container>
@@ -145,7 +161,7 @@ export default function CareersPage() {
         trackId="careers"
         title="Don't see the right role?"
         description="Tell us about yourself and the work you're excited by. Good people don't always arrive on schedule."
-        primary={{ label: "Send your CV", href: cvHref }}
+        primary={{ label: "Send your CV", href: "#general-application" }}
         secondary={{ label: "About ZAYBX", href: "/about" }}
       />
     </>

@@ -10,6 +10,7 @@ export const aiAutomation: SolutionDetail = {
     description:
       "Automate document handling, data entry, classification and routine decisions with AI steps built into your existing workflows and systems.",
   },
+  heroVisual: "neural",
   hero: {
     headline: "Hand the repetitive work to AI — keep people on what matters",
     intro:

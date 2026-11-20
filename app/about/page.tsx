@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { PageHero } from "@/components/sections/page-hero";
+import { HeroVisualPanel } from "@/components/visuals/hero-visual-panel";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Icon, type IconName } from "@/components/shared/icon";
 import { Container, Section, SectionHeader } from "@/components/shared/layout-primitives";
@@ -41,7 +42,7 @@ const missionVision: { label: string; statement: string; detail: string; icon: I
 const focusAreas: { title: string; body: string; icon: IconName }[] = [
   { title: "Voice AI", body: "Real-time voice agents for inbound and outbound calls, connected to business systems.", icon: "audio-lines" },
   { title: "AI & automation", body: "LLM applications, agents and automated workflows that handle real operational work.", icon: "sparkles" },
-  { title: "Software engineering", body: "Web, mobile, cloud and integration work — the foundation AI features depend on.", icon: "code" },
+  { title: "Software engineering", body: "Web, mobile, cloud and integration work — the foundation AI features depend on.", icon: "monitor-smartphone" },
 ];
 
 const principles = [
@@ -76,6 +77,7 @@ export default function AboutPage() {
     <>
       <PageHero
         breadcrumb={[{ name: "About", path: "/about" }]}
+        aside={<HeroVisualPanel variant="globe" caption="Pune HQ · connected worldwide" className="mx-auto w-full max-w-md lg:max-w-none" />}
         eyebrow="About ZAYBX"
         title="An AI-first engineering company, built for practical results"
         intro="ZAYBX designs and builds AI-powered software, voice agents and automation platforms. We combine modern AI with solid software engineering, so what we build works reliably in the real world — not just in a demo."
@@ -135,8 +137,8 @@ export default function AboutPage() {
           <ul className="mt-12 grid gap-4 md:grid-cols-3">
             {focusAreas.map((f) => (
               <li key={f.title} className="rounded-2xl border border-line bg-card p-6">
-                <span className="grid size-10 place-items-center rounded-lg bg-signal-soft text-signal">
-                  <Icon name={f.icon} className="size-5" />
+                <span className="grid size-12 place-items-center rounded-xl bg-signal-soft text-signal">
+                  <Icon name={f.icon} className="size-6" strokeWidth={2} />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-semibold text-foreground">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>

@@ -43,6 +43,7 @@ export const articleFrontmatterSchema = z.object({
         "cloud-devops",
         "api-integration",
         "qa-testing",
+        "staffing-services",
       ] as const),
       solutions: slugList([
         "ai-automation",

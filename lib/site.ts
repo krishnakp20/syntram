@@ -25,6 +25,8 @@ export interface Office {
   phone?: string;
   /** Optional Google Maps link. */
   mapUrl?: string;
+  /** Marks the headquarters (shown with an HQ badge). */
+  hq?: boolean;
 }
 
 export const siteConfig = {
@@ -40,8 +42,8 @@ export const siteConfig = {
 
   contact: {
     email: "info@zaybx.com" as string,
-    phone: PLACEHOLDER as string, // E.164, e.g. +91XXXXXXXXXX
-    whatsapp: PLACEHOLDER as string, // digits only incl. country code, e.g. 91XXXXXXXXXX
+    phone: "+91 91350 53121" as string,
+    whatsapp: "919135053121" as string, // digits only incl. country code
     meetingUrl: PLACEHOLDER as string, // Cal.com / Calendly link
     /** Careers / HR inbox shown on /careers. */
     careersEmail: "info@zaybx.com" as string,
@@ -53,7 +55,27 @@ export const siteConfig = {
    * Example:
    *   { label: "India", lines: ["Street", "City, State PIN", "India"], phone: "+91…" }
    */
-  offices: [] as Office[],
+  offices: [
+    {
+      label: "Pune",
+      hq: true,
+      lines: [
+        "Zaybx Globaltech360 Pvt. Ltd.",
+        "D1-1002, Dreams Aakruti, S.No-53, Kalepadal",
+        "Hadapsar, Pune 411028",
+        "Maharashtra, India",
+      ],
+      phone: "+91 91350 53121",
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent("Dreams Aakruti, Kalepadal, Hadapsar, Pune 411028"),
+    },
+    {
+      label: "New Delhi",
+      lines: ["New Delhi, India"], // TODO(ZAYBX): add the full Delhi street address
+      phone: "+91 91350 53121",
+    },
+  ] as Office[],
 
   /** Social profiles — each icon appears only once its URL is set. */
   social: {
@@ -68,7 +90,7 @@ export const siteConfig = {
 
   /** Legal entity details — confirm before launch. */
   legal: {
-    entityName: "ZAYBX",
+    entityName: "Zaybx Globaltech360 Pvt. Ltd.",
     foundingYear: PLACEHOLDER as string,
   },
 } as const;

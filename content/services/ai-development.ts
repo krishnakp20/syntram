@@ -12,6 +12,7 @@ export const aiDevelopment: ServiceDetail = {
     description:
       "Custom AI development by ZAYBX: LLM applications, AI agents and RAG systems built for production, with evaluation and guardrails.",
   },
+  heroVisual: "neural",
   hero: {
     headline: "AI development that holds up in production",
     intro:

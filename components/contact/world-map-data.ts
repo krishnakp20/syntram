@@ -2,7 +2,7 @@
  * GENERATED — dotted world map (Natural Earth 1:110m land, Natural Earth
  * projection, 10px grid) and projected office pins. Regenerate rather than
  * hand-edit the path. Land data: world-atlas (Natural Earth, public domain).
- * Country-level pins sit on the capital/main city (Ireland: Dublin, Australia: Sydney).
+ * Country-level pins sit on the main city (Ireland: Dublin, Australia: Sydney).
  */
 export const MAP_WIDTH = 1000;
 export const MAP_HEIGHT = 413;
@@ -15,30 +15,42 @@ export const mapPins = [
   {
     "name": "Pune",
     "country": "India",
+    "hq": true,
     "x": 701.9,
     "y": 173.4
   },
   {
+    "name": "New Delhi",
+    "country": "India",
+    "hq": false,
+    "x": 706.2,
+    "y": 140.8
+  },
+  {
     "name": "Bangkok",
     "country": "Thailand",
+    "hq": false,
     "x": 776.7,
     "y": 188.7
   },
   {
     "name": "Dubai",
     "country": "UAE",
+    "hq": false,
     "x": 648.9,
     "y": 151.8
   },
   {
     "name": "Ireland",
     "country": "",
+    "hq": false,
     "x": 485.1,
     "y": 62
   },
   {
     "name": "Australia",
     "country": "",
+    "hq": false,
     "x": 897,
     "y": 342.2
   }

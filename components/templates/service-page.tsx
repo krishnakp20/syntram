@@ -4,6 +4,7 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 import { Faq } from "@/components/sections/faq";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { PageHero } from "@/components/sections/page-hero";
+import { HeroVisualPanel } from "@/components/visuals/hero-visual-panel";
 import { ProblemSolution } from "@/components/sections/problem-solution";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { RelatedLinks } from "@/components/sections/related-links";
@@ -43,6 +44,7 @@ export function ServicePage({ service }: { service: ServiceDetail }) {
             </ButtonLink>
           </>
         }
+        aside={service.heroVisual && <HeroVisualPanel variant={service.heroVisual} className="mx-auto w-full max-w-md lg:max-w-none" />}
       />
 
       <ProblemSolution problem={service.problem} solution={service.solution} />

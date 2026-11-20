@@ -11,6 +11,8 @@ import { ButtonLink } from "@/components/shared/button-link";
 import { Icon } from "@/components/shared/icon";
 import { Container, Section, SectionHeader } from "@/components/shared/layout-primitives";
 import { PlaceholderNotice } from "@/components/shared/placeholder-notice";
+import { HeroVisual } from "@/components/home/hero-visual";
+import { VoicePlatformScreens } from "@/components/products/voice-platform-screens";
 import { productStatusLabel } from "@/content/products";
 import type { ProductDetail } from "@/types/content";
 
@@ -46,6 +48,10 @@ export function ProductPage({ product }: { product: ProductDetail }) {
               This page reserves the URL for a future product. No features or specifications have been published, so
               none are shown. It is hidden in production and excluded from search engines.
             </PlaceholderNotice>
+          ) : product.showcase === "voice-platform" ? (
+            <div className="mx-auto w-full max-w-md lg:max-w-none">
+              <HeroVisual floating={false} />
+            </div>
           ) : undefined
         }
       />
@@ -55,6 +61,17 @@ export function ProductPage({ product }: { product: ProductDetail }) {
           <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.5fr] lg:gap-16">
             <SectionHeader id="overview-title" eyebrow="Overview" title={`About ${product.name}`} />
             <p className="text-lead text-muted-foreground">{product.overview}</p>
+          </Container>
+        </Section>
+      )}
+
+      {product.showcase === "voice-platform" && (
+        <Section tone="light" aria-labelledby="screens-title">
+          <Container>
+            <SectionHeader id="screens-title" eyebrow="Inside the platform" title="See how it works" />
+            <div className="mt-14">
+              <VoicePlatformScreens />
+            </div>
           </Container>
         </Section>
       )}

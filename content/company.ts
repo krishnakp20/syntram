@@ -19,8 +19,11 @@ export interface JobOpening {
   slug: string;
   title: string;
   department: string;
-  location: string; // e.g. "Remote (India)", "Noida, India"
-  type: EmploymentType;
+  location: string; // e.g. "Remote", "Pune, India"
+  /** One or more, shown joined with " / ". */
+  type: EmploymentType[];
+  /** e.g. "5–8 years". */
+  experience: string;
   summary: string;
   responsibilities: string[];
   requirements: string[];
@@ -28,14 +31,93 @@ export interface JobOpening {
   postedAt: string;
 }
 
-/** TODO(ZAYBX): confirm location, type and role details for each opening. */
+/** TODO(ZAYBX): review role details for each opening. */
+const remote = "Remote";
+const flexible: EmploymentType[] = ["Full-time", "Part-time"];
+
 export const jobOpenings: JobOpening[] = [
+  {
+    slug: "app-tech-manager",
+    title: "Application Technology Manager",
+    department: "Engineering Leadership",
+    location: remote,
+    type: flexible,
+    experience: "8–10 years",
+    summary:
+      "Lead the delivery of our client applications and AI products — owning architecture, engineering quality and the teams that build them.",
+    responsibilities: [
+      "Own technical delivery across multiple application and AI projects",
+      "Set architecture, coding standards and release practices",
+      "Lead, mentor and grow developers and team leads",
+      "Work with clients to shape scope, estimates and roadmaps",
+      "Manage risks, timelines and engineering quality",
+    ],
+    requirements: [
+      "8–10 years in software development, including team or delivery leadership",
+      "Strong background in web or mobile application architecture",
+      "Experience with cloud platforms, APIs and databases",
+      "Exposure to AI/ML or LLM-based products is a strong plus",
+      "Excellent communication with clients and teams",
+    ],
+    postedAt: "2026-11-20",
+  },
+  {
+    slug: "app-lead-python-ai",
+    title: "Application Lead — Python & AI",
+    department: "AI Engineering",
+    location: remote,
+    type: flexible,
+    experience: "5–8 years",
+    summary:
+      "Lead a team building Python back-ends and AI features — LLM applications, voice agents and automation — from design to production.",
+    responsibilities: [
+      "Design and build Python services and AI features",
+      "Lead a small team through design, code review and delivery",
+      "Build LLM applications with retrieval, tools and evaluation",
+      "Integrate AI into client systems through APIs",
+      "Keep services secure, observable and well tested",
+    ],
+    requirements: [
+      "5–8 years of software development, mostly in Python",
+      "Experience with FastAPI, Django or Flask",
+      "Hands-on work with LLM APIs, embeddings or ML frameworks",
+      "Solid SQL/NoSQL database and REST API skills",
+      "Experience leading or mentoring developers",
+    ],
+    postedAt: "2026-11-20",
+  },
+  {
+    slug: "database-administrator",
+    title: "Database Administrator (DBA)",
+    department: "Infrastructure",
+    location: remote,
+    type: flexible,
+    experience: "3–6 years",
+    summary:
+      "Keep our and our clients' databases fast, secure and reliable — from performance tuning and backups to migrations and monitoring.",
+    responsibilities: [
+      "Administer, monitor and tune production databases",
+      "Plan and test backups, recovery and high availability",
+      "Manage access, security and data protection",
+      "Support developers with schema design and query optimisation",
+      "Run upgrades and migrations with minimal downtime",
+    ],
+    requirements: [
+      "3–6 years as a DBA or in a database-focused role",
+      "Strong experience with MySQL and/or PostgreSQL",
+      "Backup, replication and performance tuning skills",
+      "Scripting for automation (Shell, Python or similar)",
+      "Cloud database experience (AWS RDS, GCP or Azure) is a plus",
+    ],
+    postedAt: "2026-11-20",
+  },
   {
     slug: "website-development",
     title: "Website Developer",
     department: "Website Development",
-    location: "Pune, India",
-    type: "Full-time",
+    location: remote,
+    type: flexible,
+    experience: "1–5 years · Freshers & interns (0–1 year) welcome",
     summary:
       "Build fast, accessible and SEO-friendly websites and web apps for our clients and our own products, from first layout to production release.",
     responsibilities: [
@@ -48,7 +130,7 @@ export const jobOpenings: JobOpening[] = [
       "Hands-on experience with HTML, CSS and JavaScript",
       "Experience with React or Next.js (TypeScript a plus)",
       "Comfortable with Git and working from designs",
-      "A portfolio or links to websites you have built",
+      "Freshers and interns: projects or a portfolio that show your skills",
     ],
     postedAt: "2026-11-13",
   },
@@ -56,8 +138,9 @@ export const jobOpenings: JobOpening[] = [
     slug: "ai-tool-development",
     title: "AI Tool Developer",
     department: "AI Tools",
-    location: "Pune, India",
-    type: "Full-time",
+    location: remote,
+    type: flexible,
+    experience: "1–5 years · Freshers & interns (0–1 year) welcome",
     summary:
       "Design and build AI-powered tools — chatbots, voice agents and automation — that help businesses work faster, using modern LLMs and APIs.",
     responsibilities: [
@@ -67,14 +150,15 @@ export const jobOpenings: JobOpening[] = [
       "Document what you build so it can be supported and extended",
     ],
     requirements: [
-      "Programming experience in Python or JavaScript/TypeScript",
+      "Programming in Python or JavaScript/TypeScript",
       "Hands-on work with LLM APIs or AI frameworks",
       "Understanding of REST APIs and databases",
-      "Projects or examples of AI tools you have built",
+      "Freshers and interns: projects or examples of AI tools you have built",
     ],
     postedAt: "2026-11-13",
   },
 ];
+
 
 /* ---------- Gallery ---------- */
 
@@ -105,7 +189,7 @@ export interface Client {
  * TODO(ZAYBX): only list clients who have agreed to be named publicly.
  * Never add a logo without permission.
  */
-export const clients: Client[] = [];
+export const clients: Client[] = [{ name: "Gujarat Sales" }];
 
 /* ---------- Achievements ---------- */
 
@@ -129,4 +213,8 @@ export const achievements: Achievement[] = [];
  * learning resources). External URLs open in a new tab.
  * TODO(ZAYBX): confirm labels and URLs before adding.
  */
-export const popularLinks: NavLink[] = [];
+export const popularLinks: NavLink[] = [
+  { label: "Products", href: "/products" },
+  { label: "Staffing Services", href: "/services/staffing-services" },
+  { label: "Now taking projects", href: "/contact" },
+];

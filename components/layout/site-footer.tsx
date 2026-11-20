@@ -40,7 +40,7 @@ export function SiteFooter() {
                   </a>
                 )}
                 {!isPlaceholder(contact.phone) && (
-                  <a href={`tel:${contact.phone}`} className="hover:text-foreground">
+                  <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="hover:text-foreground">
                     {contact.phone}
                   </a>
                 )}
@@ -104,7 +104,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col gap-2 border-t border-line pt-8 text-sm text-subtle sm:flex-row sm:items-center sm:gap-6">
           <p>
-            © {new Date().getFullYear()} {siteConfig.legal.entityName}. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.legal.entityName.replace(/\.$/, "")}. All rights reserved.
           </p>
           {analyticsEnabled && <CookieSettingsButton />}
         </div>

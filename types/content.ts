@@ -59,7 +59,8 @@ export type ServiceSlug =
   | "mobile-app-development"
   | "cloud-devops"
   | "api-integration"
-  | "qa-testing";
+  | "qa-testing"
+  | "staffing-services";
 
 export interface ServiceSummary {
   slug: ServiceSlug;
@@ -143,6 +144,8 @@ export interface RelatedContent {
 export interface ServiceDetail extends ServiceSummary {
   seo: SeoFields;
   hero: PageHeroContent;
+  /** Optional animated visual beside the hero text. */
+  heroVisual?: "neural" | "globe";
   problem: NarrativeBlock;
   solution: NarrativeBlock;
   capabilities: Feature[];
@@ -158,6 +161,8 @@ export interface ServiceDetail extends ServiceSummary {
 export interface SolutionDetail extends SolutionSummary {
   seo: SeoFields;
   hero: PageHeroContent;
+  /** Optional animated visual beside the hero text. */
+  heroVisual?: "neural" | "globe";
   problem: NarrativeBlock;
   /** How the solution works, step by step. */
   howItWorks: ProcessStep[];
@@ -222,6 +227,8 @@ export interface ProductDetail extends ProductSummary {
   related?: RelatedContent;
   /** e.g. "Request early access" — defaults to a generic contextual CTA. */
   ctaLabel?: string;
+  /** Optional illustrated product screens shown after the overview. */
+  showcase?: "voice-platform";
 }
 
 /* ---------- Case studies ---------- */

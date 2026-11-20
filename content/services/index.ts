@@ -6,6 +6,7 @@ import { cloudDevops } from "./cloud-devops";
 import { customSoftwareDevelopment } from "./custom-software-development";
 import { mobileAppDevelopment } from "./mobile-app-development";
 import { qaTesting } from "./qa-testing";
+import { staffingServices } from "./staffing-services";
 import { voiceAi } from "./voice-ai";
 import { webDevelopment } from "./web-development";
 
@@ -19,6 +20,7 @@ export const services: ServiceDetail[] = [
   cloudDevops,
   apiIntegration,
   qaTesting,
+  staffingServices,
 ];
 
 export function getService(slug: string): ServiceDetail | undefined {

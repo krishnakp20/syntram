@@ -12,6 +12,7 @@ export const voiceAi: ServiceDetail = {
     description:
       "Real-time AI voice agents for inbound and outbound calls, with telephony, CRM integration, call analytics and human handoff, by ZAYBX.",
   },
+  heroVisual: "neural",
   hero: {
     headline: "Voice AI agents, engineered for real phone calls",
     intro:

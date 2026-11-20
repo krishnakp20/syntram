@@ -4,6 +4,7 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 import { Faq } from "@/components/sections/faq";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { PageHero } from "@/components/sections/page-hero";
+import { HeroVisualPanel } from "@/components/visuals/hero-visual-panel";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { RelatedLinks } from "@/components/sections/related-links";
 import { TechnologyGrid } from "@/components/sections/technology-grid";
@@ -41,6 +42,7 @@ export function SolutionPage({ solution }: { solution: SolutionDetail }) {
             </ButtonLink>
           </>
         }
+        aside={solution.heroVisual && <HeroVisualPanel variant={solution.heroVisual} className="mx-auto w-full max-w-md lg:max-w-none" />}
       />
 
       {/* Problem */}

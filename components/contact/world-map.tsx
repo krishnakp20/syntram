@@ -7,9 +7,10 @@ import { MAP_DOT_STEP, MAP_HEIGHT, MAP_WIDTH, mapDotsPath, mapPins } from "./wor
 type PinName = (typeof mapPins)[number]["name"];
 
 /** Where each label sits relative to its pin, chosen so close pins don't collide. */
-const labelSide: Record<PinName, "left" | "right" | "bottom"> = {
+const labelSide: Record<PinName, "left" | "right" | "top" | "bottom"> = {
   Dubai: "left",
   Pune: "bottom",
+  "New Delhi": "top",
   Bangkok: "right",
   Ireland: "left",
   Australia: "bottom",
@@ -18,6 +19,7 @@ const labelSide: Record<PinName, "left" | "right" | "bottom"> = {
 const labelPosition = {
   left: "right-full top-1/2 mr-2.5 -translate-y-1/2",
   right: "left-full top-1/2 ml-2.5 -translate-y-1/2",
+  top: "bottom-full left-1/2 mb-2 -translate-x-1/2",
   bottom: "top-full left-1/2 mt-2 -translate-x-1/2",
 };
 
@@ -51,7 +53,12 @@ export function WorldMap({ className }: { className?: string }) {
           >
             <span className="absolute -translate-x-1/2 -translate-y-1/2">
               <span className="absolute inset-0 rounded-full bg-signal/40 motion-safe:animate-ping" aria-hidden="true" />
-              <span className="relative block size-3 rounded-full border-2 border-white bg-signal shadow-[0_0_0_3px_var(--signal-soft)] sm:size-3.5" />
+              <span
+                className={cn(
+                  "relative block rounded-full border-2 border-white bg-signal shadow-[0_0_0_3px_var(--signal-soft)]",
+                  pin.hq ? "size-4 sm:size-[1.125rem]" : "size-3 sm:size-3.5",
+                )}
+              />
             </span>
             <span
               className={cn(
@@ -60,6 +67,7 @@ export function WorldMap({ className }: { className?: string }) {
               )}
             >
               {pin.name}
+              {pin.hq && <span className="ml-1 font-mono text-[0.625rem] font-semibold text-signal">HQ</span>}
             </span>
           </div>
         ))}
@@ -71,6 +79,7 @@ export function WorldMap({ className }: { className?: string }) {
             <li key={pin.name} className="inline-flex items-center gap-1.5">
               <MapPin aria-hidden="true" className="size-4 text-signal" />
               {fullName(pin)}
+              {pin.hq && <span className="font-mono text-[0.625rem] font-semibold text-signal">HQ</span>}
             </li>
           ))}
         </ul>
