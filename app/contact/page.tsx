@@ -105,7 +105,7 @@ export default function ContactPage() {
         <Section tone="surface" aria-labelledby="offices-title" className="border-t border-line">
           <Container>
             <h2 id="offices-title" className="text-display-md font-semibold text-foreground">
-              Our offices
+              Business contact addresses
             </h2>
             <OfficeList className="mt-8 lg:grid-cols-4" />
           </Container>
@@ -120,7 +120,7 @@ export default function ContactPage() {
               Working with clients across the globe
             </h2>
             <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
-              Headquartered in Pune, with Business Contact Address in Ghaziabad, Melbourne and Bangkok, and clients across the Middle East and Europe.
+              Headquartered in Pune, India, with business contact addresses in Ghaziabad, Melbourne, Bangkok, Dubai, and Ireland, serving clients worldwide.
             </p>
           </div>
           <WorldMap className="mx-auto mt-12 max-w-5xl" />

@@ -97,7 +97,7 @@ export function SiteFooter() {
 
         {siteConfig.offices.length > 0 && (
           <div className="mt-14 border-t border-line pt-10">
-            <h2 className="font-mono text-xs font-medium tracking-[0.14em] text-subtle uppercase">Our offices</h2>
+            <h2 className="font-mono text-xs font-medium tracking-[0.14em] text-subtle uppercase">Business contact addresses</h2>
             <OfficeList compact className="mt-5 sm:grid-cols-2 lg:grid-cols-4" />
           </div>
         )}
