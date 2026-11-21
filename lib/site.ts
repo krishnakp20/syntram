@@ -71,9 +71,25 @@ export const siteConfig = {
         encodeURIComponent("Dreams Aakruti, Kalepadal, Hadapsar, Pune 411028"),
     },
     {
-      label: "New Delhi",
-      lines: ["New Delhi, India"], // TODO(ZAYBX): add the full Delhi street address
-      phone: "+91 91350 53121",
+      label: "Ghaziabad",
+      lines: ["I-2977, Siddharth Vihar", "Ghaziabad 201009", "Uttar Pradesh, India"],
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent("I-2977, Siddharth Vihar, Ghaziabad, Uttar Pradesh 201009"),
+    },
+    {
+      label: "Melbourne",
+      lines: ["37 Pearson Rd", "Mernda VIC 3754", "Australia"],
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent("37 Pearson Rd, Mernda VIC 3754, Australia"),
+    },
+    {
+      label: "Bangkok",
+      lines: ["Lumpini Place Rama 9", "Huai Khwang, Bangkok 10310", "Thailand"],
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent("Lumpini Place Rama 9, Huai Khwang, Bangkok 10310"),
     },
   ] as Office[],
 

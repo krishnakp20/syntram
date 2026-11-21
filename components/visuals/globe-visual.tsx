@@ -6,11 +6,11 @@ import { useCanvasAnimation } from "./use-canvas-animation";
 /** Office locations; arcs run from the HQ to each of the others. */
 const places = [
   { name: "Pune", lon: 73.86, lat: 18.52, hq: true },
-  { name: "New Delhi", lon: 77.21, lat: 28.61 },
+  { name: "Ghaziabad", lon: 77.44, lat: 28.67 },
   { name: "Dubai", lon: 55.27, lat: 25.2 },
   { name: "Bangkok", lon: 100.5, lat: 13.76 },
   { name: "Ireland", lon: -6.26, lat: 53.35 },
-  { name: "Australia", lon: 151.21, lat: -33.87 },
+  { name: "Melbourne", lon: 145.1, lat: -37.6 },
 ];
 
 const RAD = Math.PI / 180;
