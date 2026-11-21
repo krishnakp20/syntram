@@ -7,6 +7,7 @@ export const staffingServices: ServiceDetail = {
   summary:
     "Skilled developers, AI engineers and IT specialists who join your team on contract, as a dedicated team or as permanent hires.",
   icon: "handshake",
+  heroVisual: "team",
   seo: {
     title: "IT Staffing Services: Developers, AI Engineers & Dedicated Teams",
     description:

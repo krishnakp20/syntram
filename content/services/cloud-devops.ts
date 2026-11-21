@@ -7,6 +7,7 @@ export const cloudDevops: ServiceDetail = {
   summary:
     "Infrastructure as code, CI/CD pipelines, observability and cost-aware cloud architecture you can operate with confidence.",
   icon: "cloud",
+  heroVisual: "cloud",
   seo: {
     title: "Cloud & DevOps Services",
     description:

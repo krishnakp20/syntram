@@ -7,6 +7,7 @@ export const qaTesting: ServiceDetail = {
   summary:
     "Automated test suites, release quality gates and evaluation pipelines for both conventional software and AI behaviour.",
   icon: "clipboard-check",
+  heroVisual: "qa",
   seo: {
     title: "QA, Testing & AI Evaluation Services",
     description:

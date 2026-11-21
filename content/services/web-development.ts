@@ -6,6 +6,7 @@ export const webDevelopment: ServiceDetail = {
   shortTitle: "Web Development",
   summary: "Fast, accessible, search-friendly websites and web applications built on a modern, maintainable stack.",
   icon: "globe",
+  heroVisual: "web",
   seo: {
     title: "Web Development — Websites & Web Apps",
     description:

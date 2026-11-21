@@ -6,6 +6,7 @@ export const apiIntegration: ServiceDetail = {
   shortTitle: "API Integration",
   summary: "Connect CRMs, ERPs, telephony and third-party platforms with reliable, well-documented integrations.",
   icon: "plug",
+  heroVisual: "api",
   seo: {
     title: "API & System Integration Services",
     description:

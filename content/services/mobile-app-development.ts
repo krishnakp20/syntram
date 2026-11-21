@@ -6,6 +6,7 @@ export const mobileAppDevelopment: ServiceDetail = {
   shortTitle: "Mobile Apps",
   summary: "iOS and Android apps with clean architecture, offline-aware data and the backend services to support them.",
   icon: "smartphone",
+  heroVisual: "mobile",
   seo: {
     title: "Mobile App Development — iOS & Android",
     description:

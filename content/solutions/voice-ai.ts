@@ -9,6 +9,7 @@ export const voiceAiSolution: SolutionDetail = {
   title: "Voice AI Agents",
   summary: "Answer, qualify, book and follow up on calls with agents that speak naturally and act in your systems.",
   icon: "phone-call",
+  heroVisual: "voice",
   seo: {
     title: "AI Voice Agents for Business Calls",
     description:

@@ -7,6 +7,7 @@ export const customSoftwareDevelopment: ServiceDetail = {
   summary:
     "Internal platforms, SaaS products and line-of-business systems designed around how your team actually works.",
   icon: "code",
+  heroVisual: "code",
   seo: {
     title: "Custom Software Development Services",
     description:

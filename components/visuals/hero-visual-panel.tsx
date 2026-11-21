@@ -1,7 +1,31 @@
 import { cn } from "@/lib/utils";
+import type { HeroVisualVariant } from "@/types/content";
 
 import { GlobeVisual } from "./globe-visual";
 import { NeuralVisual } from "./neural-visual";
+import {
+  ApiVisual,
+  CloudVisual,
+  CodeVisual,
+  MobileVisual,
+  QaVisual,
+  TeamVisual,
+  VoiceVisual,
+  WebVisual,
+} from "./service-visuals";
+
+const visuals: Record<HeroVisualVariant, React.ComponentType<{ className?: string }>> = {
+  globe: GlobeVisual,
+  neural: NeuralVisual,
+  voice: VoiceVisual,
+  code: CodeVisual,
+  web: WebVisual,
+  mobile: MobileVisual,
+  api: ApiVisual,
+  cloud: CloudVisual,
+  qa: QaVisual,
+  team: TeamVisual,
+};
 
 /** Dark, glowing frame (logo black) for an animated hero visual. */
 export function HeroVisualPanel({
@@ -9,11 +33,11 @@ export function HeroVisualPanel({
   caption,
   className,
 }: {
-  variant: "globe" | "neural";
+  variant: HeroVisualVariant;
   caption?: string;
   className?: string;
 }) {
-  const Visual = variant === "globe" ? GlobeVisual : NeuralVisual;
+  const Visual = visuals[variant];
   return (
     <figure
       className={cn(

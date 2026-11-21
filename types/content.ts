@@ -51,6 +51,9 @@ export interface SeoFields {
 
 /* ---------- Services ---------- */
 
+/** Animated visual shown beside a page's hero (see components/visuals/hero-visual-panel.tsx). */
+export type HeroVisualVariant = "neural" | "globe" | "voice" | "code" | "web" | "mobile" | "api" | "cloud" | "qa" | "team";
+
 export type ServiceSlug =
   | "ai-development"
   | "voice-ai"
@@ -145,7 +148,7 @@ export interface ServiceDetail extends ServiceSummary {
   seo: SeoFields;
   hero: PageHeroContent;
   /** Optional animated visual beside the hero text. */
-  heroVisual?: "neural" | "globe";
+  heroVisual?: HeroVisualVariant;
   problem: NarrativeBlock;
   solution: NarrativeBlock;
   /** Optional "Engagement models" section shown after the problem/solution. */
@@ -172,7 +175,7 @@ export interface SolutionDetail extends SolutionSummary {
   seo: SeoFields;
   hero: PageHeroContent;
   /** Optional animated visual beside the hero text. */
-  heroVisual?: "neural" | "globe";
+  heroVisual?: HeroVisualVariant;
   problem: NarrativeBlock;
   /** How the solution works, step by step. */
   howItWorks: ProcessStep[];
