@@ -110,7 +110,7 @@ export async function submitContact(input: ContactFormInput): Promise<ContactRes
   // Neither a database nor email delivered the lead.
   if (!db && !isEmailConfigured() && process.env.NODE_ENV !== "production") {
     // Local development without services configured: log so the flow can be tested.
-    console.info("[contact] (dev) Lead received — configure DATABASE_URL and/or RESEND_API_KEY to deliver it:", {
+    console.info("[contact] (dev) Lead received — configure DATABASE_URL and/or email (SMTP_* or RESEND_*) to deliver it:", {
       name: data.name,
       email: data.email,
       service: data.service,
@@ -118,6 +118,6 @@ export async function submitContact(input: ContactFormInput): Promise<ContactRes
     return { ok: true };
   }
 
-  console.error("[contact] Lead could not be stored or delivered. Check DATABASE_URL / Resend configuration.");
+  console.error("[contact] Lead could not be stored or delivered. Check DATABASE_URL / email (SMTP or Resend) configuration.");
   return { ok: false, message: GENERIC_ERROR };
 }

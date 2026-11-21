@@ -3,9 +3,7 @@
 import { createHash } from "node:crypto";
 
 import { headers } from "next/headers";
-import { Resend } from "resend";
-
-import { recipients } from "@/lib/contact/notify";
+import { isEmailConfigured, sendTeamMail } from "@/lib/mail";
 import { rateLimit } from "@/lib/rate-limit";
 import { siteConfig } from "@/lib/site";
 
@@ -70,11 +68,9 @@ export async function submitApplication(formData: FormData): Promise<Application
     return { ok: false, message: "You've sent several applications in a short time. Please wait a while and try again." };
   }
 
-  const to = recipients();
-  const configured = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL && to.length > 0);
-  if (!configured) {
+  if (!isEmailConfigured()) {
     if (process.env.NODE_ENV !== "production") {
-      console.info("[careers] (dev) Application received; configure RESEND_API_KEY and CONTACT_FROM_EMAIL to deliver it:", {
+      console.info("[careers] (dev) Application received; configure email (SMTP_* or RESEND_*) to deliver it:", {
         role: data.role,
         name: data.name,
         email: data.email,
@@ -119,24 +115,13 @@ export async function submitApplication(formData: FormData): Promise<Application
   const ext = RESUME_TYPES[file.type];
   const safeName = data.name.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "applicant";
 
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const { error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL!,
-      to,
-      replyTo: data.email,
-      subject: `Application: ${data.role} - ${data.name}`,
-      text,
-      html,
-      attachments: [{ filename: `CV-${safeName}.${ext}`, content: Buffer.from(await file.arrayBuffer()) }],
-    });
-    if (error) {
-      console.error("[careers] Resend rejected application:", error.name, error.message);
-      return { ok: false, message: GENERIC_ERROR };
-    }
-    return { ok: true };
-  } catch (err) {
-    console.error("[careers] Failed to send application:", err instanceof Error ? err.message : err);
-    return { ok: false, message: GENERIC_ERROR };
-  }
+  const sent = await sendTeamMail({
+    tag: "careers",
+    replyTo: data.email,
+    subject: `Application: ${data.role} - ${data.name}`,
+    text,
+    html,
+    attachments: [{ filename: `CV-${safeName}.${ext}`, content: Buffer.from(await file.arrayBuffer()) }],
+  });
+  return sent ? { ok: true } : { ok: false, message: GENERIC_ERROR };
 }

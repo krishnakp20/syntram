@@ -1,33 +1,20 @@
 import "server-only";
 
-import { Resend } from "resend";
-
+import { isEmailConfigured, recipients, sendTeamMail } from "@/lib/mail";
 import { siteConfig } from "@/lib/site";
 
 import type { ContactSubmission } from "./schema";
 
 /**
- * Team notification for a new lead, sent through Resend.
- *
- * Only ever emails the configured team address — never the submitter — so
- * the form can't be abused to send mail to arbitrary people.
- * Required env: RESEND_API_KEY, CONTACT_FROM_EMAIL (the "from" domain must be
- * verified in Resend). Enquiries go to the site's contact email (info@zaybx.com);
- * CONTACT_TO_EMAIL, if set, overrides it (comma-separated for several inboxes).
+ * Team notification for a new lead. Delivery (GoDaddy SMTP or Resend) and the
+ * required settings are described in lib/mail.ts. Enquiries go to the site's
+ * contact email (info@zaybx.com); CONTACT_TO_EMAIL, if set, overrides it.
  */
 
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-/** Inboxes that receive enquiries and job applications. */
-export function recipients(): string[] {
-  const configured = process.env.CONTACT_TO_EMAIL?.trim() || siteConfig.contact.email;
-  return configured.split(",").map((s) => s.trim()).filter(Boolean);
-}
-
-export function isEmailConfigured(): boolean {
-  return Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL && recipients().length > 0);
-}
+export { isEmailConfigured, recipients };
 
 export async function sendLeadNotification(lead: ContactSubmission, leadId?: string): Promise<boolean> {
   if (!isEmailConfigured()) return false;
@@ -70,23 +57,11 @@ export async function sendLeadNotification(lead: ContactSubmission, leadId?: str
       <p style="white-space:pre-wrap;margin:0">${escapeHtml(lead.message)}</p>
     </div>`;
 
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const { error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL!,
-      to: recipients(),
-      replyTo: lead.email,
-      subject: `New enquiry: ${lead.name}${lead.company ? ` (${lead.company})` : ""} — ${siteConfig.shortName}`,
-      text,
-      html,
-    });
-    if (error) {
-      console.error("[contact] Resend rejected notification:", error.name, error.message);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("[contact] Failed to send notification:", err instanceof Error ? err.message : err);
-    return false;
-  }
+  return sendTeamMail({
+    tag: "contact",
+    replyTo: lead.email,
+    subject: `New enquiry: ${lead.name}${lead.company ? ` (${lead.company})` : ""} — ${siteConfig.shortName}`,
+    text,
+    html,
+  });
 }
