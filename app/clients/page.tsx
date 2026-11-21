@@ -57,15 +57,15 @@ export default function ClientsPage() {
                   <Image
                     src={client.logo}
                     alt={client.name}
-                    width={160}
-                    height={64}
-                    className="h-12 w-auto max-w-[70%] object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    width={240}
+                    height={130}
+                    className="h-20 w-auto max-w-[80%] object-contain transition duration-300 group-hover:scale-105"
                   />
                 ) : (
                   <span className="text-center font-display text-base font-semibold text-foreground">{client.name}</span>
                 );
                 return (
-                  <li key={client.name} className="flex min-h-32 flex-col items-center justify-center gap-2 bg-card p-6">
+                  <li key={client.name} className="group flex min-h-44 flex-col items-center justify-center gap-3 bg-card p-8">
                     {client.url ? (
                       <a href={client.url} target="_blank" rel="noopener noreferrer" className="flex justify-center">
                         {content}

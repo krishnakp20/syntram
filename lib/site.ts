@@ -87,7 +87,7 @@ export const siteConfig = {
   /** Social profiles — each icon appears only once its URL is set. */
   social: {
     linkedin: PLACEHOLDER as string, // TODO(ZAYBX): add the LinkedIn company page URL
-    facebook: "https://www.facebook.com/profile.php?id=61596034036197" as string,
+    facebook: "https://www.facebook.com/profile.php?id=61596355181154" as string,
     instagram: "https://www.instagram.com/zaybxglobaltech360/" as string,
     youtube: "https://www.youtube.com/@Zaybx-j8w" as string,
     freelancer: "https://www.freelancer.com/u/Zaybxglobal" as string,

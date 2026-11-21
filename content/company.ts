@@ -189,7 +189,7 @@ export interface Client {
  * TODO(ZAYBX): only list clients who have agreed to be named publicly.
  * Never add a logo without permission.
  */
-export const clients: Client[] = [{ name: "Gujarat Sales" }];
+export const clients: Client[] = [{ name: "Gujarat Sales", logo: "/clients/gs-resin.png" }];
 
 /* ---------- Achievements ---------- */
 
