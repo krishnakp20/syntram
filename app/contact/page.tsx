@@ -5,6 +5,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container, Section } from "@/components/shared/layout-primitives";
 import { nextSteps } from "@/content/contact";
 import { buildMetadata } from "@/lib/seo";
+import { WorldMap } from "@/components/contact/world-map";
 import { OfficeList } from "@/components/shared/office-list";
 import { getSocialLinks, SocialLinks } from "@/components/shared/social-links";
 import { isPlaceholder, siteConfig, whatsappUrl } from "@/lib/site";
@@ -110,6 +111,21 @@ export default function ContactPage() {
           </Container>
         </Section>
       )}
+
+      <Section tone="light" aria-labelledby="locations-title" className="border-t border-line">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="font-mono text-[0.6875rem] tracking-wider text-signal uppercase">Our locations</p>
+            <h2 id="locations-title" className="mt-3 text-display-md font-semibold text-foreground">
+              Working with clients across the globe
+            </h2>
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
+              Headquartered in Pune, with offices in Ghaziabad, Melbourne and Bangkok, and clients across the Middle East and Europe.
+            </p>
+          </div>
+          <WorldMap className="mx-auto mt-12 max-w-5xl" />
+        </Container>
+      </Section>
 
 
     </>
