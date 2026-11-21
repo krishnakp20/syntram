@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { emailTypoMessage, isValidPhone, PHONE_ERROR } from "@/lib/validation";
+
 export const experienceOptions = [
   "Fresher / Intern (0–1 year)",
   "1–3 years",
@@ -28,8 +30,21 @@ const optionalText = (max: number) =>
 export const applicationSchema = z.object({
   role: z.string().trim().min(1).max(120),
   name: z.string().trim().min(2, "Please enter your full name.").max(120),
-  email: z.string().trim().email("Please enter a valid email address.").max(254),
-  phone: z.string().trim().min(7, "Please enter a phone number we can reach you on.").max(40),
+  email: z
+    .string()
+    .trim()
+    .max(254, "Please enter a valid email address.")
+    .email("Please enter a valid email address.")
+    .superRefine((v, ctx) => {
+      const typo = emailTypoMessage(v);
+      if (typo) ctx.addIssue({ code: "custom", message: typo });
+    }),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Please enter a phone number we can reach you on.")
+    .max(40, PHONE_ERROR)
+    .refine(isValidPhone, PHONE_ERROR),
   experience: z.enum(experienceOptions, { message: "Please choose your experience." }),
   location: optionalText(120),
   profileUrl: z

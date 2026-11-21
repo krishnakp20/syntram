@@ -1,6 +1,7 @@
 import * as z from "zod/mini";
 
 import { budgetOptions, serviceOptions } from "@/content/contact";
+import { emailDomainTypo, emailTypoMessage, isValidPhone, PHONE_ERROR } from "@/lib/validation";
 
 /**
  * Contact form schema — shared by the client (instant feedback via React Hook
@@ -13,7 +14,6 @@ import { budgetOptions, serviceOptions } from "@/content/contact";
 
 // Same pattern Zod uses for its built-in email check.
 const EMAIL = /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9-]*\.)+[A-Za-z]{2,}$/;
-const PHONE = /^\+?[0-9\s().-]{6,40}$/;
 
 const emptyToUndefined = <T,>(v: T | "" | undefined) => (v ? v : undefined);
 
@@ -37,12 +37,20 @@ export const contactSchema = z.object({
   company: optionalText(160),
   email: z
     .string()
-    .check(z.trim(), z.toLowerCase(), z.maxLength(254), z.regex(EMAIL, "Please enter a valid email address")),
+    .check(
+      z.trim(),
+      z.toLowerCase(),
+      z.maxLength(254, "Please enter a valid email address"),
+      z.regex(EMAIL, "Please enter a valid email address"),
+      z.superRefine((v, ctx) => {
+        if (EMAIL.test(v) && emailDomainTypo(v)) ctx.addIssue({ code: "custom", message: emailTypoMessage(v)!, input: v });
+      }),
+    ),
   phone: z.pipe(
     z.optional(
       z
         .string()
-        .check(z.trim(), z.maxLength(40), z.refine((v) => !v || PHONE.test(v), "Please enter a valid phone number")),
+        .check(z.trim(), z.maxLength(40, PHONE_ERROR), z.refine((v) => !v || isValidPhone(v), PHONE_ERROR)),
     ),
     z.transform(emptyToUndefined),
   ),
