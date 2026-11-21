@@ -120,7 +120,7 @@ export default function ContactPage() {
               Working with clients across the globe
             </h2>
             <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
-              Headquartered in Pune, with offices in Ghaziabad, Melbourne and Bangkok, and clients across the Middle East and Europe.
+              Headquartered in Pune, with Business Contact Address in Ghaziabad, Melbourne and Bangkok, and clients across the Middle East and Europe.
             </p>
           </div>
           <WorldMap className="mx-auto mt-12 max-w-5xl" />
