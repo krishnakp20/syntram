@@ -5,6 +5,7 @@ export const education: IndustryDetail = {
   title: "Education",
   summary: "Admissions enquiries, student support and learning platforms that scale with enrolment.",
   icon: "graduation-cap",
+  heroVisual: "education",
   seo: {
     title: "AI & Automation for Education",
     description:

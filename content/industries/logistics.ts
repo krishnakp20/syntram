@@ -5,6 +5,7 @@ export const logistics: IndustryDetail = {
   title: "Logistics",
   summary: "Shipment status, delivery coordination and operations visibility across systems.",
   icon: "truck",
+  heroVisual: "logistics",
   seo: {
     title: "AI & Automation for Logistics",
     description:

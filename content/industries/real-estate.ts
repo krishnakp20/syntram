@@ -5,6 +5,7 @@ export const realEstate: IndustryDetail = {
   title: "Real Estate",
   summary: "Lead qualification, site-visit scheduling and follow-up across every enquiry channel.",
   icon: "building",
+  heroVisual: "real-estate",
   seo: {
     title: "AI Voice Agents for Real Estate",
     description:

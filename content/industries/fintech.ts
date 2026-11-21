@@ -5,6 +5,7 @@ export const fintech: IndustryDetail = {
   title: "FinTech",
   summary: "Customer onboarding, collections outreach and support built with compliance in mind.",
   icon: "landmark",
+  heroVisual: "fintech",
   seo: {
     title: "AI & Automation for FinTech",
     description:

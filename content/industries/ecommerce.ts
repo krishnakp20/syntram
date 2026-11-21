@@ -5,6 +5,7 @@ export const ecommerce: IndustryDetail = {
   title: "E-commerce",
   summary: "Order support, returns, catalogue operations and conversational commerce.",
   icon: "shopping-cart",
+  heroVisual: "ecommerce",
   seo: {
     title: "AI & Automation for E-commerce",
     description:

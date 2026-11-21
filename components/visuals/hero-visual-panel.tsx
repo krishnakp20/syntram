@@ -2,6 +2,15 @@ import { cn } from "@/lib/utils";
 import type { HeroVisualVariant } from "@/types/content";
 
 import { GlobeVisual } from "./globe-visual";
+import {
+  EcommerceVisual,
+  EducationVisual,
+  FintechVisual,
+  HealthcareVisual,
+  LogisticsVisual,
+  RealEstateVisual,
+  TravelVisual,
+} from "./industry-visuals";
 import { NeuralVisual } from "./neural-visual";
 import {
   ApiVisual,
@@ -31,6 +40,13 @@ const visuals: Record<HeroVisualVariant, React.ComponentType<{ className?: strin
   automation: AutomationVisual,
   support: SupportVisual,
   workflow: WorkflowVisual,
+  healthcare: HealthcareVisual,
+  ecommerce: EcommerceVisual,
+  fintech: FintechVisual,
+  logistics: LogisticsVisual,
+  "real-estate": RealEstateVisual,
+  education: EducationVisual,
+  travel: TravelVisual,
 };
 
 /** Dark, glowing frame (logo black) for an animated hero visual. */

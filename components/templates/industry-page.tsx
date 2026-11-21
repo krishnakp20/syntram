@@ -10,6 +10,7 @@ import { TechnologyGrid } from "@/components/sections/technology-grid";
 import { UseCaseList } from "@/components/sections/use-case-list";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Icon } from "@/components/shared/icon";
+import { HeroVisualPanel } from "@/components/visuals/hero-visual-panel";
 import { Container, Section, SectionHeader } from "@/components/shared/layout-primitives";
 import { deliveryProcess } from "@/content/process";
 import { getSolution } from "@/content/solutions";
@@ -40,6 +41,7 @@ export function IndustryPage({ industry }: { industry: IndustryDetail }) {
             <ArrowRight aria-hidden="true" />
           </ButtonLink>
         }
+        aside={industry.heroVisual && <HeroVisualPanel variant={industry.heroVisual} className="mx-auto w-full max-w-md lg:max-w-none" />}
       />
 
       {/* Challenges */}

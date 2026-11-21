@@ -5,6 +5,7 @@ export const travel: IndustryDetail = {
   title: "Travel",
   summary: "Booking assistance, itinerary changes and multilingual traveller support.",
   icon: "plane",
+  heroVisual: "travel",
   seo: {
     title: "AI & Voice Automation for Travel",
     description:

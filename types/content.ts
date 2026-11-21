@@ -52,7 +52,27 @@ export interface SeoFields {
 /* ---------- Services ---------- */
 
 /** Animated visual shown beside a page's hero (see components/visuals/hero-visual-panel.tsx). */
-export type HeroVisualVariant = "neural" | "globe" | "voice" | "code" | "web" | "mobile" | "api" | "cloud" | "qa" | "team" | "automation" | "support" | "workflow";
+export type HeroVisualVariant =
+  | "neural"
+  | "globe"
+  | "voice"
+  | "code"
+  | "web"
+  | "mobile"
+  | "api"
+  | "cloud"
+  | "qa"
+  | "team"
+  | "automation"
+  | "support"
+  | "workflow"
+  | "healthcare"
+  | "ecommerce"
+  | "fintech"
+  | "logistics"
+  | "real-estate"
+  | "education"
+  | "travel";
 
 export type ServiceSlug =
   | "ai-development"
@@ -110,7 +130,8 @@ export interface IndustrySummary {
 /* ---------- Detail-page building blocks ---------- */
 
 /** Keys into `content/technology.ts` groups. */
-export type TechGroupKey = "ai" | "voice" | "frontend" | "backend" | "data" | "cloud";
+export type TechGroupKey =
+  "ai" | "voice" | "frontend" | "backend" | "data" | "cloud";
 
 export interface PageHeroContent {
   /** H1. Keep it human — the SEO title can differ. */
@@ -203,6 +224,8 @@ export interface IndustrySolutionFit {
 export interface IndustryDetail extends IndustrySummary {
   seo: SeoFields;
   hero: PageHeroContent;
+  /** Animated visual beside the hero. */
+  heroVisual?: HeroVisualVariant;
   challenges: IndustryChallenge[];
   solutionFits: IndustrySolutionFit[];
   useCases: UseCase[];

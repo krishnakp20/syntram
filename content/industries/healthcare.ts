@@ -5,6 +5,7 @@ export const healthcare: IndustryDetail = {
   title: "Healthcare",
   summary: "Appointment scheduling, patient communication and administrative workflow automation.",
   icon: "heart-pulse",
+  heroVisual: "healthcare",
   seo: {
     title: "AI & Voice Automation for Healthcare",
     description:

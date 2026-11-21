@@ -8,21 +8,21 @@ import { useCanvasAnimation } from "./use-canvas-animation";
  * example content, not customer data or performance claims. Decorative.
  */
 
-type Ctx = CanvasRenderingContext2D;
+export type Ctx = CanvasRenderingContext2D;
 
-const CYAN = "34,184,255";
-const BLUE = "22,104,214";
-const VIOLET = "124,92,255";
-const GREEN = "52,211,153";
-const INK = "rgba(200,220,245,0.88)";
-const DIM = "rgba(160,185,220,0.55)";
+export const CYAN = "34,184,255";
+export const BLUE = "22,104,214";
+export const VIOLET = "124,92,255";
+export const GREEN = "52,211,153";
+export const INK = "rgba(200,220,245,0.88)";
+export const DIM = "rgba(160,185,220,0.55)";
 
-const FONT = "Inter, system-ui, sans-serif";
-const MONO = "'JetBrains Mono', ui-monospace, monospace";
+export const FONT = "Inter, system-ui, sans-serif";
+export const MONO = "'JetBrains Mono', ui-monospace, monospace";
 
 /* ---------------------------------------------------------------- helpers */
 
-function glow(ctx: Ctx, x: number, y: number, r: number, alpha: number, rgb = CYAN) {
+export function glow(ctx: Ctx, x: number, y: number, r: number, alpha: number, rgb = CYAN) {
   if (alpha <= 0.01) return;
   const g = ctx.createRadialGradient(x, y, 0, x, y, r);
   g.addColorStop(0, `rgba(255,255,255,${(alpha * 0.95).toFixed(3)})`);
@@ -34,7 +34,7 @@ function glow(ctx: Ctx, x: number, y: number, r: number, alpha: number, rgb = CY
   ctx.fill();
 }
 
-function ambient(ctx: Ctx, w: number, h: number, rgb = CYAN, strength = 0.16) {
+export function ambient(ctx: Ctx, w: number, h: number, rgb = CYAN, strength = 0.16) {
   const g = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.6);
   g.addColorStop(0, `rgba(${rgb},${strength})`);
   g.addColorStop(1, `rgba(${rgb},0)`);
@@ -42,7 +42,7 @@ function ambient(ctx: Ctx, w: number, h: number, rgb = CYAN, strength = 0.16) {
   ctx.fillRect(0, 0, w, h);
 }
 
-function box(
+export function box(
   ctx: Ctx,
   x: number,
   y: number,
@@ -64,7 +64,7 @@ function box(
   }
 }
 
-function text(
+export function text(
   ctx: Ctx,
   value: string,
   x: number,
@@ -82,7 +82,7 @@ function text(
   ctx.fillText(value, x, y);
 }
 
-function line(ctx: Ctx, x1: number, y1: number, x2: number, y2: number, stroke: string, lw = 1) {
+export function line(ctx: Ctx, x1: number, y1: number, x2: number, y2: number, stroke: string, lw = 1) {
   ctx.strokeStyle = stroke;
   ctx.lineWidth = lw;
   ctx.beginPath();
@@ -91,7 +91,7 @@ function line(ctx: Ctx, x1: number, y1: number, x2: number, y2: number, stroke: 
   ctx.stroke();
 }
 
-function check(ctx: Ctx, x: number, y: number, s: number, color: string) {
+export function check(ctx: Ctx, x: number, y: number, s: number, color: string) {
   ctx.strokeStyle = color;
   ctx.lineWidth = Math.max(1.6, s * 0.18);
   ctx.lineCap = "round";
@@ -103,11 +103,11 @@ function check(ctx: Ctx, x: number, y: number, s: number, color: string) {
   ctx.stroke();
 }
 
-const ease = (k: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, k)), 3);
-const clamp01 = (k: number) => Math.min(1, Math.max(0, k));
+export const ease = (k: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, k)), 3);
+export const clamp01 = (k: number) => Math.min(1, Math.max(0, k));
 
 /** Deterministic pseudo-random so the server and every visit look the same. */
-function rand(seed: number) {
+export function rand(seed: number) {
   const x = Math.sin(seed * 9301 + 49297) * 233280;
   return x - Math.floor(x);
 }
@@ -313,7 +313,7 @@ function drawCode(ctx: Ctx, w: number, h: number, t: number) {
 
 /* -------------------------------------------------------- Web development */
 
-function ring(ctx: Ctx, x: number, y: number, r: number, k: number, rgb: string) {
+export function ring(ctx: Ctx, x: number, y: number, r: number, k: number, rgb: string) {
   ctx.lineWidth = r * 0.22;
   ctx.strokeStyle = "rgba(255,255,255,0.08)";
   ctx.beginPath();
@@ -718,7 +718,7 @@ function drawQa(ctx: Ctx, w: number, h: number, t: number) {
 
 const ROLES = ["Python", "React", "AI/ML", "DevOps", "QA", "DBA", "Flutter", "UI/UX"];
 
-function avatar(ctx: Ctx, x: number, y: number, s: number, rgb: string, alpha: number) {
+export function avatar(ctx: Ctx, x: number, y: number, s: number, rgb: string, alpha: number) {
   ctx.globalAlpha = alpha;
   ctx.fillStyle = `rgba(${rgb},0.9)`;
   ctx.beginPath();
@@ -966,7 +966,7 @@ const CHAT = [
   { ai: true, text: "That needs a person. Connecting you to a support agent now." },
 ];
 
-function wrapLines(ctx: Ctx, value: string, maxW: number) {
+export function wrapLines(ctx: Ctx, value: string, maxW: number) {
   const lines: string[] = [];
   let cur = "";
   for (const word of value.split(" ")) {
@@ -1090,9 +1090,9 @@ function drawSupport(ctx: Ctx, w: number, h: number, t: number) {
 
 /* ----------------------------------------- Business process automation */
 
-type Pt = [number, number];
+export type Pt = [number, number];
 
-function pointAlong(path: Pt[], k: number): Pt {
+export function pointAlong(path: Pt[], k: number): Pt {
   const lens = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1]));
   let d = clamp01(k) * lens.reduce((a, b) => a + b, 0);
   for (let i = 0; i < lens.length; i++) {
@@ -1105,7 +1105,7 @@ function pointAlong(path: Pt[], k: number): Pt {
   return path[path.length - 1];
 }
 
-function strokePath(ctx: Ctx, path: Pt[], stroke: string, lw: number) {
+export function strokePath(ctx: Ctx, path: Pt[], stroke: string, lw: number) {
   ctx.strokeStyle = stroke;
   ctx.lineWidth = lw;
   ctx.beginPath();
@@ -1231,7 +1231,7 @@ function drawWorkflow(ctx: Ctx, w: number, h: number, t: number) {
 
 /* ------------------------------------------------------------- exports */
 
-function makeVisual(draw: (ctx: Ctx, w: number, h: number, t: number) => void) {
+export function makeVisual(draw: (ctx: Ctx, w: number, h: number, t: number) => void) {
   return function ServiceVisual({ className }: { className?: string }) {
     const ref = useCanvasAnimation(draw);
     return <canvas ref={ref} aria-hidden="true" className={className} />;
