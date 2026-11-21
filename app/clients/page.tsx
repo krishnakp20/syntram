@@ -34,7 +34,7 @@ export default function ClientsPage() {
         intro="We're proud of the teams we build with. Every organisation shown here has agreed to be listed."
       />
 
-      <Section aria-label="Client list">
+      <Section aria-label="Client list" spacing="none" className="pt-14 sm:pt-16">
         <Container>
           {clients.length === 0 ? (
             <PlaceholderNotice>

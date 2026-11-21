@@ -115,8 +115,7 @@ export default function ContactPage() {
       <Section tone="light" aria-labelledby="locations-title" className="border-t border-line">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="font-mono text-[0.6875rem] tracking-wider text-signal uppercase">Our locations</p>
-            <h2 id="locations-title" className="mt-3 text-display-md font-semibold text-foreground">
+            <h2 id="locations-title" className="text-display-md font-semibold text-foreground">
               Working with clients across the globe
             </h2>
             <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">
