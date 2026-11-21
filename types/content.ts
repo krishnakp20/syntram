@@ -52,7 +52,7 @@ export interface SeoFields {
 /* ---------- Services ---------- */
 
 /** Animated visual shown beside a page's hero (see components/visuals/hero-visual-panel.tsx). */
-export type HeroVisualVariant = "neural" | "globe" | "voice" | "code" | "web" | "mobile" | "api" | "cloud" | "qa" | "team";
+export type HeroVisualVariant = "neural" | "globe" | "voice" | "code" | "web" | "mobile" | "api" | "cloud" | "qa" | "team" | "automation" | "support" | "workflow";
 
 export type ServiceSlug =
   | "ai-development"

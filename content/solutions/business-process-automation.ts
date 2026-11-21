@@ -5,6 +5,7 @@ export const businessProcessAutomation: SolutionDetail = {
   title: "Business Process Automation",
   summary: "Turn manual, multi-system workflows into reliable, observable automated processes.",
   icon: "workflow",
+  heroVisual: "workflow",
   seo: {
     title: "Business Process Automation Solutions",
     description:

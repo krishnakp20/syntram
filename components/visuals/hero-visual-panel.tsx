@@ -5,13 +5,16 @@ import { GlobeVisual } from "./globe-visual";
 import { NeuralVisual } from "./neural-visual";
 import {
   ApiVisual,
+  AutomationVisual,
   CloudVisual,
   CodeVisual,
   MobileVisual,
   QaVisual,
+  SupportVisual,
   TeamVisual,
   VoiceVisual,
   WebVisual,
+  WorkflowVisual,
 } from "./service-visuals";
 
 const visuals: Record<HeroVisualVariant, React.ComponentType<{ className?: string }>> = {
@@ -25,6 +28,9 @@ const visuals: Record<HeroVisualVariant, React.ComponentType<{ className?: strin
   cloud: CloudVisual,
   qa: QaVisual,
   team: TeamVisual,
+  automation: AutomationVisual,
+  support: SupportVisual,
+  workflow: WorkflowVisual,
 };
 
 /** Dark, glowing frame (logo black) for an animated hero visual. */

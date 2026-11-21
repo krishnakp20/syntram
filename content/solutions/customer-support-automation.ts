@@ -5,6 +5,7 @@ export const customerSupportAutomation: SolutionDetail = {
   title: "Customer Support Automation",
   summary: "Resolve routine requests instantly across chat, email and voice — and route the rest with context.",
   icon: "headset",
+  heroVisual: "support",
   seo: {
     title: "Customer Support Automation with AI",
     description:

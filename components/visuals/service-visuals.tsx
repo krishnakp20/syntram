@@ -784,6 +784,451 @@ function drawTeam(ctx: Ctx, w: number, h: number, t: number) {
   });
 }
 
+/* ---------------------------------------------------------- AI automation */
+
+const INTAKE = [
+  {
+    kind: "Email",
+    title: "Re: refund for order 4821",
+    fields: [
+      ["Intent", "Refund request"],
+      ["Priority", "High"],
+      ["Route to", "Billing team"],
+    ],
+    confidence: 96,
+  },
+  {
+    kind: "Invoice",
+    title: "INV-2291.pdf",
+    fields: [
+      ["Vendor", "Acme Supplies"],
+      ["Amount", "12,480.00"],
+      ["Due date", "30 Nov"],
+    ],
+    confidence: 74,
+  },
+  {
+    kind: "Form",
+    title: "Service request",
+    fields: [
+      ["Request", "Site visit"],
+      ["Location", "Warehouse B"],
+      ["Assign to", "Field team"],
+    ],
+    confidence: 93,
+  },
+];
+
+function drawAutomation(ctx: Ctx, w: number, h: number, t: number) {
+  ctx.clearRect(0, 0, w, h);
+  ambient(ctx, w, h, VIOLET, 0.12);
+  const R = Math.min(w, h);
+  const per = 4.6;
+  const idx = Math.floor(t / per) % INTAKE.length;
+  const k = (t % per) / per;
+  const item = INTAKE[idx];
+  const pad = R * 0.07;
+  const review = item.confidence < 80;
+
+  // Incoming queue
+  const qy = pad + R * 0.04;
+  const cw = (w - pad * 2) / INTAKE.length;
+  text(ctx, "INCOMING", pad, qy - R * 0.06, R / 54, DIM, "left", 700, MONO);
+  INTAKE.forEach((it, i) => {
+    const x = pad + i * cw;
+    const on = i === idx;
+    box(
+      ctx,
+      x + R * 0.008,
+      qy - R * 0.028,
+      cw - R * 0.016,
+      R * 0.056,
+      R * 0.028,
+      on ? `rgba(${CYAN},0.18)` : "rgba(255,255,255,0.04)",
+      on ? `rgba(${CYAN},0.75)` : "rgba(255,255,255,0.12)",
+    );
+    text(ctx, it.kind, x + cw / 2, qy, R / 42, on ? "#ffffff" : DIM, "center", 600);
+  });
+
+  // Source document
+  const dx = pad;
+  const dy = h * 0.2;
+  const dw = w * 0.37;
+  const dh = h * 0.5;
+  box(ctx, dx, dy, dw, dh, R * 0.025, "rgba(255,255,255,0.05)", "rgba(255,255,255,0.16)");
+  text(ctx, item.kind.toUpperCase(), dx + R * 0.03, dy + R * 0.04, R / 54, `rgb(${CYAN})`, "left", 700, MONO);
+  text(ctx, item.title, dx + R * 0.03, dy + R * 0.08, R / 50, INK, "left", 600);
+  for (let i = 0; i < 8; i++) {
+    const ly = dy + R * 0.12 + (i * (dh - R * 0.16)) / 8;
+    const lw = (dw - R * 0.06) * (0.45 + 0.5 * rand(i + idx * 13));
+    box(ctx, dx + R * 0.03, ly, lw, R * 0.011, 3, "rgba(255,255,255,0.12)");
+  }
+  const scan = clamp01((k - 0.04) / 0.36);
+  if (scan > 0 && scan < 1) {
+    const sy = dy + dh * scan;
+    const g = ctx.createLinearGradient(0, sy - R * 0.06, 0, sy);
+    g.addColorStop(0, `rgba(${CYAN},0)`);
+    g.addColorStop(1, `rgba(${CYAN},0.22)`);
+    ctx.fillStyle = g;
+    ctx.fillRect(dx, sy - R * 0.06, dw, R * 0.06);
+    line(ctx, dx, sy, dx + dw, sy, `rgba(${CYAN},0.95)`, 1.5);
+  }
+
+  // AI reader between the two cards
+  const fx = w * 0.55;
+  const ax = (dx + dw + fx) / 2;
+  const ay = dy + dh / 2;
+  line(ctx, dx + dw, ay, fx, ay, "rgba(255,255,255,0.12)", 1.2);
+  const flow = (t * 0.9) % 1;
+  if (k > 0.3 && k < 0.85) {
+    glow(ctx, dx + dw + (ax - dx - dw) * flow, ay, R * 0.02, 0.8);
+    glow(ctx, ax + (fx - ax) * flow, ay, R * 0.02, 0.8, VIOLET);
+  }
+  const busy = k > 0.04 && k < 0.8;
+  glow(ctx, ax, ay, R * 0.09, busy ? 0.45 + 0.15 * Math.sin(t * 6) : 0.25, VIOLET);
+  const ag = ctx.createLinearGradient(ax - R * 0.04, ay - R * 0.04, ax + R * 0.04, ay + R * 0.04);
+  ag.addColorStop(0, `rgba(${VIOLET},1)`);
+  ag.addColorStop(1, `rgba(${BLUE},1)`);
+  ctx.fillStyle = ag;
+  ctx.beginPath();
+  ctx.arc(ax, ay, R * 0.042, 0, Math.PI * 2);
+  ctx.fill();
+  text(ctx, "AI", ax, ay + 1, R / 36, "#ffffff", "center", 800);
+
+  // Structured output
+  const fw = w - pad - fx;
+  box(ctx, fx, dy, fw, dh, R * 0.025, "rgba(10,18,35,0.9)", `rgba(${VIOLET},0.45)`, 1.2);
+  text(ctx, "STRUCTURED DATA", fx + R * 0.03, dy + R * 0.04, R / 54, `rgb(${VIOLET})`, "left", 700, MONO);
+  item.fields.forEach(([label, value], i) => {
+    const y = dy + R * 0.1 + i * R * 0.09;
+    text(ctx, label, fx + R * 0.03, y, R / 50, DIM, "left", 500, MONO);
+    const p = clamp01((k - 0.42 - i * 0.09) / 0.09);
+    const shown = value.slice(0, Math.floor(p * value.length));
+    box(
+      ctx,
+      fx + R * 0.03,
+      y + R * 0.017,
+      fw - R * 0.06,
+      R * 0.045,
+      R * 0.012,
+      p > 0 ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.025)",
+      p >= 1 ? `rgba(${GREEN},0.45)` : "rgba(255,255,255,0.1)",
+    );
+    text(ctx, shown + (p > 0 && p < 1 ? "▍" : ""), fx + R * 0.045, y + R * 0.04, R / 42, "#ffffff", "left", 600);
+  });
+  const conf = Math.round(item.confidence * ease((k - 0.4) / 0.4));
+  text(
+    ctx,
+    `confidence ${conf}%`,
+    fx + R * 0.03,
+    dy + dh - R * 0.035,
+    R / 50,
+    review && k > 0.8 ? `rgb(${VIOLET})` : DIM,
+    "left",
+    600,
+    MONO,
+  );
+
+  // Outcome
+  const oy = h * 0.8;
+  const done = k > 0.8;
+  const ok = done && !review;
+  const ow = w * 0.66;
+  box(
+    ctx,
+    (w - ow) / 2,
+    oy - R * 0.04,
+    ow,
+    R * 0.08,
+    R * 0.04,
+    ok ? `rgba(${GREEN},0.16)` : done ? `rgba(${VIOLET},0.18)` : "rgba(255,255,255,0.04)",
+    ok ? `rgba(${GREEN},0.8)` : done ? `rgba(${VIOLET},0.8)` : "rgba(255,255,255,0.14)",
+  );
+  text(
+    ctx,
+    ok ? "✓ Processed automatically" : done ? "→ Sent to a person to review" : "Reading and extracting…",
+    w / 2,
+    oy,
+    R / 38,
+    ok ? `rgb(${GREEN})` : done ? "#ffffff" : DIM,
+    "center",
+    700,
+  );
+  text(ctx, "Low-confidence cases always go to your team", w / 2, h * 0.91, R / 50, DIM, "center", 500);
+}
+
+/* --------------------------------------------------- Customer support */
+
+const CHAT = [
+  { ai: false, text: "Where is my order #4821?" },
+  { ai: true, text: "It's out for delivery and should arrive today by 6 pm." },
+  { ai: false, text: "Can I change the delivery address?" },
+  { ai: true, text: "That needs a person. Connecting you to a support agent now." },
+];
+
+function wrapLines(ctx: Ctx, value: string, maxW: number) {
+  const lines: string[] = [];
+  let cur = "";
+  for (const word of value.split(" ")) {
+    const next = cur ? `${cur} ${word}` : word;
+    if (ctx.measureText(next).width > maxW && cur) {
+      lines.push(cur);
+      cur = word;
+    } else cur = next;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+function drawSupport(ctx: Ctx, w: number, h: number, t: number) {
+  ctx.clearRect(0, 0, w, h);
+  ambient(ctx, w, h, CYAN, 0.12);
+  const R = Math.min(w, h);
+  const cycle = t % 13;
+  const pad = R * 0.07;
+
+  // Chat window
+  const wx = pad;
+  const wy = pad;
+  const ww = w - pad * 2;
+  const wh = h * 0.7;
+  box(ctx, wx, wy, ww, wh, R * 0.03, "rgba(10,18,35,0.92)", "rgba(255,255,255,0.14)");
+  const hy = wy + R * 0.055;
+  glow(ctx, wx + R * 0.055, hy, R * 0.05, 0.35);
+  ctx.fillStyle = `rgb(${BLUE})`;
+  ctx.beginPath();
+  ctx.arc(wx + R * 0.055, hy, R * 0.026, 0, Math.PI * 2);
+  ctx.fill();
+  text(ctx, "AI", wx + R * 0.055, hy + 1, R / 50, "#ffffff", "center", 800);
+  text(ctx, "Support assistant", wx + R * 0.095, hy - R * 0.012, R / 40, "#ffffff", "left", 700);
+  ctx.fillStyle = `rgb(${GREEN})`;
+  ctx.beginPath();
+  ctx.arc(wx + R * 0.1, hy + R * 0.022, R * 0.007, 0, Math.PI * 2);
+  ctx.fill();
+  text(ctx, "online · replies instantly", wx + R * 0.113, hy + R * 0.022, R / 56, DIM, "left", 500);
+  line(ctx, wx, wy + R * 0.11, wx + ww, wy + R * 0.11, "rgba(255,255,255,0.08)");
+
+  // Messages
+  const fs = R / 38;
+  const lh = fs * 1.35;
+  const maxW = ww * 0.68;
+  let y = wy + R * 0.14;
+  for (const m of CHAT) {
+    const i = CHAT.indexOf(m);
+    const at = 0.6 + i * 2.6 + (m.ai ? 1 : 0);
+    if (m.ai && cycle > at - 1 && cycle < at) {
+      // Typing indicator
+      box(ctx, wx + R * 0.03, y, R * 0.1, R * 0.05, R * 0.025, `rgba(${CYAN},0.1)`, `rgba(${CYAN},0.3)`);
+      for (let d = 0; d < 3; d++) {
+        const a = 0.35 + 0.65 * Math.max(0, Math.sin(t * 7 - d * 0.8));
+        ctx.fillStyle = `rgba(${CYAN},${a.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(wx + R * 0.055 + d * R * 0.025, y + R * 0.025, R * 0.007, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      break;
+    }
+    if (cycle < at) break;
+    ctx.font = `500 ${fs.toFixed(1)}px ${FONT}`;
+    const lines = wrapLines(ctx, m.text, maxW - R * 0.05);
+    const bw = Math.min(maxW, Math.max(...lines.map((l) => ctx.measureText(l).width)) + R * 0.05);
+    const bh = lines.length * lh + R * 0.03;
+    const bx = m.ai ? wx + R * 0.03 : wx + ww - R * 0.03 - bw;
+    const fade = clamp01((cycle - at) / 0.3);
+    const lift = (1 - fade) * R * 0.02;
+    ctx.globalAlpha = fade;
+    box(
+      ctx,
+      bx,
+      y + lift,
+      bw,
+      bh,
+      R * 0.025,
+      m.ai ? `rgba(${CYAN},0.12)` : `rgba(${BLUE},0.6)`,
+      m.ai ? `rgba(${CYAN},0.35)` : undefined,
+    );
+    lines.forEach((l, j) => text(ctx, l, bx + R * 0.025, y + lift + R * 0.015 + lh * (j + 0.5), fs, "#ffffff", "left", 500));
+    ctx.globalAlpha = 1;
+    y += bh + R * 0.025;
+  }
+
+  // Hand-off to a person, with the conversation attached
+  const handoff = clamp01((cycle - 10.4) / 0.4);
+  if (handoff > 0) {
+    ctx.globalAlpha = handoff;
+    const hw = ww * 0.86;
+    const hx = wx + (ww - hw) / 2;
+    const hy2 = wy + wh - R * 0.085;
+    box(ctx, hx, hy2, hw, R * 0.06, R * 0.03, `rgba(${VIOLET},0.18)`, `rgba(${VIOLET},0.7)`);
+    avatar(ctx, hx + R * 0.035, hy2 + R * 0.032, R * 0.03, VIOLET, 1);
+    text(ctx, "Agent joined · full chat history shared", hx + R * 0.07, hy2 + R * 0.03, R / 44, "#ffffff", "left", 600);
+    ctx.globalAlpha = 1;
+  }
+
+  // Channels the same assistant answers on
+  const channels = ["Chat", "Email", "WhatsApp", "Voice"];
+  const lit = Math.floor(t * 0.7) % channels.length;
+  const cw = (w - pad * 2) / channels.length;
+  text(ctx, "ONE ASSISTANT, EVERY CHANNEL", w / 2, h * 0.83, R / 54, DIM, "center", 700, MONO);
+  channels.forEach((ch, i) => {
+    const x = pad + i * cw + cw / 2;
+    const yy = h * 0.9;
+    const on = i === lit;
+    box(
+      ctx,
+      x - cw * 0.42,
+      yy - R * 0.028,
+      cw * 0.84,
+      R * 0.056,
+      R * 0.028,
+      on ? `rgba(${CYAN},0.2)` : "rgba(255,255,255,0.04)",
+      on ? `rgba(${CYAN},0.8)` : "rgba(255,255,255,0.12)",
+    );
+    text(ctx, ch, x, yy, R / 42, on ? "#ffffff" : DIM, "center", 600);
+  });
+}
+
+/* ----------------------------------------- Business process automation */
+
+type Pt = [number, number];
+
+function pointAlong(path: Pt[], k: number): Pt {
+  const lens = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1]));
+  let d = clamp01(k) * lens.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < lens.length; i++) {
+    if (d <= lens[i] || i === lens.length - 1) {
+      const f = lens[i] ? Math.min(1, d / lens[i]) : 0;
+      return [path[i][0] + (path[i + 1][0] - path[i][0]) * f, path[i][1] + (path[i + 1][1] - path[i][1]) * f];
+    }
+    d -= lens[i];
+  }
+  return path[path.length - 1];
+}
+
+function strokePath(ctx: Ctx, path: Pt[], stroke: string, lw: number) {
+  ctx.strokeStyle = stroke;
+  ctx.lineWidth = lw;
+  ctx.beginPath();
+  path.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+  ctx.stroke();
+}
+
+function drawWorkflow(ctx: Ctx, w: number, h: number, t: number) {
+  ctx.clearRect(0, 0, w, h);
+  ambient(ctx, w, h, BLUE, 0.18);
+  const R = Math.min(w, h);
+  const cx = w / 2;
+  const lx = w * 0.26;
+  const rx = w * 0.74;
+  const Y = [0.1, 0.26, 0.43, 0.6, 0.76, 0.91].map((f) => f * h);
+
+  // Each run takes one branch; the runs alternate between them.
+  const cycleLen = 7.5;
+  const c = t % cycleLen;
+  const viaManager = Math.floor(t / cycleLen) % 2 === 0;
+  const bx = viaManager ? lx : rx;
+
+  // All edges, dim
+  const edges: Pt[][] = [
+    [[cx, Y[0]], [cx, Y[1]]],
+    [[cx, Y[1]], [cx, Y[2]]],
+    [[cx, Y[2]], [lx, Y[2]], [lx, Y[3]]],
+    [[cx, Y[2]], [rx, Y[2]], [rx, Y[3]]],
+    [[lx, Y[3]], [lx, Y[4]], [cx, Y[4]]],
+    [[rx, Y[3]], [rx, Y[4]], [cx, Y[4]]],
+    [[cx, Y[4]], [cx, Y[5]]],
+  ];
+  edges.forEach((e) => strokePath(ctx, e, "rgba(255,255,255,0.13)", 1.4));
+
+  // This run's route: [path, start time, duration]; each leg ends at a node.
+  const legs: { path: Pt[]; start: number; dur: number }[] = [];
+  let at = 0.3;
+  const add = (path: Pt[], dur: number) => {
+    legs.push({ path, start: at, dur });
+    at += dur;
+  };
+  add([[cx, Y[0]], [cx, Y[1]]], 0.6);
+  add([[cx, Y[1]], [cx, Y[2]]], 0.9);
+  add([[cx, Y[2]], [bx, Y[2]], [bx, Y[3]]], 0.8);
+  const branchAt = at;
+  if (viaManager) at += 1.4; // waiting for the manager's approval
+  add([[bx, Y[3]], [bx, Y[4]], [cx, Y[4]]], 0.8);
+  add([[cx, Y[4]], [cx, Y[5]]], 0.6);
+  const finished = at;
+  const arrived = (leg: number) => c >= legs[leg].start + legs[leg].dur;
+
+  legs.forEach((leg) => {
+    const k = clamp01((c - leg.start) / leg.dur);
+    if (k <= 0) return;
+    const sub: Pt[] = [];
+    for (let s = 0; s <= 24; s++) sub.push(pointAlong(leg.path, (s / 24) * k));
+    strokePath(ctx, sub, `rgba(${CYAN},0.85)`, 2);
+    if (k < 1) {
+      const [x, y] = pointAlong(leg.path, k);
+      glow(ctx, x, y, R * 0.035, 1);
+    }
+  });
+
+  const node = (x: number, y: number, caption: string, title: string, lit: boolean, rgb = CYAN, wid = R * 0.36) => {
+    const nh = R * 0.085;
+    if (lit) glow(ctx, x, y, R * 0.12, 0.18, rgb);
+    box(ctx, x - wid / 2, y - nh / 2, wid, nh, R * 0.02, "rgba(10,18,35,0.96)", lit ? `rgba(${rgb},0.85)` : "rgba(255,255,255,0.16)", 1.3);
+    text(ctx, caption, x - wid / 2 + R * 0.025, y - nh * 0.2, R / 60, lit ? `rgb(${rgb})` : DIM, "left", 700, MONO);
+    text(ctx, title, x - wid / 2 + R * 0.025, y + nh * 0.2, R / 44, lit ? "#ffffff" : INK, "left", 600);
+  };
+
+  node(cx, Y[0], "TRIGGER", "New purchase request", c >= 0.3);
+  node(cx, Y[1], "AI", "Read & check policy", arrived(0), VIOLET);
+
+  // Decision diamond
+  const dLit = arrived(1);
+  const ds = R * 0.075;
+  ctx.beginPath();
+  ctx.moveTo(cx, Y[2] - ds);
+  ctx.lineTo(cx + ds * 1.9, Y[2]);
+  ctx.lineTo(cx, Y[2] + ds);
+  ctx.lineTo(cx - ds * 1.9, Y[2]);
+  ctx.closePath();
+  ctx.fillStyle = "rgba(10,18,35,0.96)";
+  ctx.fill();
+  ctx.strokeStyle = dLit ? `rgba(${CYAN},0.85)` : "rgba(255,255,255,0.16)";
+  ctx.lineWidth = 1.3;
+  ctx.stroke();
+  text(ctx, "Over 10,000?", cx, Y[2], R / 46, dLit ? "#ffffff" : INK, "center", 700);
+  text(ctx, "Yes", (cx - ds * 1.9 + lx) / 2, Y[2] - R * 0.022, R / 54, DIM, "center", 600, MONO);
+  text(ctx, "No", (cx + ds * 1.9 + rx) / 2, Y[2] - R * 0.022, R / 54, DIM, "center", 600, MONO);
+
+  // Branches
+  const atBranch = c >= branchAt;
+  const approved = c >= branchAt + 1.4;
+  const waiting = viaManager && atBranch && !approved;
+  node(
+    lx,
+    Y[3],
+    "PERSON",
+    waiting ? "Awaiting approval" : "Manager approves",
+    viaManager && atBranch,
+    approved ? GREEN : CYAN,
+    R * 0.33,
+  );
+  if (viaManager && atBranch) {
+    const ix = lx + R * 0.135;
+    if (approved) check(ctx, ix, Y[3], R * 0.022, `rgb(${GREEN})`);
+    else {
+      ctx.strokeStyle = `rgb(${CYAN})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(ix, Y[3], R * 0.014, t * 8, t * 8 + Math.PI * 1.4);
+      ctx.stroke();
+    }
+  }
+  node(rx, Y[3], "RULE", "Auto-approve", !viaManager && atBranch, GREEN, R * 0.33);
+
+  node(cx, Y[4], "SYSTEM", "Update ERP & books", arrived(3));
+  const doneLit = c >= finished;
+  node(cx, Y[5], "NOTIFY", doneLit ? "✓ Requester informed" : "Requester informed", doneLit, GREEN);
+}
+
 /* ------------------------------------------------------------- exports */
 
 function makeVisual(draw: (ctx: Ctx, w: number, h: number, t: number) => void) {
@@ -801,3 +1246,6 @@ export const ApiVisual = makeVisual(drawApi);
 export const CloudVisual = makeVisual(drawCloud);
 export const QaVisual = makeVisual(drawQa);
 export const TeamVisual = makeVisual(drawTeam);
+export const AutomationVisual = makeVisual(drawAutomation);
+export const SupportVisual = makeVisual(drawSupport);
+export const WorkflowVisual = makeVisual(drawWorkflow);
