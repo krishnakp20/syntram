@@ -29,6 +29,9 @@ export function OfficeList({ className, compact = false }: { className?: string;
               </span>
             )}
           </p>
+          {office.note && (
+            <p className="mt-2 font-mono text-[0.6875rem] font-medium tracking-wider text-signal uppercase">{office.note}</p>
+          )}
           <address className="mt-2 flex flex-col gap-1 text-sm leading-relaxed not-italic text-muted-foreground">
             <span>
               {office.lines.map((line) => (
@@ -62,16 +65,6 @@ export function OfficeList({ className, compact = false }: { className?: string;
               </a>
             )}
           </address>
-          {office.mapUrl && (
-            <a
-              href={office.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-block text-sm font-medium text-signal hover:underline"
-            >
-              View on map<span className="sr-only"> ({office.label}, opens in a new tab)</span>
-            </a>
-          )}
         </li>
       ))}
     </ul>

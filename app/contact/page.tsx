@@ -106,7 +106,7 @@ export default function ContactPage() {
             <h2 id="offices-title" className="text-display-md font-semibold text-foreground">
               Our offices
             </h2>
-            <OfficeList className="mt-8 lg:grid-cols-2" />
+            <OfficeList className="mt-8 lg:grid-cols-4" />
           </Container>
         </Section>
       )}

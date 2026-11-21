@@ -23,8 +23,8 @@ export interface Office {
   lines: string[];
   /** Optional phone for this office, E.164 format. */
   phone?: string;
-  /** Optional Google Maps link. */
-  mapUrl?: string;
+  /** Small label printed above the address, e.g. "Business Contact Address". */
+  note?: string;
   /** Marks the headquarters (shown with an HQ badge). */
   hq?: boolean;
 }
@@ -66,30 +66,21 @@ export const siteConfig = {
         "Maharashtra, India",
       ],
       phone: "+91 91350 53121",
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent("Dreams Aakruti, Kalepadal, Hadapsar, Pune 411028"),
     },
     {
       label: "Ghaziabad",
+      note: "Business Contact Address",
       lines: ["I-2977, Siddharth Vihar", "Ghaziabad 201009", "Uttar Pradesh, India"],
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent("I-2977, Siddharth Vihar, Ghaziabad, Uttar Pradesh 201009"),
     },
     {
       label: "Melbourne",
+      note: "Business Contact Address",
       lines: ["37 Pearson Rd", "Mernda VIC 3754", "Australia"],
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent("37 Pearson Rd, Mernda VIC 3754, Australia"),
     },
     {
       label: "Bangkok",
+      note: "Business Contact Address",
       lines: ["Lumpini Place Rama 9", "Huai Khwang, Bangkok 10310", "Thailand"],
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent("Lumpini Place Rama 9, Huai Khwang, Bangkok 10310"),
     },
   ] as Office[],
 
