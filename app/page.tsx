@@ -1,16 +1,11 @@
 import { AiCapabilities } from "@/components/home/ai-capabilities";
-import { AutomationSection } from "@/components/home/automation-section";
 import { CapabilityBand } from "@/components/home/capability-band";
-import { EngineeringSection } from "@/components/home/engineering-section";
 import { Hero } from "@/components/home/hero";
 import { IndustriesOverview } from "@/components/home/industries-overview";
-import { ProductsTeaser } from "@/components/home/products-teaser";
 import { ResourcesTeaser } from "@/components/home/resources-teaser";
 import { ServicesOverview } from "@/components/home/services-overview";
-import { TechnologySection } from "@/components/home/technology-section";
 import { VoiceAiFeature } from "@/components/home/voice-ai-feature";
 import { WhyZaybx } from "@/components/home/why-zaybx";
-import { WorkTeaser } from "@/components/home/work-teaser";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
@@ -32,12 +27,7 @@ export default function HomePage() {
       <AiCapabilities />
       <ServicesOverview />
       <VoiceAiFeature />
-      <AutomationSection />
-      <EngineeringSection />
       <IndustriesOverview />
-      <ProductsTeaser />
-      <WorkTeaser />
-      <TechnologySection />
       <WhyZaybx />
       <ResourcesTeaser />
       <CtaBanner
